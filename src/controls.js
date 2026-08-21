@@ -1,9 +1,11 @@
 export function createControls(camera, canvas, target, options = {}) {
-  const minRadius = options.minRadius ?? 2.2;
-  const maxRadius = options.maxRadius ?? 12;
-  const minPhi = options.minPhi ?? 0.18;
-  const maxPhi = options.maxPhi ?? 1.35;
-  const bounds = options.bounds ?? { x: 8, zMin: -8, zMax: 6 };
+  const minRadius = options.minRadius ?? 0.9;
+  const maxRadius = options.maxRadius ?? 1.7;
+  const minPhi = options.minPhi ?? 0.62;
+  const maxPhi = options.maxPhi ?? 1.18;
+  const walk = options.walk ?? { x: 1, zMin: -0.2, zMax: 1.1 };
+  const camBox = options.cam ?? { x: 1.4, z: 1.3, yMin: 0.42, yMax: 1.88 };
+
   const state = {
     theta: Math.atan2(camera.position.x - target.x, camera.position.z - target.z),
     phi: Math.acos(
@@ -44,7 +46,7 @@ export function createControls(camera, canvas, target, options = {}) {
 
   const onWheel = (event) => {
     event.preventDefault();
-    state.radius = clamp(state.radius + event.deltaY * 0.01, minRadius, maxRadius);
+    state.radius = clamp(state.radius + event.deltaY * 0.008, minRadius, maxRadius);
   };
 
   const onKeyDown = (event) => {
@@ -65,7 +67,7 @@ export function createControls(camera, canvas, target, options = {}) {
 
   return {
     update(dt) {
-      const speed = 1.7 * dt;
+      const speed = 1.15 * dt;
       const forward = newDir(state.theta);
       const right = { x: forward.z, z: -forward.x };
       if (state.keys.has("KeyW")) {
@@ -84,12 +86,28 @@ export function createControls(camera, canvas, target, options = {}) {
         target.x += right.x * speed;
         target.z += right.z * speed;
       }
-      target.x = clamp(target.x, -bounds.x, bounds.x);
-      target.z = clamp(target.z, bounds.zMin, bounds.zMax);
+      target.x = clamp(target.x, -walk.x, walk.x);
+      target.z = clamp(target.z, walk.zMin, walk.zMax);
+      target.y = clamp(target.y, 0.55, 1.05);
 
-      camera.position.x = target.x + Math.sin(state.theta) * Math.sin(state.phi) * state.radius;
-      camera.position.z = target.z + Math.cos(state.theta) * Math.sin(state.phi) * state.radius;
-      camera.position.y = target.y + Math.cos(state.phi) * state.radius;
+      let radius = state.radius;
+      for (let i = 0; i < 8; i += 1) {
+        camera.position.x = target.x + Math.sin(state.theta) * Math.sin(state.phi) * radius;
+        camera.position.z = target.z + Math.cos(state.theta) * Math.sin(state.phi) * radius;
+        camera.position.y = target.y + Math.cos(state.phi) * radius;
+        const inside =
+          Math.abs(camera.position.x) <= camBox.x &&
+          Math.abs(camera.position.z) <= camBox.z &&
+          camera.position.y >= camBox.yMin &&
+          camera.position.y <= camBox.yMax;
+        if (inside) break;
+        radius = Math.max(minRadius, radius - 0.08);
+      }
+
+      camera.position.x = clamp(camera.position.x, -camBox.x, camBox.x);
+      camera.position.z = clamp(camera.position.z, -camBox.z, camBox.z);
+      camera.position.y = clamp(camera.position.y, camBox.yMin, camBox.yMax);
+      state.radius = radius;
       camera.lookAt(target);
     },
   };

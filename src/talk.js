@@ -1,7 +1,9 @@
+import * as THREE from "three";
 import { CSS3DObject } from "three/addons/renderers/CSS3DRenderer.js";
 import { replyTo } from "./replies.js";
 
-const CSS_SCALE = 0.0046;
+const CSS_SCALE = 0.0042;
+const headWorld = new THREE.Vector3();
 
 export function createTalkSurface() {
   const balloonEl = document.getElementById("talk-balloon");
@@ -12,7 +14,6 @@ export function createTalkSurface() {
 
   const balloon = new CSS3DObject(balloonEl);
   balloon.scale.setScalar(CSS_SCALE);
-  balloon.position.set(0.52, 1.58, 0.22);
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -26,6 +27,8 @@ export function createTalkSurface() {
   return { balloon, input };
 }
 
-export function billboardBalloon(camera, balloon) {
+export function tapeBalloon(camera, balloon, head) {
+  head.getWorldPosition(headWorld);
+  balloon.position.set(headWorld.x + 0.26, headWorld.y + 0.2, headWorld.z + 0.06);
   balloon.quaternion.copy(camera.quaternion);
 }

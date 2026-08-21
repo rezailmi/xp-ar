@@ -85,7 +85,7 @@ body > .balloon {
 }
 
 .balloon {
-  width: 268px;
+  width: 232px;
   font-family: var(--font);
   user-select: none;
 }
@@ -98,16 +98,10 @@ body > .balloon {
       #f8ec94 7px 8px
     );
   color: var(--ink);
-  border: 2px solid var(--balloon-edge);
-  padding: 10px 12px 12px;
+  border: 1px solid var(--balloon-edge);
+  padding: 8px 10px 10px;
   font-size: 11px;
-  line-height: 1.4;
-}
-
-.balloon-name {
-  margin: 0 0 4px;
-  font-size: 11px;
-  font-weight: 700;
+  line-height: 1.35;
 }
 
 .balloon-echo,
@@ -126,7 +120,7 @@ body > .balloon {
   margin: -1px 0 0 28px;
   border-left: 12px solid transparent;
   border-right: 10px solid transparent;
-  border-top: 18px solid var(--balloon-edge);
+  border-top: 16px solid var(--balloon-edge);
   position: relative;
 }
 
@@ -134,10 +128,10 @@ body > .balloon {
   content: "";
   position: absolute;
   left: -9px;
-  top: -20px;
+  top: -17px;
   border-left: 10px solid transparent;
   border-right: 8px solid transparent;
-  border-top: 16px solid var(--balloon);
+  border-top: 15px solid var(--balloon);
 }
 
 #talk-form {
@@ -151,7 +145,7 @@ body > .balloon {
   min-width: 0;
   height: 22px;
   padding: 2px 5px;
-  border: 2px solid var(--balloon-edge);
+  border: 1px solid var(--balloon-edge);
   background: #fffdf2;
   color: var(--ink);
   font: 11px/1.2 Tahoma, "MS Sans Serif", system-ui, sans-serif;
@@ -205,7 +199,7 @@ body > .balloon {
 
 @media (max-width: 640px) {
   .balloon {
-    width: 230px;
+    width: 210px;
   }
 
   .sketch-note,

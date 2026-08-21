@@ -3,8 +3,8 @@ import { CSS3DRenderer } from "three/addons/renderers/CSS3DRenderer.js";
 import { createControls } from "./controls.js";
 import { createPips } from "./pips.js";
 import { tickPS1Materials } from "./ps1-material.js";
-import { createRoom } from "./room.js";
-import { billboardBalloon, createTalkSurface } from "./talk.js";
+import { ROOM, createRoom } from "./room.js";
+import { createTalkSurface, tapeBalloon } from "./talk.js";
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -27,27 +27,28 @@ cssHost.appendChild(cssRenderer.domElement);
 const scene = new THREE.Scene();
 const cssScene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(52, 1, 0.08, 24);
-camera.position.set(0.22, 1.42, 1.92);
+const camera = new THREE.PerspectiveCamera(50, 1, 0.08, 12);
+camera.position.set(0.18, 1.28, 1.18);
 
-const lookTarget = new THREE.Vector3(0, 0.82, 0.04);
+const lookTarget = new THREE.Vector3(0.12, 0.72, -0.7);
 
 scene.add(createRoom());
 
 const pips = createPips();
-pips.scale.setScalar(0.92);
-pips.position.set(0, 0, 0.06);
+pips.position.set(0.32, 0.5, -0.88);
+pips.userData.seatY = 0.5;
 scene.add(pips);
 
 const { balloon, input } = createTalkSurface();
 cssScene.add(balloon);
 
 const controls = createControls(camera, canvas, lookTarget, {
-  minRadius: 1.25,
-  maxRadius: 2.55,
-  minPhi: 0.55,
-  maxPhi: 1.22,
-  bounds: { x: 1.15, zMin: -0.55, zMax: 1.35 },
+  minRadius: 0.85,
+  maxRadius: 1.55,
+  minPhi: 0.64,
+  maxPhi: 1.16,
+  walk: ROOM.walk,
+  cam: ROOM.cam,
 });
 
 function resize() {
@@ -76,7 +77,7 @@ function frame(now) {
     wobble: !reduceMotion,
     snap: reduceMotion ? 2000 : 168,
   });
-  billboardBalloon(camera, balloon);
+  tapeBalloon(camera, balloon, pips.userData.head);
 
   renderer.render(scene, camera);
   cssRenderer.render(cssScene, camera);

@@ -1,81 +1,83 @@
-# Design plan — from WHY.md
+# Design plan — from WHY.md + Research pack
 
-Written after the why, before this rebuild. Follows the frontend-design skill. The why wins if this file and the pixels disagree.
+Privilege: **room, then body, then balloon.** If the room reads as a level, the sketch failed. WHY.md still wins on job and open questions.
 
 ## Subject
 
-A living room you could stand in. **Pips** appeared on the rug — an original PS1 mascot (orange/tan, sneakers, gauntlets, wild eyes). House guest, not a desktop icon.
+A living room a body lives in. **Pips** is already using the sofa and the rug. Original PS1 mascot. House guest, not a pet, not Crash.
 
-## Audience
+## Audience / job
 
-Reza. Thirty seconds. Click through. Leave.
+Reza, thirty seconds. Feel *someone appeared in my living room*. Then talk.
 
-## Job
+## Steal
 
-Feel *this character appeared in my living room*, then talk.
+| From | Take |
+| --- | --- |
+| [EyePet](https://en.wikipedia.org/wiki/EyePet) | Creature on *your* rug, scaled against real furniture. |
+| [Nintendogs](https://en.wikipedia.org/wiki/Nintendogs) | A body that can sit or lean on the sofa. Not a dog. No meters. |
+| [Tomodachi](https://en.wikipedia.org/wiki/Tomodachi_Life) | One tight apartment. Camera cannot leave. |
+| Bob / domestic toys | Sofa, lamp, rug, CRT at arm’s reach. |
+| Crash *construction* (not likeness) | Large head, no neck, short limbs, gauntlets + sneakers as side color blocks, low-poly snap, orange/tan that holds on a CRT. |
+| Ape Escape Spike *energy* | Busy hands when still. Not the hair, not the net. |
+| Spyro *energy* | Small on the floor. Not purple, horns, or wings. |
+| Clippit / [Microsoft Agent](https://en.wikipedia.org/wiki/Microsoft_Agent) | One yellow paper letter. 1px brown edge. Triangular tail on the skull. Tahoma 11. Reply replaces the copy. |
 
-## Aesthetic risk
+## Avoid
 
-The room is **small and furnished like a house**, not a game level. The only chrome is a paper balloon and a tiny honest caption: **Sketch. Decisions still open.** If it looks shipped, it failed the why.
+Rover. Comic Sans. House-as-OS. Pixar fur. Pet-care HUD. Catalog. Mii faces. Dual-screen HUD. Overworld. Horizon / skybox.
+
+Crash face/mask, green eyes, back spots, chest patch, blue jeans + red shoes, mohawk, name, Wumpa, gum-on-shoe, gem-pose, “Whoa,” spin-as-brand.
+
+Spike red hair / Time Net. Spyro purple+horns+wings. Croc green+backpack.
+
+Paperclip mesh. Office 97 wizard chrome. Title-bar window. Luna/XP frames. Bonzi / Peedy / Merlin. TTS. Right-click menus. iMessage pills.
 
 ## Palette
 
-Domestic tokens. No mauve, no Inter purple, no AI-beige.
+| Token | Hex |
+| --- | --- |
+| wallpaper | `#C4A882` |
+| trim | `#6B4A2A` |
+| rug | `#7A2E2E` |
+| sofa | `#3A4A6B` |
+| balloon | `#FFF4A3` |
+| ink | `#111111` |
 
-| Token | Hex | Role |
-| --- | --- | --- |
-| wallpaper | `#C4A882` | Walls |
-| trim | `#6B4A2A` | Wood, frames |
-| rug | `#7A2E2E` | Where Pips stands |
-| sofa | `#3A4A6B` | The couch you would sit on |
-| balloon | `#FFF4A3` | Paper talk |
-| ink | `#111111` | Type and edges |
-
-Supporting, not new hues: CRT beige `#D8D0B8`, balloon edge `#4A3B12`, fur `#C86A2A`, gauntlet `#E8D8B0`, sneaker `#2F6F62`.
+Body blocks (kept): fur `#C86A2A`, gauntlet `#E8D8B0`, sneaker `#2F6F62`. CRT beige `#D8D0B8`. Balloon edge `#4A3B12`.
 
 ## Type
 
-- **Talk / hint:** Tahoma, `"MS Sans Serif"`, system-ui. 11px body. 11px bold name.
-- **Sketch note:** same face, 10px. Not a banner.
-- **Never:** Inter, Geist, a display serif, a purple CTA, a title bar.
-
-Tahoma is the only face. It is used like office paper, not like a brand.
+Tahoma / `"MS Sans Serif"` / system-ui. Balloon 11px. Sketch note 10px. Never Inter. Never Comic Sans.
 
 ## Layout
 
-Tighter than a level: ~4.6m across, ceiling you could touch. Camera starts *in* the room, looking at Pips on the rug. Sofa close behind. Lamp and CRT in reach. One balloon, tail on the skull.
+Tomodachi-tight: ~3.4m. Sofa you could sit on. Camera starts inside and is clamped to the walls. No window-to-sky.
 
 ```
-+--------------------------------------+
-| wallpaper     [lamp] sofa [CRT]      |
-|               [table]                |
-|      +------------------+            |
-|      | (copy)           |            |
-|      | [______] [Send]  |            |
-|      +----\             |            |
-|            \ [PIPS]                  |
-|              rug                     |
-+--------------------------------------+
-  Sketch. Decisions still open.     (tiny)
++------------------------------+
+| [lamp]   sofa+Pips    [CRT]  |
+|          [table]             |
+|     rug                      |
+|   (you, in the room)         |
++------------------------------+
+  Sketch. Decisions still open.
 ```
-
-No sidebar. No second balloon. No Luna. No WASD billboard that looks like an app chrome — controls stay one Tahoma line, or go unsaid next to the sketch note.
 
 ## Signature
 
-A **paper Office balloon taped to a house-scale living room**, with PS1 snap + wobble + nearest-neighbor texels. The sketch caption is not decoration; it is the Emil fix.
+A **closed living room** you cannot leave, with a **taped paper balloon** on a short-limbed guest who fidgets.
 
 ## Motion
 
-- Pips: spin-ready idle. Bounce, arms out, a twitch toward a spin.
-- Wobble on room and body. Not on the paper.
-- Send insets. No bounce-in.
-- `prefers-reduced-motion` keeps the room; kills wobble and idle.
+- Pips: sit/lean. Glance, yawn, twitch, compact bounce, busy hands. No spin.
+- Room wobbles. Paper does not.
+- Send insets. `prefers-reduced-motion` stills the body.
 
 ## Copy
 
-House guest who thinks he is a helpful paperclip. Eager, slightly officious, a little broken. Echo what was typed. No “unlock.” No homework bit unless the house earns it.
+Officious house guest. Opens with “It looks like you walked in.” One letter at a time. Not a thread.
 
-## Critique (before build)
+## Critique
 
-A generic 3D chat demo would be a large empty stage, a mascot, and a polished HUD. The last pass drifted that way: 7-meter walls, furniture in the corners, a yellow control bar that read like product chrome. This plan shrinks the room to domestic reach and puts the unfinished-ness on screen. The balloon stays the one bold thing.
+The last room was 4.6m with a free orbit — a level with furniture. This pass shrinks to apartment reach and clamps the camera to the wallpaper. Pips loses the neck, the chest patch, and the spin. The balloon loses the name plate that read as a title bar.

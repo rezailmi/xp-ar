@@ -16,7 +16,7 @@ Then open the URL `serve` prints. Or open `index.html` (use `npx serve` if `file
 
 ## The sketch
 
-You are in a small living room. **Pips** is on the rug. Type in the paper balloon. The reply replaces the copy. Lines are canned. No API.
+You are in a tight living room you cannot leave. **Pips** is using the sofa. Type in the paper balloon. The reply replaces the copy. Lines are canned. No API.
 
 On screen: **Sketch. Decisions still open.** so the pixels do not fake alignment.
 
