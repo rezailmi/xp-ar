@@ -28,10 +28,10 @@ cssHost.appendChild(cssRenderer.domElement);
 const scene = new THREE.Scene();
 const cssScene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(46, 1, 0.08, 12);
-camera.position.set(0.62, 0.9, 1.02);
+const camera = new THREE.PerspectiveCamera(52, 1, 0.08, 12);
+camera.position.set(0.38, 0.94, 1.18);
 
-const lookTarget = new THREE.Vector3(-0.22, 0.58, -0.52);
+const lookTarget = new THREE.Vector3(0.02, 0.6, -0.52);
 
 const room = createRoom();
 scene.add(room);
@@ -48,10 +48,10 @@ const { balloon, input } = createTalkSurface();
 cssScene.add(balloon);
 
 const controls = createControls(camera, canvas, lookTarget, {
-  minRadius: 0.92,
-  maxRadius: 1.42,
-  minPhi: 0.78,
-  maxPhi: 1.22,
+  minRadius: 0.88,
+  maxRadius: 1.65,
+  minPhi: 0.76,
+  maxPhi: 1.24,
   lookSpeed: 0.0032,
   walkSpeed: 0.72,
   walk: ROOM.walk,

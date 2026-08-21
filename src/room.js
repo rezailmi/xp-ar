@@ -33,7 +33,7 @@ export const ROOM = {
   halfW: 1.7,
   halfD: 1.6,
   height: 2.15,
-  cam: { x: 1.42, z: 1.32, yMin: 0.38, yMax: 1.72 },
+  cam: { x: 1.42, z: 1.38, yMin: 0.38, yMax: 1.72 },
   walk: { x: 1.05, zMin: -0.15, zMax: 1.12 },
 };
 

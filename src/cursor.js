@@ -42,7 +42,7 @@ export function createTalkCursor() {
   group.userData.update = (time, head, reduceMotion) => {
     const origin = head.getWorldPosition(group.userData._head ??= new THREE.Vector3());
     const bob = reduceMotion ? 0 : Math.sin(time * 2.1) * 0.02;
-    group.position.set(origin.x + 0.22, origin.y + 0.16 + bob, origin.z + 0.1);
+    group.position.set(origin.x + 0.32, origin.y + 0.24 + bob, origin.z + 0.14);
     group.rotation.y = time * 0.6;
     glow.material.opacity = reduceMotion ? 0.4 : 0.4 + Math.sin(time * 3.4) * 0.12;
   };
