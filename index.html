@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <title>Agent — Bliss yard</title>
+    <title>Pips — living room</title>
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230A246A'/%3E%3Crect x='2' y='2' width='6' height='6' fill='%233A6EA5'/%3E%3Crect x='8' y='8' width='6' height='6' fill='%233B7A2A'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23FFF4A3'/%3E%3Crect x='2' y='2' width='12' height='12' fill='none' stroke='%234A3B12' stroke-width='2'/%3E%3Crect x='4' y='5' width='4' height='4' fill='%23C86A2A'/%3E%3C/svg%3E"
     />
     <link rel="stylesheet" href="./styles.css" />
     <script type="importmap">
@@ -26,18 +26,11 @@
 
     <p class="hint">Drag to look · Scroll to zoom · WASD to walk</p>
 
-    <div id="talk-window" class="xp-window talk-window">
-      <div class="xp-titlebar">
-        <span class="xp-title-icon" aria-hidden="true"></span>
-        <span class="xp-title">Agent</span>
-        <div class="xp-caption-buttons">
-          <button type="button" class="xp-caption" tabindex="-1" aria-hidden="true">–</button>
-          <button type="button" class="xp-caption" tabindex="-1" aria-hidden="true">□</button>
-          <button type="button" class="xp-caption xp-caption-close" tabindex="-1" aria-hidden="true">×</button>
-        </div>
-      </div>
-      <div class="xp-body">
-        <p class="xp-help">Ask Rover something. He lives here.</p>
+    <div id="talk-balloon" class="balloon">
+      <div class="balloon-paper">
+        <p class="balloon-name">Pips</p>
+        <p id="reply-echo" class="balloon-echo"></p>
+        <p id="reply-line" class="balloon-line">It looks like you’re trying to talk to me. Type something. I’ll file it.</p>
         <form id="talk-form" autocomplete="off">
           <label class="sr-only" for="talk-input">Message</label>
           <input
@@ -46,26 +39,12 @@
             type="text"
             maxlength="140"
             spellcheck="false"
-            placeholder="Type a question…"
+            placeholder="Type here…"
           />
-          <button type="submit" class="xp-btn" id="talk-send">Send</button>
+          <button type="submit" class="balloon-btn" id="talk-send">Send</button>
         </form>
       </div>
-    </div>
-
-    <div id="reply-window" class="xp-window reply-window">
-      <div class="xp-titlebar">
-        <span class="xp-title-icon" aria-hidden="true"></span>
-        <span class="xp-title">Rover</span>
-        <div class="xp-caption-buttons">
-          <button type="button" class="xp-caption" tabindex="-1" aria-hidden="true">–</button>
-          <button type="button" class="xp-caption xp-caption-close" tabindex="-1" aria-hidden="true">×</button>
-        </div>
-      </div>
-      <div class="xp-body">
-        <p id="reply-echo" class="xp-echo"></p>
-        <p id="reply-line" class="xp-line">Hi. I’m Rover. Type something and press Enter.</p>
-      </div>
+      <span class="balloon-tail" aria-hidden="true"></span>
     </div>
 
     <script type="module" src="./src/main.js"></script>

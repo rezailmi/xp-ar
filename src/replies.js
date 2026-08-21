@@ -1,19 +1,20 @@
 const LINES = [
-  "It looks like you’re trying to get something done.",
-  "I can search this computer — or just sit here. Your call.",
-  "Have you saved your work? Just checking.",
-  "Try Start, then All Programs. That’s where the good stuff lives.",
-  "I’m not on the Internet right now. I can still listen.",
-  "That reminds me of a file I saw once. Or maybe a stick.",
-  "The Start button is in the corner. Always has been.",
-  "If this were 2001, I’d fetch that for you.",
+  "It looks like you’re trying to stand in a living room. I can help with that. Or spin.",
+  "I circled the important part. The important part is you. Also the lamp.",
+  "Would you like help spinning, sitting, or pretending this is a spreadsheet?",
+  "I put your words in a folder called STUFF. The folder is imaginary.",
+  "Have you saved? There is nothing to save. I saved it anyway.",
+  "Searching living room… found: sofa, one (1) Pips, leftover Tuesday.",
+  "I’m not supposed to leave the rug. That’s a lie. I just like the rug.",
+  "Tip: the TV only plays snow. That’s editorial.",
+  "Whoa! You typed! I have a form for that. The form ate itself.",
 ];
 
 export function replyTo(text) {
   const typed = text.replace(/\s+/g, " ").trim();
   const index = hash(typed) % LINES.length;
   return {
-    echo: typed ? `You typed: “${typed}”` : "You pressed Enter without typing.",
+    echo: typed ? `You typed: “${typed}”` : "You pressed Enter without typing. Bold.",
     line: LINES[index],
   };
 }

@@ -1,13 +1,11 @@
 :root {
-  --bliss-grass: #3b7a2a;
-  --bliss-sun: #6b9b3a;
-  --bliss-sky: #7ec8e3;
-  --bliss-horizon: #c5e4f3;
-  --xp-teal: #3a6ea5;
-  --luna-navy: #0a246a;
-  --luna-end: #a6caf0;
-  --chrome-face: #ece9d8;
-  --button-face: #d4d0c8;
+  --wallpaper: #c4a882;
+  --trim: #6b4a2a;
+  --rug: #7a2e2e;
+  --sofa: #3a4a6b;
+  --crt-beige: #d8d0b8;
+  --balloon: #fff4a3;
+  --balloon-edge: #4a3b12;
   --ink: #111111;
   --font: Tahoma, "MS Sans Serif", system-ui, sans-serif;
 }
@@ -17,7 +15,7 @@ body {
   margin: 0;
   height: 100%;
   overflow: hidden;
-  background: var(--bliss-sky);
+  background: var(--wallpaper);
   color: var(--ink);
   font-family: var(--font);
 }
@@ -40,11 +38,11 @@ body {
   pointer-events: none;
 }
 
-#css3d .xp-window {
+#css3d .balloon {
   pointer-events: auto;
 }
 
-body > .xp-window {
+body > .balloon {
   position: absolute;
   left: 0;
   top: 0;
@@ -58,9 +56,9 @@ body > .xp-window {
   z-index: 4;
   margin: 0;
   font-size: 11px;
-  color: #111111;
-  background: #ece9d8;
-  border: 2px solid #0a246a;
+  color: var(--ink);
+  background: var(--balloon);
+  border: 2px solid var(--balloon-edge);
   padding: 2px 7px 3px;
   pointer-events: none;
 }
@@ -77,144 +75,92 @@ body > .xp-window {
   border: 0;
 }
 
-.xp-window {
-  width: 280px;
-  background: var(--chrome-face);
-  color: var(--ink);
+.balloon {
+  width: 268px;
   font-family: var(--font);
-  font-size: 11px;
-  line-height: 1.35;
-  border: 3px solid var(--luna-navy);
-  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.45);
   user-select: none;
 }
 
-.talk-window {
-  width: 300px;
-}
-
-.reply-window {
-  width: 230px;
-}
-
-.xp-titlebar {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  height: 26px;
-  padding: 0 4px 0 6px;
-  color: #fff;
+.balloon-paper {
   background:
-    linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.28) 0%,
-      rgba(255, 255, 255, 0) 42%,
-      rgba(0, 0, 0, 0.18) 100%
-    ),
-    linear-gradient(to right, var(--luna-navy), var(--luna-end));
+    repeating-linear-gradient(
+      0deg,
+      #fff4a3 0 7px,
+      #f8ec94 7px 8px
+    );
+  color: var(--ink);
+  border: 2px solid var(--balloon-edge);
+  padding: 10px 12px 12px;
+  font-size: 11px;
+  line-height: 1.4;
 }
 
-.xp-title-icon {
-  width: 14px;
-  height: 14px;
-  flex: 0 0 14px;
-  background:
-    linear-gradient(135deg, #3a6ea5 50%, transparent 50%),
-    linear-gradient(45deg, #6b9b3a 50%, #7ec8e3 50%);
-  background-size: 7px 7px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
-}
-
-.xp-title {
-  flex: 1;
+.balloon-name {
+  margin: 0 0 4px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.xp-caption-buttons {
-  display: flex;
-  gap: 2px;
-}
-
-.xp-caption {
-  width: 21px;
-  height: 18px;
-  padding: 0;
-  border: 1px solid #003c74;
-  border-radius: 3px;
-  background: linear-gradient(to bottom, #2b88d6, #165fa7);
-  color: #fff;
-  font: 700 12px/1 Tahoma, "MS Sans Serif", system-ui, sans-serif;
-  cursor: default;
-}
-
-.xp-caption-close {
-  background: linear-gradient(to bottom, #e36d5c, #c03624);
-}
-
-.xp-caption:hover {
-  filter: brightness(1.08);
-}
-
-.xp-caption:focus-visible {
-  outline: 1px dotted #fff;
-  outline-offset: -3px;
-}
-
-.xp-caption:active {
-  filter: brightness(0.92);
-  box-shadow: inset 1px 1px 0 rgba(0, 0, 0, 0.35);
-  transform: translate(1px, 1px);
-}
-
-.xp-body {
-  padding: 10px 10px 12px;
-}
-
-.xp-help,
-.xp-echo,
-.xp-line {
+.balloon-echo,
+.balloon-line {
   margin: 0 0 8px;
 }
 
-.xp-echo {
-  color: #3a3a3a;
+.balloon-echo:empty {
+  display: none;
+}
+
+.balloon-tail {
+  display: block;
+  width: 0;
+  height: 0;
+  margin: -1px 0 0 28px;
+  border-left: 12px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 18px solid var(--balloon-edge);
+  position: relative;
+}
+
+.balloon-tail::after {
+  content: "";
+  position: absolute;
+  left: -9px;
+  top: -20px;
+  border-left: 10px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 16px solid var(--balloon);
 }
 
 #talk-form {
   display: flex;
-  gap: 8px;
+  gap: 7px;
   align-items: stretch;
 }
 
 #talk-input {
   flex: 1;
   min-width: 0;
-  height: 23px;
+  height: 22px;
   padding: 2px 5px;
-  border: 2px solid;
-  border-color: #404040 #fff #fff #404040;
-  background: #fff;
+  border: 2px solid var(--balloon-edge);
+  background: #fffdf2;
   color: var(--ink);
   font: 11px/1.2 Tahoma, "MS Sans Serif", system-ui, sans-serif;
   border-radius: 0;
-  box-shadow: none;
+  box-shadow: inset 1px 1px 0 #c4a882;
 }
 
 #talk-input::placeholder {
-  color: #6b6b6b;
+  color: #6b5a32;
 }
 
 #talk-input:hover {
-  border-color: #2b4f7a #d0d0d0 #d0d0d0 #2b4f7a;
+  background: #fff;
 }
 
 #talk-input:focus {
   outline: none;
-  border-color: var(--xp-teal) #fff #fff var(--xp-teal);
+  background: #fff;
 }
 
 #talk-input:focus-visible {
@@ -222,43 +168,35 @@ body > .xp-window {
   outline-offset: 2px;
 }
 
-.xp-btn {
+.balloon-btn {
   appearance: none;
-  height: 23px;
-  padding: 0 14px;
-  background: var(--button-face);
+  height: 22px;
+  padding: 0 12px;
+  background: var(--crt-beige);
   color: var(--ink);
   font: 11px Tahoma, "MS Sans Serif", system-ui, sans-serif;
-  border: 2px solid;
-  border-color: #fff #404040 #404040 #fff;
-  border-radius: 3px;
-  box-shadow: 1px 1px 0 #000;
+  border: 2px solid var(--ink);
+  border-radius: 0;
   cursor: default;
 }
 
-.xp-btn:hover {
-  background: #e6e2d6;
-  border-color: #316ac5 #0a246a #0a246a #316ac5;
+.balloon-btn:hover {
+  background: #e8e0c8;
 }
 
-.xp-btn:focus-visible {
+.balloon-btn:focus-visible {
   outline: 1px dotted var(--ink);
-  outline-offset: -5px;
+  outline-offset: -4px;
 }
 
-.xp-btn:active {
-  border-color: #404040 #fff #fff #404040;
-  box-shadow: inset 1px 1px 0 #808080;
-  padding: 1px 13px 0 15px;
+.balloon-btn:active {
+  box-shadow: inset 1px 1px 0 #6b4a2a;
+  padding: 1px 11px 0 13px;
 }
 
 @media (max-width: 640px) {
-  .talk-window {
-    width: 250px;
-  }
-
-  .reply-window {
-    width: 200px;
+  .balloon {
+    width: 230px;
   }
 
   .hint {
@@ -267,8 +205,7 @@ body > .xp-window {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .xp-btn:active,
-  .xp-caption:active {
-    transform: none;
+  .balloon-btn:active {
+    padding: 0 12px;
   }
 }

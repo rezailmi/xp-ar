@@ -1,4 +1,9 @@
-export function createControls(camera, canvas, target) {
+export function createControls(camera, canvas, target, options = {}) {
+  const minRadius = options.minRadius ?? 2.2;
+  const maxRadius = options.maxRadius ?? 12;
+  const minPhi = options.minPhi ?? 0.18;
+  const maxPhi = options.maxPhi ?? 1.35;
+  const bounds = options.bounds ?? { x: 8, zMin: -8, zMax: 6 };
   const state = {
     theta: Math.atan2(camera.position.x - target.x, camera.position.z - target.z),
     phi: Math.acos(
@@ -13,7 +18,7 @@ export function createControls(camera, canvas, target) {
   };
 
   const onPointerDown = (event) => {
-    if (event.target.closest(".xp-window")) return;
+    if (event.target.closest(".balloon")) return;
     state.dragging = true;
     state.pointerId = event.pointerId;
     state.lastX = event.clientX;
@@ -28,7 +33,7 @@ export function createControls(camera, canvas, target) {
     state.lastX = event.clientX;
     state.lastY = event.clientY;
     state.theta -= dx * 0.005;
-    state.phi = clamp(state.phi - dy * 0.005, 0.18, 1.35);
+    state.phi = clamp(state.phi - dy * 0.005, minPhi, maxPhi);
   };
 
   const onPointerUp = (event) => {
@@ -39,7 +44,7 @@ export function createControls(camera, canvas, target) {
 
   const onWheel = (event) => {
     event.preventDefault();
-    state.radius = clamp(state.radius + event.deltaY * 0.01, 2.2, 12);
+    state.radius = clamp(state.radius + event.deltaY * 0.01, minRadius, maxRadius);
   };
 
   const onKeyDown = (event) => {
@@ -79,8 +84,8 @@ export function createControls(camera, canvas, target) {
         target.x += right.x * speed;
         target.z += right.z * speed;
       }
-      target.x = clamp(target.x, -8, 8);
-      target.z = clamp(target.z, -8, 6);
+      target.x = clamp(target.x, -bounds.x, bounds.x);
+      target.z = clamp(target.z, bounds.zMin, bounds.zMax);
 
       camera.position.x = target.x + Math.sin(state.theta) * Math.sin(state.phi) * state.radius;
       camera.position.z = target.z + Math.cos(state.theta) * Math.sin(state.phi) * state.radius;

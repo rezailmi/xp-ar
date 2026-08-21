@@ -1,122 +1,224 @@
 import * as THREE from "three";
-import { createPS1Material, rememberWobble } from "./ps1-material.js";
-import { crtTexture, grassTexture, plasticTexture, woodTexture } from "./textures.js";
+import { createPS1Material } from "./ps1-material.js";
+import {
+  crtBeigeTexture,
+  floorTexture,
+  rugTexture,
+  shadeTexture,
+  sofaTexture,
+  tvSnowTexture,
+  wallpaperTexture,
+  woodTrimTexture,
+} from "./textures.js";
 
 export function createRoom() {
   const room = new THREE.Group();
-  room.name = "Yard";
+  room.name = "LivingRoom";
 
-  const grass = grassTexture();
-  grass.wrapS = THREE.RepeatWrapping;
-  grass.wrapT = THREE.RepeatWrapping;
-  grass.repeat.set(10, 10);
+  const wallpaper = wallpaperTexture();
+  wallpaper.wrapS = THREE.RepeatWrapping;
+  wallpaper.wrapT = THREE.RepeatWrapping;
+  wallpaper.repeat.set(3, 2);
+  const wallMat = createPS1Material({ map: wallpaper, color: "#ffffff", wobble: 0.008 });
 
-  const groundMat = createPS1Material({ map: grass, color: "#d8d8d8", wobble: 0.01 });
-  rememberWobble(groundMat, 0.01);
+  const floorMap = floorTexture();
+  floorMap.wrapS = THREE.RepeatWrapping;
+  floorMap.wrapT = THREE.RepeatWrapping;
+  floorMap.repeat.set(6, 6);
+  const floorMat = createPS1Material({ map: floorMap, color: "#ffffff", wobble: 0.006 });
 
-  const groundGeo = new THREE.PlaneGeometry(90, 90, 10, 10);
-  groundGeo.rotateX(-Math.PI / 2);
-  const pos = groundGeo.attributes.position;
-  for (let i = 0; i < pos.count; i += 1) {
-    const x = pos.getX(i);
-    const z = pos.getZ(i);
-    const hillA = Math.exp(-((x + 16) ** 2) / 90 - ((z + 24) ** 2) / 110) * 7.4;
-    const hillB = Math.exp(-((x - 22) ** 2) / 140 - ((z + 28) ** 2) / 160) * 4.8;
-    const hillC = Math.exp(-((x + 4) ** 2) / 220 - ((z + 36) ** 2) / 180) * 3.2;
-    pos.setY(i, hillA + hillB + hillC);
-  }
-  groundGeo.computeVertexNormals();
+  const trimMat = createPS1Material({ map: woodTrimTexture(), color: "#ffffff", wobble: 0.008 });
+  const sofaMat = createPS1Material({ map: sofaTexture(), color: "#ffffff", wobble: 0.01 });
+  const beigeMat = createPS1Material({ map: crtBeigeTexture(), color: "#ffffff", wobble: 0.008 });
+  const shadeMat = createPS1Material({ map: shadeTexture(), color: "#ffffff", wobble: 0.01 });
+  const darkMat = createPS1Material({ color: "#2A2420", wobble: 0.006 });
 
-  const ground = new THREE.Mesh(groundGeo, groundMat);
-  room.add(ground);
+  const floor = new THREE.Mesh(new THREE.PlaneGeometry(7.2, 7.2, 4, 4), floorMat);
+  floor.rotation.x = -Math.PI / 2;
+  room.add(floor);
 
-  const farHill = createPS1Material({ color: "#3B7A2A", wobble: 0.012 });
-  const nearHill = createPS1Material({ color: "#6B9B3A", wobble: 0.012 });
-  rememberWobble(farHill, 0.012);
-  rememberWobble(nearHill, 0.012);
+  const ceiling = new THREE.Mesh(
+    new THREE.PlaneGeometry(7.2, 7.2, 2, 2),
+    createPS1Material({ color: "#B89A74", wobble: 0.004 }),
+  );
+  ceiling.rotation.x = Math.PI / 2;
+  ceiling.position.y = 2.58;
+  room.add(ceiling);
 
-  const moundA = new THREE.Mesh(new THREE.SphereGeometry(7.5, 6, 4), farHill);
-  moundA.scale.set(1.8, 0.55, 1.2);
-  moundA.position.set(-16, 1.4, -26);
-  room.add(moundA);
+  room.add(wall(0, 1.29, -3.58, 7.2, 2.58, 0.12, wallMat));
+  room.add(wall(-3.58, 1.29, 0, 0.12, 2.58, 7.2, wallMat));
+  room.add(wall(3.58, 1.29, 0, 0.12, 2.58, 7.2, wallMat));
+  room.add(wall(0, 1.29, 3.58, 7.2, 2.58, 0.12, wallMat));
 
-  const moundB = new THREE.Mesh(new THREE.SphereGeometry(5.2, 6, 4), nearHill);
-  moundB.scale.set(1.6, 0.5, 1.3);
-  moundB.position.set(18, 0.9, -30);
-  room.add(moundB);
+  room.add(baseboard(0, 0.06, -3.5, 7.1, 0.12, 0.08, trimMat));
+  room.add(baseboard(-3.5, 0.06, 0, 0.08, 0.12, 7.1, trimMat));
+  room.add(baseboard(3.5, 0.06, 0, 0.08, 0.12, 7.1, trimMat));
 
-  room.add(createCrate(-1.85, 0, -1.15));
-  room.add(createCrt(-1.85, 0.52, -1.15));
+  const rug = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.04, 1.9), createPS1Material({
+    map: rugTexture(),
+    color: "#ffffff",
+    wobble: 0.01,
+  }));
+  rug.position.set(0, 0.025, 0.1);
+  room.add(rug);
+
+  room.add(createSofa(0.05, 0, -2.42, sofaMat, trimMat));
+  room.add(createTable(0.1, 0, -1.28, trimMat));
+  room.add(createCrtStand(2.2, 0, -2.15, beigeMat, darkMat, trimMat));
+  room.add(createLamp(-2.4, 0, -2.2, trimMat, shadeMat, beigeMat));
+  room.add(createWindow(-3.5, 1.45, 0.4, trimMat));
+  room.add(createPicture(0.9, 1.85, -3.5, trimMat, sofaMat));
 
   return room;
 }
 
-function createCrate(x, y, z) {
-  const mat = createPS1Material({ map: woodTexture(), color: "#ffffff", wobble: 0.014 });
-  rememberWobble(mat, 0.014);
-  const crate = new THREE.Mesh(new THREE.BoxGeometry(0.7, 0.7, 0.7), mat);
-  crate.position.set(x, y + 0.35, z);
-  crate.rotation.y = 0.18;
-  return crate;
+function wall(x, y, z, w, h, d, mat) {
+  const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  mesh.position.set(x, y, z);
+  return mesh;
 }
 
-function createCrt(x, y, z) {
+function baseboard(x, y, z, w, h, d, mat) {
+  const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+  mesh.position.set(x, y, z);
+  return mesh;
+}
+
+function createSofa(x, y, z, sofaMat, trimMat) {
   const group = new THREE.Group();
   group.position.set(x, y, z);
-  group.rotation.y = 0.35;
 
-  const beige = createPS1Material({ map: plasticTexture(), color: "#ffffff", wobble: 0.01 });
-  const dark = createPS1Material({ color: "#2A2A28", wobble: 0.008 });
-  rememberWobble(beige, 0.01);
-  rememberWobble(dark, 0.008);
+  const seat = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.36, 0.82), sofaMat);
+  seat.position.set(0, 0.34, 0);
+  group.add(seat);
 
-  const body = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.5, 0.48), beige);
-  body.position.y = 0.28;
-  group.add(body);
+  const back = new THREE.Mesh(new THREE.BoxGeometry(2.4, 0.7, 0.22), sofaMat);
+  back.position.set(0, 0.72, -0.34);
+  group.add(back);
 
-  const bezel = new THREE.Mesh(new THREE.BoxGeometry(0.5, 0.36, 0.06), dark);
-  bezel.position.set(0, 0.3, 0.24);
-  group.add(bezel);
+  const armL = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.48, 0.82), sofaMat);
+  armL.position.set(-1.1, 0.52, 0);
+  const armR = armL.clone();
+  armR.position.x = 1.1;
+  group.add(armL, armR);
 
-  const screen = new THREE.Mesh(
-    new THREE.PlaneGeometry(0.42, 0.3),
-    createPS1Material({ map: crtTexture(), color: "#ffffff", wobble: 0 }),
-  );
-  screen.position.set(0, 0.3, 0.275);
-  group.add(screen);
+  const cushionL = new THREE.Mesh(new THREE.BoxGeometry(0.95, 0.14, 0.62), sofaMat);
+  cushionL.position.set(-0.46, 0.56, 0.04);
+  const cushionR = cushionL.clone();
+  cushionR.position.x = 0.46;
+  group.add(cushionL, cushionR);
 
-  const base = new THREE.Mesh(new THREE.BoxGeometry(0.36, 0.08, 0.32), beige);
-  base.position.y = 0.02;
-  group.add(base);
+  const foot = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.14, 0.12), trimMat);
+  const feet = [
+    [-1.05, 0.07, 0.32],
+    [1.05, 0.07, 0.32],
+    [-1.05, 0.07, -0.32],
+    [1.05, 0.07, -0.32],
+  ];
+  for (const [fx, fy, fz] of feet) {
+    const f = foot.clone();
+    f.position.set(fx, fy, fz);
+    group.add(f);
+  }
 
   return group;
 }
 
-export function createSky() {
-  const skyMat = new THREE.ShaderMaterial({
-    side: THREE.BackSide,
-    depthWrite: false,
-    uniforms: {
-      uTop: { value: new THREE.Color("#7EC8E3") },
-      uHorizon: { value: new THREE.Color("#C5E4F3") },
-    },
-    vertexShader: /* glsl */ `
-      varying vec3 vPos;
-      void main() {
-        vPos = position;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `,
-    fragmentShader: /* glsl */ `
-      varying vec3 vPos;
-      uniform vec3 uTop;
-      uniform vec3 uHorizon;
-      void main() {
-        float h = normalize(vPos).y;
-        float t = clamp(h * 0.75 + 0.35, 0.0, 1.0);
-        gl_FragColor = vec4(mix(uHorizon, uTop, t), 1.0);
-      }
-    `,
-  });
-  return new THREE.Mesh(new THREE.SphereGeometry(80, 16, 12), skyMat);
+function createTable(x, y, z, trimMat) {
+  const group = new THREE.Group();
+  group.position.set(x, y, z);
+  const top = new THREE.Mesh(new THREE.BoxGeometry(1.15, 0.08, 0.58), trimMat);
+  top.position.y = 0.38;
+  group.add(top);
+  const legs = [
+    [-0.48, 0.18, 0.22],
+    [0.48, 0.18, 0.22],
+    [-0.48, 0.18, -0.22],
+    [0.48, 0.18, -0.22],
+  ];
+  for (const [lx, ly, lz] of legs) {
+    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.36, 0.08), trimMat);
+    leg.position.set(lx, ly, lz);
+    group.add(leg);
+  }
+  return group;
+}
+
+function createCrtStand(x, y, z, beigeMat, darkMat, trimMat) {
+  const group = new THREE.Group();
+  group.position.set(x, y, z);
+  group.rotation.y = -0.35;
+
+  const stand = new THREE.Mesh(new THREE.BoxGeometry(0.92, 0.46, 0.48), trimMat);
+  stand.position.y = 0.23;
+  group.add(stand);
+
+  const body = new THREE.Mesh(new THREE.BoxGeometry(0.78, 0.58, 0.52), beigeMat);
+  body.position.set(0, 0.76, 0);
+  group.add(body);
+
+  const bezel = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.42, 0.06), darkMat);
+  bezel.position.set(0, 0.8, 0.26);
+  group.add(bezel);
+
+  const screen = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.52, 0.34),
+    createPS1Material({ map: tvSnowTexture(), color: "#ffffff", wobble: 0 }),
+  );
+  screen.position.set(0, 0.8, 0.295);
+  group.add(screen);
+
+  const dial = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 0.04), darkMat);
+  dial.position.set(0.28, 0.56, 0.26);
+  group.add(dial);
+
+  return group;
+}
+
+function createLamp(x, y, z, trimMat, shadeMat, beigeMat) {
+  const group = new THREE.Group();
+  group.position.set(x, y, z);
+  const base = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.08, 0.32), beigeMat);
+  base.position.y = 0.04;
+  group.add(base);
+  const pole = new THREE.Mesh(new THREE.BoxGeometry(0.07, 1.35, 0.07), trimMat);
+  pole.position.y = 0.74;
+  group.add(pole);
+  const shade = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.32, 0.36, 6, 1, true), shadeMat);
+  shade.position.y = 1.48;
+  group.add(shade);
+  const shadeTop = new THREE.Mesh(new THREE.CircleGeometry(0.18, 6), shadeMat);
+  shadeTop.rotation.x = -Math.PI / 2;
+  shadeTop.position.y = 1.66;
+  group.add(shadeTop);
+  return group;
+}
+
+function createWindow(x, y, z, trimMat) {
+  const group = new THREE.Group();
+  group.position.set(x, y, z);
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(0.08, 1.15, 1.35), trimMat);
+  group.add(frame);
+  const pane = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.15, 0.95),
+    createPS1Material({ color: "#6A7A82", wobble: 0.004 }),
+  );
+  pane.rotation.y = Math.PI / 2;
+  pane.position.x = 0.05;
+  group.add(pane);
+  const bar = new THREE.Mesh(new THREE.BoxGeometry(0.06, 1.05, 0.06), trimMat);
+  bar.position.x = 0.02;
+  group.add(bar);
+  return group;
+}
+
+function createPicture(x, y, z, trimMat, sofaMat) {
+  const group = new THREE.Group();
+  group.position.set(x, y, z);
+  const frame = new THREE.Mesh(new THREE.BoxGeometry(0.72, 0.56, 0.06), trimMat);
+  group.add(frame);
+  const art = new THREE.Mesh(new THREE.PlaneGeometry(0.58, 0.42), sofaMat);
+  art.position.z = 0.035;
+  group.add(art);
+  return group;
 }

@@ -1,10 +1,10 @@
 import * as THREE from "three";
 import { CSS3DRenderer } from "three/addons/renderers/CSS3DRenderer.js";
 import { createControls } from "./controls.js";
+import { createPips } from "./pips.js";
 import { tickPS1Materials } from "./ps1-material.js";
-import { createRoom, createSky } from "./room.js";
-import { createRover } from "./rover.js";
-import { billboardWindows, createTalkSurface } from "./talk.js";
+import { createRoom } from "./room.js";
+import { billboardBalloon, createTalkSurface } from "./talk.js";
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -17,7 +17,7 @@ const renderer = new THREE.WebGLRenderer({
   powerPreference: "high-performance",
 });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-renderer.setClearColor(0x7ec8e3, 1);
+renderer.setClearColor(0xc4a882, 1);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const cssRenderer = new CSS3DRenderer();
@@ -25,26 +25,29 @@ cssRenderer.domElement.style.pointerEvents = "none";
 cssHost.appendChild(cssRenderer.domElement);
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.Fog(0xc5e4f3, 18, 72);
-
 const cssScene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 120);
-camera.position.set(1.05, 1.48, 5.05);
+const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 40);
+camera.position.set(0.42, 1.38, 3.05);
 
-const lookTarget = new THREE.Vector3(0.05, 0.82, 0.05);
+const lookTarget = new THREE.Vector3(0.02, 0.88, 0.08);
 
-scene.add(createSky());
 scene.add(createRoom());
 
-const rover = createRover();
-rover.position.set(0.2, 0, 0.05);
-scene.add(rover);
+const pips = createPips();
+pips.position.set(0, 0, 0.12);
+scene.add(pips);
 
-const { talk, reply, input } = createTalkSurface();
-cssScene.add(talk, reply);
+const { balloon, input } = createTalkSurface();
+cssScene.add(balloon);
 
-const controls = createControls(camera, canvas, lookTarget);
+const controls = createControls(camera, canvas, lookTarget, {
+  minRadius: 1.7,
+  maxRadius: 4.6,
+  minPhi: 0.42,
+  maxPhi: 1.28,
+  bounds: { x: 2.2, zMin: -1.6, zMax: 2.4 },
+});
 
 function resize() {
   const width = window.innerWidth;
@@ -67,12 +70,12 @@ function frame(now) {
   last = now;
 
   controls.update(dt);
-  rover.userData.update(time, reduceMotion);
+  pips.userData.update(time, reduceMotion);
   tickPS1Materials(time, {
     wobble: !reduceMotion,
     snap: reduceMotion ? 2000 : 168,
   });
-  billboardWindows(camera, talk, reply);
+  billboardBalloon(camera, balloon);
 
   renderer.render(scene, camera);
   cssRenderer.render(cssScene, camera);

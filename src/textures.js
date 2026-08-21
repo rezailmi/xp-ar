@@ -15,36 +15,135 @@ function canvasTexture(size, paint) {
   return texture;
 }
 
-export function grassTexture() {
+export function wallpaperTexture() {
   return canvasTexture(128, (ctx, size) => {
-    ctx.fillStyle = "#3B7A2A";
+    ctx.fillStyle = "#C4A882";
     ctx.fillRect(0, 0, size, size);
-    for (let i = 0; i < 900; i += 1) {
-      const x = (Math.sin(i * 12.9898) * 43758.5453) % 1;
-      const y = (Math.sin(i * 78.233) * 12345.678) % 1;
-      const px = Math.abs(x) * size;
-      const py = Math.abs(y) * size;
-      ctx.fillStyle = i % 7 === 0 ? "#6B9B3A" : i % 11 === 0 ? "#2F641F" : "#4A8A30";
-      ctx.fillRect(px, py, 2, 2);
+    ctx.fillStyle = "#B39168";
+    for (let y = 0; y < size; y += 16) {
+      for (let x = 0; x < size; x += 16) {
+        ctx.fillRect(x + 7, y + 2, 2, 12);
+        ctx.fillRect(x + 2, y + 7, 12, 2);
+      }
     }
-    ctx.fillStyle = "#C9B44A";
-    for (let i = 0; i < 18; i += 1) {
-      ctx.fillRect((i * 17) % size, (i * 29) % size, 1, 1);
+    ctx.fillStyle = "#A07C55";
+    for (let i = 0; i < 40; i += 1) {
+      ctx.fillRect((i * 19) % size, (i * 27) % size, 2, 2);
     }
   });
 }
 
-export function furTexture() {
+export function floorTexture() {
+  return canvasTexture(128, (ctx, size) => {
+    for (let y = 0; y < size; y += 1) {
+      ctx.fillStyle = y % 16 < 14 ? "#8A6238" : "#6B4A2A";
+      ctx.fillRect(0, y, size, 1);
+    }
+    ctx.fillStyle = "#5A3C22";
+    for (let x = 0; x < size; x += 32) {
+      ctx.fillRect(x, 0, 1, size);
+    }
+    ctx.fillStyle = "#C4A882";
+    ctx.fillRect(10, 20, 2, 8);
+    ctx.fillRect(70, 90, 2, 6);
+  });
+}
+
+export function rugTexture() {
   return canvasTexture(64, (ctx, size) => {
-    ctx.fillStyle = "#C9A227";
+    ctx.fillStyle = "#4A1C1C";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#7A2E2E";
+    ctx.fillRect(6, 6, size - 12, size - 12);
+    ctx.fillStyle = "#9A3E3E";
+    ctx.fillRect(20, 20, 24, 24);
+    ctx.fillStyle = "#C4A882";
+    ctx.fillRect(30, 30, 4, 4);
+  });
+}
+
+export function sofaTexture() {
+  return canvasTexture(64, (ctx, size) => {
+    ctx.fillStyle = "#3A4A6B";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#2E3C58";
+    for (let y = 0; y < size; y += 4) {
+      ctx.fillRect(0, y, size, 1);
+    }
+    ctx.fillStyle = "#4A5C80";
+    ctx.fillRect(8, 8, 6, 6);
+    ctx.fillRect(40, 28, 6, 6);
+  });
+}
+
+export function woodTrimTexture() {
+  return canvasTexture(64, (ctx, size) => {
+    ctx.fillStyle = "#6B4A2A";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#8A6238";
+    for (let y = 4; y < size; y += 8) {
+      ctx.fillRect(0, y, size, 2);
+    }
+    ctx.fillStyle = "#4A3018";
+    ctx.fillRect(0, 0, size, 1);
+  });
+}
+
+export function crtBeigeTexture() {
+  return canvasTexture(64, (ctx, size) => {
+    ctx.fillStyle = "#D8D0B8";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#E8E0C8";
+    ctx.fillRect(0, 0, size, 10);
+    ctx.fillStyle = "#B8B09A";
+    for (let i = 0; i < size; i += 8) {
+      ctx.fillRect(i, 16, 2, size);
+    }
+  });
+}
+
+export function tvSnowTexture() {
+  return canvasTexture(64, (ctx, size) => {
+    for (let y = 0; y < size; y += 1) {
+      for (let x = 0; x < size; x += 1) {
+        const n = ((x * 13 + y * 31) % 7) / 7;
+        ctx.fillStyle = n > 0.55 ? "#D8D0B8" : n > 0.3 ? "#6B4A2A" : "#111111";
+        ctx.fillRect(x, y, 1, 1);
+      }
+    }
+    ctx.fillStyle = "#7A2E2E";
+    ctx.fillRect(4, 26, 10, 12);
+    ctx.fillStyle = "#3A4A6B";
+    ctx.fillRect(18, 26, 10, 12);
+    ctx.fillStyle = "#C4A882";
+    ctx.fillRect(32, 26, 10, 12);
+    ctx.fillStyle = "#FFF4A3";
+    ctx.fillRect(46, 26, 10, 12);
+  });
+}
+
+export function shadeTexture() {
+  return canvasTexture(64, (ctx, size) => {
+    ctx.fillStyle = "#D8D0B8";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#C4A882";
+    for (let y = 0; y < size; y += 6) {
+      ctx.fillRect(0, y, size, 2);
+    }
+  });
+}
+
+export function pipsFurTexture() {
+  return canvasTexture(64, (ctx, size) => {
+    ctx.fillStyle = "#C86A2A";
     ctx.fillRect(0, 0, size, size);
     for (let y = 0; y < size; y += 1) {
       for (let x = 0; x < size; x += 1) {
-        if ((x + y * 3) % 5 === 0) {
-          ctx.fillStyle = "#A7841C";
+        if ((x + y * 2) % 6 === 0) {
+          ctx.fillStyle = "#A85420";
           ctx.fillRect(x, y, 1, 1);
-        } else if ((x * 7 + y) % 11 === 0) {
-          ctx.fillStyle = "#E0C15A";
+        } else if ((x * 5 + y) % 9 === 0) {
+          ctx.fillStyle = "#E08A40";
           ctx.fillRect(x, y, 1, 1);
         }
       }
@@ -52,61 +151,26 @@ export function furTexture() {
   });
 }
 
-export function woodTexture() {
-  return canvasTexture(64, (ctx, size) => {
-    for (let y = 0; y < size; y += 1) {
-      const stripe = y % 16 < 14 ? "#8A5A2B" : "#6B4220";
-      ctx.fillStyle = stripe;
-      ctx.fillRect(0, y, size, 1);
-      if (y % 16 === 0) {
-        ctx.fillStyle = "#4A2C14";
-        ctx.fillRect(0, y, size, 1);
-      }
-    }
-    ctx.fillStyle = "#C4A36A";
-    ctx.fillRect(6, 8, 2, 10);
-    ctx.fillRect(40, 28, 2, 12);
-    ctx.fillStyle = "#2A1810";
-    ctx.font = "9px Tahoma, sans-serif";
-    ctx.fillText("FRAGILE", 6, 38);
+export function gauntletTexture() {
+  return canvasTexture(32, (ctx, size) => {
+    ctx.fillStyle = "#E8D8B0";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#6B4A2A";
+    ctx.fillRect(0, 12, size, 4);
+    ctx.fillStyle = "#C4A882";
+    ctx.fillRect(4, 4, 6, 6);
   });
 }
 
-export function crtTexture() {
-  return canvasTexture(64, (ctx, size) => {
-    const sky = ctx.createLinearGradient(0, 0, 0, size);
-    sky.addColorStop(0, "#7EC8E3");
-    sky.addColorStop(1, "#C5E4F3");
-    ctx.fillStyle = sky;
+export function sneakerTexture() {
+  return canvasTexture(32, (ctx, size) => {
+    ctx.fillStyle = "#2F6F62";
     ctx.fillRect(0, 0, size, size);
-    ctx.fillStyle = "#3B7A2A";
-    ctx.beginPath();
-    ctx.moveTo(0, 48);
-    ctx.quadraticCurveTo(28, 22, 64, 44);
-    ctx.lineTo(64, 64);
-    ctx.lineTo(0, 64);
-    ctx.fill();
-    ctx.fillStyle = "#6B9B3A";
-    ctx.beginPath();
-    ctx.moveTo(0, 56);
-    ctx.quadraticCurveTo(20, 40, 40, 58);
-    ctx.lineTo(0, 64);
-    ctx.fill();
-    ctx.fillStyle = "#111111";
-    ctx.fillRect(2, 2, 18, 3);
-    ctx.fillRect(2, 6, 10, 2);
-  });
-}
-
-export function plasticTexture() {
-  return canvasTexture(64, (ctx, size) => {
-    ctx.fillStyle = "#D4D0C8";
-    ctx.fillRect(0, 0, size, size);
-    ctx.fillStyle = "#ECE9D8";
+    ctx.fillStyle = "#E8D8B0";
     ctx.fillRect(0, 0, size, 8);
-    ctx.fillStyle = "#B4B0A4";
-    for (let i = 0; i < size; i += 8) {
-      ctx.fillRect(i, 20, 3, size);
-    }
+    ctx.fillStyle = "#4A3B12";
+    ctx.fillRect(0, 24, size, 8);
+    ctx.fillStyle = "#111111";
+    ctx.fillRect(20, 10, 4, 8);
   });
 }

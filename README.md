@@ -1,6 +1,6 @@
 # xp-ar
 
-Talk to your agent in AR. The agent lives in a Windows XP / PlayStation 1 3D world.
+Talk to your agent in AR. The agent lives in a PlayStation 1 living room and talks like a paperclip.
 
 Open-source, fun, early sketch. Not a Handmade feature.
 
@@ -22,7 +22,7 @@ You need a network connection the first time so the browser can fetch Three.js f
 
 ## The prototype
 
-You are in the Bliss yard. Rover (the XP search dog) is standing there. Type in the **Agent** window and press Enter. Rover answers in a second XP window in the grass. Replies are canned 2001-help-mascot lines plus an echo of what you typed. No API.
+You are in a low-poly living room. **Pips** (original PS1-era mascot — not Crash, not Rover) is standing on the rug. Type in the yellow Office-assistant balloon and press Enter. The balloon text is the reply. Lines are canned, slightly manic, plus an echo of what you typed. No API.
 
 - Drag to look (one finger on a phone)
 - Scroll to zoom

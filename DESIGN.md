@@ -1,10 +1,10 @@
-# Design plan — XP / PS1 AR room
+# Design plan — living room, Pips, Clippy balloon
 
-Written before code. Follows the frontend-design skill: subject, audience, job, palette, type, layout, one signature. Then a pass against generic defaults.
+Written before this pass of code. Follows the frontend-design skill. Revises the Bliss-yard / Rover / Luna plan.
 
 ## Subject
 
-A toy AR yard. Your companion is **Rover**, the Windows XP Search Companion — a late-90s 3D help dog standing on the Bliss hill.
+A toy AR living room. The agent appeared on the rug. He is **Pips**: an original PlayStation-era mascot (biped, sneakers, gauntlets, wild eyes). Crash energy, not Crash. Not Rover.
 
 ## Audience
 
@@ -12,75 +12,71 @@ Reza. A five-minute click-through. No headset, no account, no backend.
 
 ## Job
 
-Feel like you walked into 2001 and the agent is already standing there.
+Feel like you walked into the house and a late-90s help mascot is already standing on the carpet, talking like a paperclip who learned to spin.
 
 ## Aesthetic risk
 
-A real, typeable **Luna window lives in the yard** (CSS 3D), not as a HUD and not as a painted texture. Crisp XP chrome sits next to snapped, affine-warped PS1 geometry. The OS is furniture. That fight is the joke.
+The **Office Assistant balloon is the only talk surface**, hung in the room with a paper tail aimed at Pips’s head. Yellow comic paper against chunky PS1 furniture. No Luna chrome. The OS is a speech bubble, not a window.
 
 ## Palette
 
-Named tokens only. No mauve, no Inter-era purple, no AI-beige.
+Locked domestic tokens. No mauve, no Inter-era purple, no AI-beige.
 
 | Token | Hex | Role |
 | --- | --- | --- |
-| bliss-grass | `#3B7A2A` | Hill and yard |
-| bliss-sun | `#6B9B3A` | Lit grass, crate moss |
-| bliss-sky | `#7EC8E3` | Zenith |
-| xp-teal | `#3A6EA5` | Collar, window rim, desktop memory |
-| luna-navy | `#0A246A` | Title-bar start |
-| chrome-face | `#ECE9D8` | Window client area |
-| ink | `#111111` | Type |
+| wallpaper | `#C4A882` | Walls |
+| trim | `#6B4A2A` | Baseboard, frames, table |
+| rug | `#7A2E2E` | The place Pips stands |
+| sofa | `#3A4A6B` | Backdrop couch |
+| crt-beige | `#D8D0B8` | TV plastic, lamp, sneakers’ gum |
+| balloon | `#FFF4A3` | Paper talk surface |
+| ink | `#111111` | Type and balloon edge |
 
-Supporting (not new hues): sky falloff `#C5E4F3`, Luna title end `#A6CAF0`, button face `#D4D0C8`.
+Supporting (not new hues): balloon stroke `#4A3B12`, Pips fur `#C86A2A`, gauntlet cream `#E8D8B0`, sneaker `#2F6F62`.
 
 ## Type
 
-- **Chrome / UI:** Tahoma, `"MS Sans Serif"`, system-ui. 11px body, 11px bold title.
-- **Never:** Inter, Geist, Roboto, a display serif, a purple CTA.
-
-Tahoma *is* the display face. It is used with restraint: window chrome and a one-line look hint. No hero headline. No marketing lockup.
+- **Chrome / UI:** Tahoma, `"MS Sans Serif"`, system-ui. 11px balloon body, 11px bold name.
+- **Never:** Inter, Geist, a display serif, a purple CTA, Luna title bars.
 
 ## Layout
 
-Full-viewport WebGL. Talk and reply are objects in the room, billboarded so they stay readable.
+Full-viewport WebGL. One billboarded balloon in the room, tail on the character.
 
 ```
 +--------------------------------------------------+
-| \\\\\\\\\\\\\\\\\ Bliss sky /////////////////// |
-|                                                |
-|      (far hill)              [CRT on crate]    |
-|                                                |
-|              [Rover]   +----------------+      |
-|                        | Rover          |      |
-|                        | you typed: …   |      |
-|                        +----------------+      |
-|   +----------------------+                     |
-|   | Agent           _ □ X|                     |
-|   | [____________] [Send]|                     |
-|   +----------------------+                     |
-| ~~~~~~~~~~~~~~~~ grass yard ~~~~~~~~~~~~~~~~~~~ |
+| wallpaper                  [lamp]   [CRT]        |
+|              [sofa]                              |
+|           [coffee table]                         |
+|                                                  |
+|        +-------------------------+               |
+|        | Pips                    |  <- paper     |
+|        | you typed: …            |     balloon   |
+|        | [______________] [Send] |               |
+|        +---------\               |               |
+|                   \  [PIPS]                      |
+|                    rug                           |
 +--------------------------------------------------+
   Tahoma hint, bottom-left: Drag to look · Scroll · WASD
 ```
 
-No sidebar. No card stack. No icon row.
+No sidebar. No XP window. No iMessage pills.
 
 ## Signature
 
-Sincere PlayStation 1 **vertex snap + wobble + affine-ish UVs**, nearest-neighbor 64–128px textures, and the Luna **Agent** window floating in the grass as the only talk surface.
+A **Clippy comic balloon** (paper yellow, 2px brown edge, pointed tail on the skull) living in a **low-poly living room**, with PS1 vertex snap + wobble + nearest-neighbor texels on the furniture and on Pips.
 
 ## Motion
 
-- Rover idle bob and tail wag.
-- PS1 wobble on world meshes (not the sky, not the XP chrome).
-- Buttons inset on press. No bounce-in. No page-load choreography.
-- `prefers-reduced-motion: reduce` keeps the room and windows; kills wobble and bob.
+- Pips: spin-ready idle — bounce, arms out, a twitch toward a spin.
+- PS1 wobble on room meshes and Pips (not the paper balloon).
+- Send insets on press. No bounce-in. No page-load ballet.
+- `prefers-reduced-motion: reduce` keeps the room and balloon; kills wobble and the idle.
 
 ## Copy
 
-2001 help-mascot register. Short. Specific. Echoes what you typed. Never “unlock,” “delight,” “next-gen,” or “your AI companion.”
+Slightly officious, eager, a little broken. A PS1 mascot who thinks he is a helpful paperclip. Echoes what you typed. Never “unlock,” “companion,” Crash, or Rover.
 
 ## Critique (before build)
 
-A generic “3D AI demo” would be dark glass, a purple Send, Inter, a chat drawer, and a feature row. This plan is the opposite on every axis: Bliss greens, Tahoma, in-world Luna, one dog, canned lines. The risk is the CSS3D window in the grass — keep that, cut everything else that does not serve 2001.
+The last plan’s risk was a Luna window in a Bliss yard. That read as XP desktop tourism. This pass moves the joke indoors: domestic set, original mascot, Office-assistant paper. A generic 3D chat demo would put pills in a drawer. The balloon on the rug is the one thing to keep; cut anything that looks like a title bar.
