@@ -4,7 +4,7 @@ Privilege: **room, then body, then balloon.** If the room reads as a level, the 
 
 ## Subject
 
-A living room a body lives in. **Pips** is already using the sofa. Original PS1 roommate. House guest, not a pet, not Crash.
+A living room a body lives in. **Pips** is already on the futon. Original PS1 roommate. House guest, not a pet, not Crash, not a Shiba.
 
 ## Audience / job
 
@@ -14,42 +14,43 @@ Reza, thirty seconds. Feel *someone appeared in my living room*. Then talk.
 
 | From | Take |
 | --- | --- |
-| binadra apartment stills | Morning window vs cool corners. Lived-in clutter. Nearest-neighbor texels. Chunky appliances. |
-| ember.lite lighting | Saturated sky against warm interior glow. Local bloom on CRT / lamp / LED. Not the mall. |
-| ember.lite cat energy | Calm inhabitant. Occupies the sofa. Watches. Not a mascot spin. |
-| [EyePet](https://en.wikipedia.org/wiki/EyePet) | Creature on *your* rug, scaled against real furniture. |
-| [Tomodachi](https://en.wikipedia.org/wiki/Tomodachi_Life) | One tight apartment. Camera cannot leave. |
-| Crash *construction* (not likeness) | Large head, no neck, short limbs, low-poly snap. Bounce lives in the idle, not the silhouette. |
+| binadra night tatami | Indigo room `#130e1f` / `#2b2b5d` / `#5350a2`. CRT blue. Lava-lamp amber. Futon on the floor. Low camera. |
+| binadra sunset balcony | Amber wash `#f89d09` / `#d36b11` through sliding glass / shoji. Invented city skyline only. |
+| binadra bath still | Saturated practical glow and colored bounce. Not a bathroom. |
+| binadra sleeping inhabitant | Lounge poses. One mundane accessory. Cozy, not a mascot spin. |
+| Crash *construction* (not likeness) | Large head, no neck, short limbs, low-poly snap. Bounce lives in the idle. |
 | Clippit / [Microsoft Agent](https://en.wikipedia.org/wiki/Microsoft_Agent) | One yellow paper letter. 1px brown edge. Triangular tail on the skull. Tahoma 11. Reply replaces the copy. |
 
 ## Avoid
 
-Rover. Comic Sans. House-as-OS. Pixar fur. Pet-care HUD. Catalog. Mii faces. Dual-screen HUD. Overworld. Horizon / skybox.
+Rover. Comic Sans. House-as-OS. Pixar fur. Pet-care HUD. Catalog. Mii faces. Dual-screen HUD. Overworld. Horizon as a place you can walk.
 
-Crash face/mask, green eyes, back spots, chest patch, blue jeans + red shoes, mohawk, name, Wumpa, gum-on-shoe, gem-pose, “Whoa,” spin-as-brand.
+Crash face/mask, green eyes, back spots, chest patch, blue jeans + red shoes, mohawk, name, Wumpa, spin-as-brand.
 
-Teal candy wallpaper. Toy-primary sofa/rug. Toys R Us / Pizza Hut / branded toys. Coca-Cola script. Stay With Me / Miki Matsubara. FF7 screens. BINADRA. Pagoda “JAPAN” poster. A tuxedo cat as Pips.
+Shiba Inu. Ramen-cup hat. Cucumber slices. Akatsuki cloud blanket. Teal candy wallpaper. Toys R Us / Pizza Hut. Coca-Cola script. Stay With Me / Miki Matsubara. Evangelion. Street Fighter. FF7. Naruto. Chainsaw Man. Godzilla. BINADRA. Pagoda “JAPAN” poster. Skytree. Fuji copy. A bathroom tour.
 
-Paperclip mesh. Office 97 wizard chrome. Title-bar window. Luna/XP frames. Bonzi / Peedy / Merlin. TTS. Right-click menus. iMessage pills. Inter. Purple UI gradients.
+Paperclip mesh. Inter. Purple UI gradients. Nested cards.
 
 ## Palette
 
-Lived-in apartment morning. Cream plaster. Wood and metal. Warm sun, cool fill. Not a candy box.
+Night apartment with a sunset leak. One CRT practical, one lava-lamp accent, amber through the glass. No fog.
 
 | Token | Hex | Role |
 | --- | --- | --- |
-| plaster | `#E6D4B4` | Warm wall. Catches the window. |
-| sofa | `#D8C4A0` | Oatmeal fabric on a wood frame |
-| rug | `#7A4030` | Worn rust. Checker is gone. |
-| sky | `#FFB46A` | Morning postcard through the window |
-| balloon | `#FFF4A3` | Clippy paper. Not neon HUD |
+| night | `#130E1F` | Ceiling, deep fill |
+| indigo | `#2B2B5D` | Walls, cool bounce |
+| lift | `#5350A2` | Mid violet |
+| sunset | `#F89D09` | Window wash |
+| amber | `#D36B11` | Sunset leak |
+| lava | `#520C20` / `#F0A24A` | Lamp accent |
+| balloon | `#FFF4A3` | Clippy paper |
 | ink | `#111111` | Type and 1px balloon edge |
 
-Supporting: skin `#E6C8A0`, vest `#5A6840`, tuft `#A84A28`, slipper `#5A3A28`, CRT bloom `#C8B8FF`, LED `#2AD84A`.
+Supporting: skin `#E6C8A0`, vest `#5A6840`, tuft `#A84A28`, CRT blue `#6688FF`.
 
 ## Window
 
-A hole in the left wall. Frame, sill, half-open linen. Behind it: a 64px postcard (gold sky, sun, block buildings). Morning sun hits the rug and the left wall. Orbit still cannot leave the room or become an outdoor level.
+Sliding glass in the left wall. One shoji panel open. Behind it: a 64px invented skyline under amber cloud. Orbit cannot leave the room.
 
 ## Type
 
@@ -57,27 +58,27 @@ Tahoma / `"MS Sans Serif"` / system-ui. Balloon 11px. Sketch note 10px. Never In
 
 ## Layout
 
-Tomodachi-tight: ~3.4m. Sofa you could sit on. Camera starts low and is clamped to the walls. A window is *in* the room.
+Tomodachi-tight: ~3.4m. Futon you could lie on. Camera starts near the floor and is clamped to the walls.
 
 ```
 +------------------------------+
-| [window] sofa [CRT shelf]    |
-| cooker   Pips  [dresser]     |
-|     rug  (sun patch)         |
-|   (you, in the room)         |
+| [shoji/sunset]   [CRT shelf] |
+| futon Pips       [dresser]   |
+| low table   lava lamp        |
+|   (you, low on the tatami)   |
 +------------------------------+
   Sketch. Decisions still open.
 ```
 
 ## Signature
 
-A **small apartment you cannot leave**, morning sun from a real window, taped paper balloon on a roommate who already sat down.
+A **small night apartment you cannot leave**, sunset through sliding glass, taped paper balloon on a roommate already using the futon.
 
 ## Motion
 
-- Pips: sit/lounge. Breath, glance, tuft, tail twitch, a small bounce. Hands stay on the lap. No spin.
+- Pips: belly-read / lounge. Breath, glance, doze, tuft, tail twitch, a small bounce. Book on the belly. No spin.
 - Room wobbles a little. Paper does not.
-- CRT and the record LED pulse in place.
+- CRT and lava lamp pulse in place.
 - Send insets. `prefers-reduced-motion` stills the body.
 
 ## Copy
@@ -86,4 +87,4 @@ Officious house guest. Opens with “It looks like you walked in.” One letter 
 
 ## Critique
 
-The candy-teal pass read like a toy aisle with a Crash fidget on the sofa. This pass keeps the clamp, the balloon, and the name, and spends the budget on apartment light and an original roommate body.
+The candy-teal pass read like a toy aisle. The morning cream pass was closer but still a sit-up living room. This fold keeps the clamp, the balloon, and the name, and spends the budget on binadra night light and a roommate who already lay down.

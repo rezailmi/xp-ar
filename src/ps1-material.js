@@ -62,9 +62,9 @@ void main() {
 
 const ticking = [];
 
-const WARM_DIR = new THREE.Vector3(-0.92, 0.48, 0.18).normalize();
-const WARM_COLOR = new THREE.Color(1.28, 1.02, 0.7);
-const COOL_COLOR = new THREE.Color(0.42, 0.5, 0.74);
+const WARM_DIR = new THREE.Vector3(-0.88, 0.28, 0.22).normalize();
+const WARM_COLOR = new THREE.Color(0xf89d09);
+const COOL_COLOR = new THREE.Color(0x2b2b5d);
 
 export function createPS1Material({
   map = null,

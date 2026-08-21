@@ -90,7 +90,7 @@ export function createControls(camera, canvas, target, options = {}) {
       }
       target.x = clamp(target.x, -walk.x, walk.x);
       target.z = clamp(target.z, walk.zMin, walk.zMax);
-      target.y = clamp(target.y, 0.48, 0.92);
+      target.y = clamp(target.y, 0.18, 0.62);
 
       let radius = state.radius;
       for (let i = 0; i < 8; i += 1) {

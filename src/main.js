@@ -18,7 +18,7 @@ const renderer = new THREE.WebGLRenderer({
   powerPreference: "high-performance",
 });
 renderer.setPixelRatio(0.7);
-renderer.setClearColor(0xe6d4b4, 1);
+renderer.setClearColor(0x130e1f, 1);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const cssRenderer = new CSS3DRenderer();
@@ -28,17 +28,17 @@ cssHost.appendChild(cssRenderer.domElement);
 const scene = new THREE.Scene();
 const cssScene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(52, 1, 0.08, 12);
-camera.position.set(0.38, 0.94, 1.18);
+const camera = new THREE.PerspectiveCamera(64, 1, 0.08, 12);
+camera.position.set(0.28, 0.46, 1.12);
 
-const lookTarget = new THREE.Vector3(0.02, 0.6, -0.52);
+const lookTarget = new THREE.Vector3(-0.08, 0.28, -0.12);
 
 const room = createRoom();
 scene.add(room);
 
 const pips = createPips();
-pips.position.set(0.18, 0.46, -0.9);
-pips.userData.seatY = 0.46;
+pips.position.set(-0.2, 0.08, -0.18);
+pips.userData.seatY = 0.08;
 scene.add(pips);
 
 const talkCursor = createTalkCursor();
@@ -48,12 +48,12 @@ const { balloon, input } = createTalkSurface();
 cssScene.add(balloon);
 
 const controls = createControls(camera, canvas, lookTarget, {
-  minRadius: 0.88,
-  maxRadius: 1.65,
-  minPhi: 0.76,
-  maxPhi: 1.24,
-  lookSpeed: 0.0032,
-  walkSpeed: 0.72,
+  minRadius: 0.85,
+  maxRadius: 1.7,
+  minPhi: 0.92,
+  maxPhi: 1.35,
+  lookSpeed: 0.0022,
+  walkSpeed: 0.55,
   walk: ROOM.walk,
   cam: ROOM.cam,
 });

@@ -1,6 +1,6 @@
 const LINES = [
   "The sofa accepted me. The rug is still jealous.",
-  "The cooker finished before you sat down. I am not sharing the bowl.",
+  "The futon accepted me. The table is still jealous.",
   "I filed the record under Background. I can still see you.",
   "I am a guest. I am also a paperclip. I sat down anyway.",
   "Searching the house… found: you, this cushion, leftover Tuesday.",

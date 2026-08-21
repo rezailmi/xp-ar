@@ -1,5 +1,5 @@
 :root {
-  --wallpaper: #e6d4b4;
+  --wallpaper: #130e1f;
   --trim: #8a5a32;
   --rug: #7a4030;
   --sofa: #d8c4a0;
@@ -74,6 +74,7 @@ body > .balloon {
 
 .hint {
   bottom: 8px;
+  color: #c8c0e0;
 }
 
 .sr-only {

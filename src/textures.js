@@ -27,16 +27,16 @@ function noiseFill(ctx, width, height, colors, step = 1) {
 
 export function plasterTexture() {
   return canvasTexture(64, (ctx, size) => {
-    ctx.fillStyle = "#E8D6B4";
+    ctx.fillStyle = "#2B2B5D";
     ctx.fillRect(0, 0, size, size);
     for (let y = 0; y < size; y += 1) {
       for (let x = 0; x < size; x += 1) {
         const n = (x * 13 + y * 29 + (x ^ y)) % 11;
         if (n === 0) {
-          ctx.fillStyle = "#E0CBA6";
+          ctx.fillStyle = "#24244A";
           ctx.fillRect(x, y, 1, 1);
         } else if (n === 1) {
-          ctx.fillStyle = "#F0E0C4";
+          ctx.fillStyle = "#5350A2";
           ctx.fillRect(x, y, 1, 1);
         }
       }
@@ -45,18 +45,21 @@ export function plasterTexture() {
 }
 
 export function floorTexture() {
-  return canvasTexture(128, (ctx, size) => {
-    for (let y = 0; y < size; y += 1) {
-      ctx.fillStyle = y % 20 < 18 ? "#C49A62" : "#A87848";
+  return canvasTexture(64, (ctx, size) => {
+    ctx.fillStyle = "#C4A45A";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#A88840";
+    for (let y = 0; y < size; y += 4) {
       ctx.fillRect(0, y, size, 1);
     }
-    ctx.fillStyle = "#8A5A30";
-    for (let x = 0; x < size; x += 32) {
-      ctx.fillRect(x, 0, 1, size);
-    }
-    ctx.fillStyle = "#D4B07A";
-    for (let y = 4; y < size; y += 20) {
-      ctx.fillRect(0, y, size, 1);
+    ctx.fillStyle = "#8A6A30";
+    ctx.fillRect(0, 0, 2, size);
+    ctx.fillRect(size - 2, 0, 2, size);
+    ctx.fillRect(0, 0, size, 2);
+    ctx.fillRect(0, size - 2, size, 2);
+    ctx.fillStyle = "#D8BC72";
+    for (let x = 6; x < size; x += 8) {
+      ctx.fillRect(x, 3, 1, size - 6);
     }
   });
 }
@@ -176,49 +179,48 @@ export function outsideTexture() {
   return canvasTexture(64, (ctx, size) => {
     for (let y = 0; y < size; y += 1) {
       const t = y / size;
-      const r = Math.round(255 - t * 70);
-      const g = Math.round(176 - t * 40);
-      const b = Math.round(120 + t * 40);
+      const r = Math.round(248 - t * 40);
+      const g = Math.round(157 - t * 90);
+      const b = Math.round(9 + t * 40);
       ctx.fillStyle = `rgb(${r},${g},${b})`;
       ctx.fillRect(0, y, size, 1);
     }
-    ctx.fillStyle = "#FFF2C4";
-    ctx.fillRect(6, 8, 14, 14);
-    ctx.fillStyle = "#FFE08A";
-    ctx.fillRect(8, 10, 10, 10);
-    ctx.fillStyle = "#6A5A48";
-    ctx.fillRect(0, 48, size, 16);
-    ctx.fillStyle = "#8A7A62";
-    ctx.fillRect(4, 36, 18, 16);
-    ctx.fillRect(28, 30, 14, 22);
-    ctx.fillRect(46, 38, 16, 14);
-    ctx.fillStyle = "#C4A070";
-    ctx.fillRect(8, 40, 3, 3);
-    ctx.fillRect(32, 36, 3, 3);
-    ctx.fillRect(50, 42, 3, 3);
+    ctx.fillStyle = "#D36B11";
+    ctx.fillRect(8, 10, 18, 4);
+    ctx.fillRect(30, 6, 22, 3);
+    ctx.fillStyle = "#1A1028";
+    for (let i = 0; i < 10; i += 1) {
+      const x = i * 6;
+      const h = 10 + ((i * 7) % 16);
+      ctx.fillRect(x, size - h, 5, h);
+    }
+    ctx.fillStyle = "#F0D48A";
+    for (let y = 40; y < 62; y += 4) {
+      for (let x = 1; x < 62; x += 5) {
+        if ((x + y) % 7 !== 0) ctx.fillRect(x, y, 1, 1);
+      }
+    }
   });
 }
 
 export function tvGlowTexture() {
   return canvasTexture(64, (ctx, size) => {
-    ctx.fillStyle = "#1A1430";
+    ctx.fillStyle = "#0C1030";
     ctx.fillRect(0, 0, size, size);
     for (let y = 0; y < size; y += 2) {
-      ctx.fillStyle = y % 4 === 0 ? "#2A2460" : "#1E1850";
+      ctx.fillStyle = y % 4 === 0 ? "#2B2B5D" : "#16183A";
       ctx.fillRect(0, y, size, 1);
     }
-    ctx.fillStyle = "#C8B8FF";
-    ctx.fillRect(18, 14, 28, 20);
-    ctx.fillStyle = "#F4F0FF";
-    ctx.fillRect(24, 18, 16, 10);
-    ctx.fillStyle = "#6A4AD0";
-    ctx.fillRect(8, 42, 10, 8);
-    ctx.fillStyle = "#3A8A70";
-    ctx.fillRect(22, 42, 10, 8);
-    ctx.fillStyle = "#A86838";
-    ctx.fillRect(36, 42, 10, 8);
-    ctx.fillStyle = "#8890A8";
-    ctx.fillRect(50, 44, 8, 4);
+    ctx.fillStyle = "#6A88FF";
+    ctx.fillRect(10, 12, 44, 28);
+    ctx.fillStyle = "#C8D8FF";
+    ctx.fillRect(18, 18, 28, 14);
+    ctx.fillStyle = "#5350A2";
+    ctx.fillRect(8, 46, 14, 6);
+    ctx.fillStyle = "#3A4A88";
+    ctx.fillRect(26, 46, 14, 6);
+    ctx.fillStyle = "#8898C8";
+    ctx.fillRect(44, 48, 12, 4);
   });
 }
 
@@ -270,19 +272,18 @@ export function nightPosterTexture() {
 
 export function mountainPosterTexture() {
   return canvasTexture(32, (ctx, w, h) => {
-    ctx.fillStyle = "#C8D4D8";
+    ctx.fillStyle = "#1A1840";
     ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = "#6A8AA0";
-    ctx.fillRect(0, 8, 14, 10);
-    ctx.fillRect(10, 4, 16, 12);
-    ctx.fillRect(20, 10, 12, 8);
-    ctx.fillStyle = "#4A6A80";
-    ctx.fillRect(0, 16, w, 6);
-    ctx.fillStyle = "#3A6A78";
+    ctx.fillStyle = "#5350A2";
+    ctx.fillRect(0, 10, w, 8);
+    ctx.fillStyle = "#2B2B5D";
+    ctx.fillRect(4, 6, 8, 14);
+    ctx.fillRect(16, 4, 10, 16);
+    ctx.fillStyle = "#F89D09";
+    ctx.fillRect(6, 12, 2, 2);
+    ctx.fillRect(20, 10, 2, 2);
+    ctx.fillStyle = "#130E1F";
     ctx.fillRect(0, 22, w, 10);
-    ctx.fillStyle = "#8AB0B8";
-    ctx.fillRect(4, 24, 8, 2);
-    ctx.fillRect(18, 26, 10, 2);
   });
 }
 
@@ -496,5 +497,68 @@ export function pipsSlipperTexture() {
     ctx.fillRect(2, 3, 12, 4);
     ctx.fillStyle = "#C47848";
     ctx.fillRect(6, 4, 4, 2);
+  });
+}
+
+export function shojiTexture() {
+  return canvasTexture(32, (ctx, size) => {
+    ctx.fillStyle = "#E8D2A0";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#C4A878";
+    for (let i = 0; i <= size; i += 8) {
+      ctx.fillRect(i, 0, 1, size);
+      ctx.fillRect(0, i, size, 1);
+    }
+    ctx.fillStyle = "#8A6A40";
+    ctx.fillRect(0, 0, size, 2);
+    ctx.fillRect(0, size - 2, size, 2);
+  });
+}
+
+export function futonTexture() {
+  return canvasTexture(32, (ctx, size) => {
+    ctx.fillStyle = "#E8E0D4";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#D0C8BC";
+    for (let y = 0; y < size; y += 4) {
+      ctx.fillRect(0, y, size, 1);
+    }
+  });
+}
+
+export function blanketTexture() {
+  return canvasTexture(32, (ctx, size) => {
+    ctx.fillStyle = "#2B2B5D";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#5350A2";
+    for (let y = 0; y < size; y += 6) {
+      ctx.fillRect(0, y, size, 3);
+    }
+    ctx.fillStyle = "#D36B11";
+    ctx.fillRect(0, 14, size, 2);
+    ctx.fillRect(0, 28, size, 2);
+  });
+}
+
+export function bookCoverTexture() {
+  return canvasTexture(16, (ctx, size) => {
+    ctx.fillStyle = "#3A2848";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#F89D09";
+    ctx.fillRect(2, 3, 12, 3);
+    ctx.fillStyle = "#E8D8B0";
+    ctx.fillRect(3, 8, 10, 2);
+    ctx.fillRect(4, 11, 8, 2);
+  });
+}
+
+export function lavaTexture() {
+  return canvasTexture(16, (ctx, size) => {
+    ctx.fillStyle = "#520C20";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#F0A24A";
+    ctx.fillRect(4, 3, 8, 8);
+    ctx.fillStyle = "#D36B11";
+    ctx.fillRect(6, 5, 4, 4);
   });
 }

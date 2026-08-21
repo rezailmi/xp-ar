@@ -16,7 +16,7 @@ Then open the URL `serve` prints. Or open `index.html` (use `npx serve` if `file
 
 ## The sketch
 
-You are in a tight apartment you cannot leave. Morning sun, a CRT in the corner, **Pips** on the sofa. Type in the paper balloon. The reply replaces the copy. Lines are canned. No API.
+You are in a tight apartment you cannot leave. Night indigo, sunset through sliding glass, a CRT in the corner, **Pips** on the futon. Type in the paper balloon. The reply replaces the copy. Lines are canned. No API.
 
 On screen: **Sketch. Decisions still open.** so the pixels do not fake alignment.
 

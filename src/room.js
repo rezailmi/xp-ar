@@ -2,25 +2,22 @@ import * as THREE from "three";
 import { createPS1Material, pulseEmissive } from "./ps1-material.js";
 import {
   bagTexture,
+  blanketTexture,
   bottleAmberTexture,
   bottleGreenTexture,
   canTexture,
-  cookerPanelTexture,
-  curtainTexture,
   floorTexture,
+  futonTexture,
   glowTexture,
+  lavaTexture,
   metalTexture,
   mountainPosterTexture,
   nightPosterTexture,
-  noodleTexture,
   notePosterTexture,
   outsideTexture,
   plasterTexture,
   recordLabelTexture,
-  rugTexture,
-  shadeTexture,
-  sofaTexture,
-  steamTexture,
+  shojiTexture,
   tvGlowTexture,
   vinylBusTexture,
   vinylDotTexture,
@@ -33,7 +30,7 @@ export const ROOM = {
   halfW: 1.7,
   halfD: 1.6,
   height: 2.15,
-  cam: { x: 1.42, z: 1.38, yMin: 0.38, yMax: 1.72 },
+  cam: { x: 1.42, z: 1.38, yMin: 0.2, yMax: 1.35 },
   walk: { x: 1.05, zMin: -0.15, zMax: 1.12 },
 };
 
@@ -51,18 +48,16 @@ export function createRoom() {
   const floorMap = floorTexture();
   floorMap.wrapS = THREE.RepeatWrapping;
   floorMap.wrapT = THREE.RepeatWrapping;
-  floorMap.repeat.set(3, 3);
+  floorMap.repeat.set(4, 4);
   const floorMat = createPS1Material({ map: floorMap, color: "#ffffff", wobble: 0.003 });
   const trimMat = createPS1Material({ map: woodTrimTexture(), color: "#ffffff", wobble: 0.005 });
-  const sofaMat = createPS1Material({ map: sofaTexture(), color: "#ffffff", wobble: 0.006 });
   const plasticMat = createPS1Material({ map: whitePlasticTexture(), color: "#ffffff", wobble: 0.004 });
   const metalMat = createPS1Material({ map: metalTexture(), color: "#ffffff", wobble: 0.003 });
-  const shadeMat = createPS1Material({ map: shadeTexture(), color: "#ffffff", wobble: 0.005 });
-  const darkMat = createPS1Material({ color: "#1A1816", wobble: 0.003 });
-  const curtainMat = createPS1Material({
-    map: curtainTexture(),
+  const darkMat = createPS1Material({ color: "#130E1F", wobble: 0.003 });
+  const shojiMat = createPS1Material({
+    map: shojiTexture(),
     color: "#ffffff",
-    wobble: 0.004,
+    wobble: 0.003,
     side: THREE.DoubleSide,
   });
 
@@ -76,7 +71,7 @@ export function createRoom() {
 
   const ceiling = new THREE.Mesh(
     new THREE.PlaneGeometry(w + 0.2, d + 0.2, 2, 2),
-    createPS1Material({ color: "#D8D0C0", wobble: 0.002 }),
+    createPS1Material({ color: "#130E1F", wobble: 0.002 }),
   );
   ceiling.rotation.x = Math.PI / 2;
   ceiling.position.y = h;
@@ -91,41 +86,35 @@ export function createRoom() {
   room.add(box(-ROOM.halfW + 0.02, 0.05, 0, 0.05, 0.1, d - 0.1, trimMat));
   room.add(box(ROOM.halfW - 0.02, 0.05, 0, 0.05, 0.1, d - 0.1, trimMat));
 
-  const rug = new THREE.Mesh(
-    new THREE.BoxGeometry(1.5, 0.03, 1.08),
-    createPS1Material({ map: rugTexture(), color: "#ffffff", wobble: 0.005 }),
-  );
-  rug.position.set(0.02, 0.02, 0.18);
-  room.add(rug);
-
-  room.add(createSofa(0.04, 0, -1.02, sofaMat, trimMat));
-  room.add(createSideTable(-1.28, 0, -0.62, trimMat, metalMat, plasticMat, darkMat, updaters));
+  room.add(createFuton(-0.22, 0, -0.12, trimMat));
+  room.add(createLowTable(0.42, 0, 0.28, trimMat, plasticMat, darkMat));
   room.add(createCrtCorner(1.16, 0, -0.82, plasticMat, darkMat, trimMat, metalMat, updaters));
   room.add(createRecordDresser(1.2, 0, 0.42, plasticMat, metalMat, trimMat, darkMat, updaters));
-  room.add(createLamp(-1.2, 0, 0.62, trimMat, shadeMat, plasticMat));
-  room.add(createWindow(-ROOM.halfW + 0.01, 1.3, -0.22, trimMat, curtainMat));
+  room.add(createLavaLamp(-1.22, 0, 0.55, plasticMat, updaters));
+  room.add(createWarmLamp(-1.15, 0, -0.95, trimMat, plasticMat));
+  room.add(createSlidingGlass(-ROOM.halfW + 0.01, 0.98, -0.18, trimMat, shojiMat));
   room.add(createDoor(0.85, 0, ROOM.halfD - 0.02, trimMat, plasticMat));
   room.add(createPosters(trimMat));
-  room.add(createHangingBag(-ROOM.halfW + 0.1, 1.05, 0.72));
+  room.add(createHangingBag(-ROOM.halfW + 0.1, 1.05, 0.78));
 
-  const sunFloor = glowPlane(1.35, 0.95, 0xffe08a, 0.55);
-  sunFloor.rotation.x = -Math.PI / 2;
-  sunFloor.position.set(-0.55, 0.036, 0.02);
-  room.add(sunFloor);
+  const sunsetFloor = glowPlane(1.45, 1.05, 0xf89d09, 0.42);
+  sunsetFloor.rotation.x = -Math.PI / 2;
+  sunsetFloor.position.set(-0.55, 0.036, -0.05);
+  room.add(sunsetFloor);
 
-  const sunWall = glowPlane(0.72, 1.35, 0xffc878, 0.5);
-  sunWall.rotation.y = Math.PI / 2;
-  sunWall.position.set(-ROOM.halfW + 0.09, 1.2, -0.18);
-  room.add(sunWall);
+  const sunsetWall = glowPlane(0.8, 1.55, 0xd36b11, 0.38);
+  sunsetWall.rotation.y = Math.PI / 2;
+  sunsetWall.position.set(-ROOM.halfW + 0.09, 1.05, -0.18);
+  room.add(sunsetWall);
 
-  const coolCorner = glowPlane(0.7, 0.9, 0x6a7ab0, 0.12);
-  coolCorner.position.set(0.2, 1.35, -ROOM.halfD + 0.08);
-  room.add(coolCorner);
+  const indigoBounce = glowPlane(1.1, 0.8, 0x5350a2, 0.16);
+  indigoBounce.position.set(0.15, 0.9, -ROOM.halfD + 0.08);
+  room.add(indigoBounce);
 
-  const lampGlow = glowPlane(0.55, 0.55, 0xffd89a, 0.28);
-  lampGlow.rotation.x = -Math.PI / 2;
-  lampGlow.position.set(-1.2, 1.28, 0.62);
-  room.add(lampGlow);
+  const lavaPool = glowPlane(0.55, 0.55, 0xf0a24a, 0.4);
+  lavaPool.rotation.x = -Math.PI / 2;
+  lavaPool.position.set(-1.22, 0.04, 0.55);
+  room.add(lavaPool);
 
   room.userData.update = (time) => {
     for (const update of updaters) update(time);
@@ -137,10 +126,10 @@ export function createRoom() {
 function leftWallWithHole(wallMat, h, d) {
   const group = new THREE.Group();
   const x = -ROOM.halfW - 0.06;
-  const winZ0 = -0.78;
-  const winZ1 = 0.32;
-  const winY0 = 0.86;
-  const winY1 = 1.76;
+  const winZ0 = -0.9;
+  const winZ1 = 0.54;
+  const winY0 = 0.1;
+  const winY1 = 1.88;
 
   group.add(box(x, winY0 / 2, 0, 0.14, winY0, d + 0.24, wallMat));
   group.add(box(x, (h + winY1) / 2, 0, 0.14, h - winY1, d + 0.24, wallMat));
@@ -172,152 +161,75 @@ function glowPlane(w, h, color, opacity) {
   return new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat);
 }
 
-function createSofa(x, y, z, sofaMat, trimMat) {
+function createFuton(x, y, z, trimMat) {
   const group = new THREE.Group();
   group.position.set(x, y, z);
 
-  const rail = new THREE.Mesh(new THREE.BoxGeometry(1.62, 0.08, 0.64), trimMat);
-  rail.position.set(0, 0.2, 0.04);
-  group.add(rail);
+  const mattress = new THREE.Mesh(
+    new THREE.BoxGeometry(0.95, 0.05, 1.35),
+    createPS1Material({ map: futonTexture(), color: "#ffffff", wobble: 0.004 }),
+  );
+  mattress.position.y = 0.04;
+  group.add(mattress);
 
-  const seat = new THREE.Mesh(new THREE.BoxGeometry(1.52, 0.16, 0.56), sofaMat);
-  seat.position.set(0, 0.3, 0.06);
-  group.add(seat);
-
-  const back = new THREE.Mesh(new THREE.BoxGeometry(1.52, 0.46, 0.14), sofaMat);
-  back.position.set(0, 0.54, -0.22);
-  group.add(back);
-
-  const armL = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.28, 0.56), trimMat);
-  armL.position.set(-0.74, 0.4, 0.06);
-  const armR = armL.clone();
-  armR.position.x = 0.74;
-  group.add(armL, armR);
-
-  const cushionL = new THREE.Mesh(new THREE.BoxGeometry(0.68, 0.08, 0.44), sofaMat);
-  cushionL.position.set(-0.32, 0.4, 0.1);
-  const cushionR = cushionL.clone();
-  cushionR.position.x = 0.32;
-  group.add(cushionL, cushionR);
+  const blanket = new THREE.Mesh(
+    new THREE.BoxGeometry(0.72, 0.03, 0.7),
+    createPS1Material({ map: blanketTexture(), color: "#ffffff", wobble: 0.005 }),
+  );
+  blanket.position.set(0.04, 0.075, 0.18);
+  group.add(blanket);
 
   const pillow = new THREE.Mesh(
-    new THREE.BoxGeometry(0.22, 0.18, 0.08),
-    createPS1Material({ color: "#8A4030", wobble: 0.006 }),
+    new THREE.BoxGeometry(0.34, 0.08, 0.18),
+    createPS1Material({ color: "#E8D8C0", wobble: 0.005 }),
   );
-  pillow.position.set(-0.58, 0.5, -0.08);
-  pillow.rotation.y = 0.25;
+  pillow.position.set(-0.02, 0.09, -0.48);
   group.add(pillow);
 
-  for (const [fx, fz] of [
-    [-0.68, 0.24],
-    [0.68, 0.24],
-    [-0.68, -0.16],
-    [0.68, -0.16],
-  ]) {
-    const foot = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.16, 0.07), trimMat);
-    foot.position.set(fx, 0.08, fz);
-    group.add(foot);
-  }
+  const edge = new THREE.Mesh(new THREE.BoxGeometry(0.98, 0.02, 1.38), trimMat);
+  edge.position.y = 0.015;
+  group.add(edge);
 
   return group;
 }
 
-function createSideTable(x, y, z, trimMat, metalMat, plasticMat, darkMat, updaters) {
+function createLowTable(x, y, z, trimMat, plasticMat, darkMat) {
   const group = new THREE.Group();
   group.position.set(x, y, z);
 
-  const top = new THREE.Mesh(new THREE.BoxGeometry(0.46, 0.04, 0.36), trimMat);
-  top.position.y = 0.42;
+  const top = new THREE.Mesh(new THREE.BoxGeometry(0.62, 0.03, 0.4), plasticMat);
+  top.position.y = 0.22;
   group.add(top);
   for (const [lx, lz] of [
-    [-0.18, 0.13],
-    [0.18, 0.13],
-    [-0.18, -0.13],
-    [0.18, -0.13],
+    [-0.26, 0.15],
+    [0.26, 0.15],
+    [-0.26, -0.15],
+    [0.26, -0.15],
   ]) {
-    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.4, 0.04), metalMat);
-    leg.position.set(lx, 0.2, lz);
+    const leg = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.2, 0.04), trimMat);
+    leg.position.set(lx, 0.1, lz);
     group.add(leg);
   }
 
-  const cooker = new THREE.Group();
-  cooker.position.set(-0.08, 0.52, -0.02);
-  const pot = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.14, 0.2), plasticMat);
-  pot.position.y = 0.07;
-  const lid = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.1, 0.05, 6), plasticMat);
-  lid.position.y = 0.16;
-  const knob = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.03, 0.03), darkMat);
-  knob.position.y = 0.2;
-  const panel = new THREE.Mesh(
-    new THREE.BoxGeometry(0.16, 0.05, 0.01),
-    createPS1Material({ map: cookerPanelTexture(), color: "#ffffff", wobble: 0 }),
+  const deck = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.05, 0.16), plasticMat);
+  deck.position.set(-0.12, 0.26, 0.02);
+  group.add(deck);
+  const led = new THREE.Mesh(
+    new THREE.BoxGeometry(0.015, 0.012, 0.015),
+    createPS1Material({ color: "#1A3A1A", emissive: "#2AD84A", wobble: 0 }),
   );
-  panel.position.set(0, 0.07, 0.105);
-  cooker.add(pot, lid, knob, panel);
-  group.add(cooker);
-
-  const burner = new THREE.Mesh(
-    new THREE.BoxGeometry(0.16, 0.03, 0.16),
-    createPS1Material({ color: "#2A2A30", emissive: "#141428", wobble: 0.002 }),
-  );
-  burner.position.set(0.12, 0.445, 0.04);
-  group.add(burner);
-
-  const ring = glowPlane(0.2, 0.2, 0x6688ff, 0.45);
-  ring.rotation.x = -Math.PI / 2;
-  ring.position.set(0.12, 0.462, 0.04);
-  group.add(ring);
-
-  const bowl = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.055, 0.045, 0.05, 8),
-    createPS1Material({ color: "#C4A070", wobble: 0.004 }),
-  );
-  bowl.position.set(0.12, 0.492, 0.04);
-  group.add(bowl);
-
-  const noodles = new THREE.Mesh(
-    new THREE.CircleGeometry(0.045, 8),
-    createPS1Material({ map: noodleTexture(), color: "#ffffff", wobble: 0 }),
-  );
-  noodles.rotation.x = -Math.PI / 2;
-  noodles.position.set(0.12, 0.518, 0.04);
-  group.add(noodles);
-
-  const steams = [];
-  const steamMap = steamTexture();
-  for (let i = 0; i < 3; i += 1) {
-    const puff = new THREE.Mesh(
-      new THREE.PlaneGeometry(0.06, 0.1),
-      new THREE.MeshBasicMaterial({
-        map: steamMap,
-        transparent: true,
-        opacity: 0.45,
-        depthWrite: false,
-        side: THREE.DoubleSide,
-      }),
-    );
-    puff.position.set(0.1 + i * 0.02, 0.56, 0.04);
-    puff.userData.baseY = 0.56;
-    puff.userData.phase = i * 0.8;
-    group.add(puff);
-    steams.push(puff);
-  }
+  led.position.set(-0.04, 0.27, 0.08);
+  group.add(led);
+  const pad = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.02, 0.06), darkMat);
+  pad.position.set(0.08, 0.245, 0.08);
+  group.add(pad);
 
   const can = new THREE.Mesh(
     new THREE.CylinderGeometry(0.025, 0.025, 0.08, 6),
     createPS1Material({ map: canTexture(), color: "#ffffff", wobble: 0.003 }),
   );
-  can.position.set(-0.16, 0.48, 0.1);
+  can.position.set(0.2, 0.27, -0.08);
   group.add(can);
-
-  updaters.push((time) => {
-    for (const puff of steams) {
-      const t = (time * 0.18 + puff.userData.phase) % 1;
-      puff.position.y = puff.userData.baseY + t * 0.16;
-      puff.material.opacity = 0.5 * (1 - t);
-      puff.rotation.y = time * 0.4 + puff.userData.phase;
-    }
-  });
 
   return group;
 }
@@ -359,17 +271,17 @@ function createCrtCorner(x, y, z, plasticMat, darkMat, trimMat, metalMat, update
     map: tvGlowTexture(),
     color: "#ffffff",
     wobble: 0,
-    emissive: "#3A2A78",
+    emissive: "#2B4ACC",
   });
   const screen = new THREE.Mesh(new THREE.PlaneGeometry(0.34, 0.22), screenMat);
   screen.position.set(0, 0.96, 0.205);
   group.add(screen);
 
-  const bloom = glowPlane(0.62, 0.44, 0xd8c8ff, 0.55);
+  const bloom = glowPlane(0.7, 0.5, 0x6688ff, 0.62);
   bloom.position.set(0, 0.96, 0.22);
   group.add(bloom);
 
-  const spill = glowPlane(0.5, 0.28, 0xc8b8ff, 0.32);
+  const spill = glowPlane(0.58, 0.34, 0x5350a2, 0.4);
   spill.rotation.x = -Math.PI / 2;
   spill.position.set(0, 0.735, 0.12);
   group.add(spill);
@@ -489,79 +401,112 @@ function createRecordDresser(x, y, z, plasticMat, metalMat, trimMat, darkMat, up
   return group;
 }
 
-function createLamp(x, y, z, trimMat, shadeMat, beigeMat) {
+function createLavaLamp(x, y, z, plasticMat, updaters) {
   const group = new THREE.Group();
   group.position.set(x, y, z);
-  const base = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.05, 0.2), beigeMat);
-  base.position.y = 0.03;
-  group.add(base);
-  const pole = new THREE.Mesh(new THREE.BoxGeometry(0.04, 1.02, 0.04), trimMat);
-  pole.position.y = 0.54;
-  group.add(pole);
-  const shade = new THREE.Mesh(new THREE.CylinderGeometry(0.11, 0.2, 0.24, 6, 1, true), shadeMat);
-  shade.position.y = 1.1;
-  group.add(shade);
-  const shadeTop = new THREE.Mesh(new THREE.CircleGeometry(0.11, 6), shadeMat);
-  shadeTop.rotation.x = -Math.PI / 2;
-  shadeTop.position.y = 1.22;
-  group.add(shadeTop);
-  const bulb = new THREE.Mesh(
-    new THREE.BoxGeometry(0.05, 0.05, 0.05),
-    createPS1Material({ color: "#FFF2C4", emissive: "#806020", wobble: 0 }),
+  const lavaMap = lavaTexture();
+  const glass = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.045, 0.055, 0.28, 6),
+    createPS1Material({ map: lavaMap, color: "#ffffff", emissive: "#401010", wobble: 0.004 }),
   );
-  bulb.position.y = 1.02;
-  group.add(bulb);
+  glass.position.y = 0.28;
+  group.add(glass);
+  const base = new THREE.Mesh(new THREE.CylinderGeometry(0.06, 0.07, 0.08, 6), plasticMat);
+  base.position.y = 0.1;
+  group.add(base);
+  const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.04, 0.04, 0.04, 6), plasticMat);
+  cap.position.y = 0.44;
+  group.add(cap);
+
+  const blobMat = createPS1Material({ color: "#F0A24A", emissive: "#803010", wobble: 0.008 });
+  const blobA = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.05, 0.04), blobMat);
+  blobA.position.set(0, 0.24, 0);
+  const blobB = blobA.clone();
+  blobB.position.y = 0.32;
+  group.add(blobA, blobB);
+
+  const glow = glowPlane(0.28, 0.36, 0xf0a24a, 0.45);
+  glow.position.set(0.06, 0.28, 0);
+  group.add(glow);
+
+  updaters.push((time) => {
+    blobA.position.y = 0.22 + Math.sin(time * 0.7) * 0.05;
+    blobB.position.y = 0.34 + Math.sin(time * 0.7 + 1.4) * 0.04;
+    pulseEmissive(blobMat, 0.8 + Math.sin(time * 1.6) * 0.25);
+    glow.material.opacity = 0.32 + Math.sin(time * 1.6) * 0.1;
+  });
+
   return group;
 }
 
-function createWindow(x, y, z, trimMat, curtainMat) {
+function createWarmLamp(x, y, z, trimMat, beigeMat) {
+  const group = new THREE.Group();
+  group.position.set(x, y, z);
+  const base = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.04, 0.14), beigeMat);
+  base.position.y = 0.03;
+  group.add(base);
+  const pole = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.42, 0.03), trimMat);
+  pole.position.y = 0.25;
+  group.add(pole);
+  const shade = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.06, 0.1, 0.12, 6, 1, true),
+    createPS1Material({ color: "#E8C878", emissive: "#403010", wobble: 0.003 }),
+  );
+  shade.position.y = 0.5;
+  group.add(shade);
+  const glow = glowPlane(0.28, 0.28, 0xf89d09, 0.28);
+  glow.rotation.x = -Math.PI / 2;
+  glow.position.set(0, 0.52, 0);
+  group.add(glow);
+  return group;
+}
+
+function createSlidingGlass(x, y, z, trimMat, shojiMat) {
   const group = new THREE.Group();
   group.position.set(x, y, z);
 
-  const jambL = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.96, 0.08), trimMat);
-  jambL.position.set(0.04, 0, -0.52);
+  const jambL = new THREE.Mesh(new THREE.BoxGeometry(0.07, 1.82, 0.07), trimMat);
+  jambL.position.set(0.04, 0, -0.7);
   const jambR = jambL.clone();
-  jambR.position.z = 0.52;
-  const head = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 1.12), trimMat);
-  head.position.set(0.04, 0.48, 0);
-  const sill = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.07, 1.16), trimMat);
-  sill.position.set(0.08, -0.48, 0);
-  group.add(jambL, jambR, head, sill);
+  jambR.position.z = 0.7;
+  const head = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.07, 1.48), trimMat);
+  head.position.set(0.04, 0.88, 0);
+  const track = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.05, 1.48), trimMat);
+  track.position.set(0.06, -0.88, 0);
+  group.add(jambL, jambR, head, track);
 
   const outside = new THREE.Mesh(
-    new THREE.PlaneGeometry(1.08, 0.88),
+    new THREE.PlaneGeometry(1.4, 1.72),
     new THREE.MeshBasicMaterial({ map: outsideTexture() }),
   );
   outside.rotation.y = Math.PI / 2;
-  outside.position.set(-0.2, 0.02, 0);
+  outside.position.set(-0.22, 0.02, 0);
   group.add(outside);
 
   const pane = new THREE.Mesh(
-    new THREE.PlaneGeometry(0.98, 0.8),
+    new THREE.PlaneGeometry(1.28, 1.6),
     new THREE.MeshBasicMaterial({
-      color: 0xffe6a0,
+      color: 0xf89d09,
       transparent: true,
       opacity: 0.1,
       depthWrite: false,
     }),
   );
   pane.rotation.y = Math.PI / 2;
-  pane.position.set(0.03, 0.02, 0);
+  pane.position.set(0.02, 0.02, 0);
   group.add(pane);
 
-  const mullion = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.8, 0.04), trimMat);
-  mullion.position.set(0.03, 0.02, 0);
-  group.add(mullion);
+  const shojiClosed = new THREE.Mesh(new THREE.BoxGeometry(0.03, 1.58, 0.52), shojiMat);
+  shojiClosed.position.set(0.08, 0.02, -0.42);
+  group.add(shojiClosed);
 
-  const curtainL = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.88, 0.18), curtainMat);
-  curtainL.position.set(0.07, 0.02, -0.42);
-  const curtainR = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.88, 0.14), curtainMat);
-  curtainR.position.set(0.07, 0.02, 0.44);
-  group.add(curtainL, curtainR);
+  const shojiOpen = new THREE.Mesh(new THREE.BoxGeometry(0.03, 1.58, 0.28), shojiMat);
+  shojiOpen.position.set(0.1, 0.02, 0.58);
+  group.add(shojiOpen);
 
-  const valance = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.08, 1.12), curtainMat);
-  valance.position.set(0.08, 0.46, 0);
-  group.add(valance);
+  const rail = new THREE.Mesh(new THREE.BoxGeometry(0.04, 1.58, 0.04), trimMat);
+  rail.position.set(0.05, 0.02, 0.08);
+  group.add(rail);
 
   return group;
 }
