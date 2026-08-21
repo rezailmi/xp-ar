@@ -29,9 +29,9 @@ const scene = new THREE.Scene();
 const cssScene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(46, 1, 0.08, 12);
-camera.position.set(0.46, 0.98, 1.14);
+camera.position.set(0.62, 0.9, 1.02);
 
-const lookTarget = new THREE.Vector3(0.06, 0.6, -0.7);
+const lookTarget = new THREE.Vector3(-0.22, 0.58, -0.52);
 
 const room = createRoom();
 scene.add(room);

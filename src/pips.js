@@ -38,41 +38,50 @@ export function createPips() {
   head.position.set(0, 0.38, 0.08);
   group.add(head);
 
-  const skull = new THREE.Mesh(new THREE.BoxGeometry(0.32, 0.28, 0.3), skinMat);
+  const skull = new THREE.Mesh(new THREE.BoxGeometry(0.34, 0.3, 0.3), skinMat);
   head.add(skull);
 
-  const cheekL = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.06, 0.06), skinMat);
-  cheekL.position.set(-0.16, -0.04, 0.1);
+  const cheekL = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.07, 0.07), skinMat);
+  cheekL.position.set(-0.17, -0.04, 0.1);
   const cheekR = cheekL.clone();
-  cheekR.position.x = 0.16;
+  cheekR.position.x = 0.17;
   head.add(cheekL, cheekR);
 
   const tuft = new THREE.Group();
-  tuft.position.set(-0.04, 0.16, -0.02);
-  const tuftA = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.12, 0.08), tuftMat);
-  tuftA.rotation.z = 0.35;
-  const tuftB = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.1, 0.07), tuftMat);
-  tuftB.position.set(-0.07, 0.06, 0);
-  tuftB.rotation.z = 0.7;
-  tuft.add(tuftA, tuftB);
+  tuft.position.set(-0.02, 0.18, 0);
+  const tuftA = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.16, 0.1), tuftMat);
+  tuftA.rotation.z = 0.4;
+  const tuftB = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.14, 0.08), tuftMat);
+  tuftB.position.set(-0.1, 0.08, 0.01);
+  tuftB.rotation.z = 0.85;
+  const tuftC = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.08, 0.06), tuftMat);
+  tuftC.position.set(-0.16, 0.12, 0);
+  tuftC.rotation.z = 1.1;
+  tuft.add(tuftA, tuftB, tuftC);
   head.add(tuft);
 
-  const browL = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.03, 0.04), lidMat);
-  browL.position.set(-0.07, 0.05, 0.15);
+  const socketL = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.07, 0.03), bellyMat);
+  socketL.position.set(-0.08, 0.02, 0.15);
+  const socketR = socketL.clone();
+  socketR.position.x = 0.08;
+  head.add(socketL, socketR);
+
+  const browL = new THREE.Mesh(new THREE.BoxGeometry(0.11, 0.03, 0.04), lidMat);
+  browL.position.set(-0.08, 0.055, 0.155);
   const browR = browL.clone();
-  browR.position.x = 0.07;
+  browR.position.x = 0.08;
   head.add(browL, browR);
 
-  const eyeL = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.04, 0.03), pupilMat);
-  eyeL.position.set(-0.07, 0.015, 0.155);
+  const eyeL = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.03, 0.03), pupilMat);
+  eyeL.position.set(-0.08, 0.012, 0.162);
   const eyeR = eyeL.clone();
-  eyeR.position.x = 0.07;
+  eyeR.position.x = 0.08;
   head.add(eyeL, eyeR);
 
-  const pupilL = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.03, 0.02), pupilMat);
-  pupilL.position.set(-0.065, 0.012, 0.17);
+  const pupilL = new THREE.Mesh(new THREE.BoxGeometry(0.028, 0.028, 0.02), pupilMat);
+  pupilL.position.set(-0.075, 0.01, 0.175);
   const pupilR = pupilL.clone();
-  pupilR.position.x = 0.075;
+  pupilR.position.x = 0.085;
   head.add(pupilL, pupilR);
 
   const nose = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.04, 0.05), noseMat);
@@ -156,8 +165,8 @@ export function createPips() {
       tuft.rotation.z = 0;
       tail.rotation.x = 0.35;
       mouth.scale.y = 1;
-      pupilL.position.x = -0.065;
-      pupilR.position.x = 0.075;
+      pupilL.position.x = -0.075;
+      pupilR.position.x = 0.085;
       return;
     }
 
@@ -183,8 +192,8 @@ export function createPips() {
     armR.rotation.z = -0.22;
 
     mouth.scale.y = cycle >= 5.1 && cycle < 5.5 ? 1.8 : 1;
-    pupilL.position.x = -0.065 + glance * 0.025;
-    pupilR.position.x = 0.075 + glance * 0.025;
+    pupilL.position.x = -0.075 + glance * 0.025;
+    pupilR.position.x = 0.085 + glance * 0.025;
   };
 
   return group;

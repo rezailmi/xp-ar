@@ -26,29 +26,36 @@ function noiseFill(ctx, width, height, colors, step = 1) {
 }
 
 export function plasterTexture() {
-  return canvasTexture(128, (ctx, size) => {
-    noiseFill(ctx, size, size, ["#E6D4B4", "#E2CFA8", "#EBDCC0", "#D8C49A", "#E8D6B6"], 2);
-    ctx.fillStyle = "#CDB892";
-    ctx.fillRect(18, 40, 22, 1);
-    ctx.fillRect(70, 88, 28, 1);
-    ctx.fillStyle = "#F2E4C8";
-    ctx.fillRect(44, 16, 3, 3);
-    ctx.fillRect(96, 54, 2, 2);
+  return canvasTexture(64, (ctx, size) => {
+    ctx.fillStyle = "#E8D6B4";
+    ctx.fillRect(0, 0, size, size);
+    for (let y = 0; y < size; y += 1) {
+      for (let x = 0; x < size; x += 1) {
+        const n = (x * 13 + y * 29 + (x ^ y)) % 11;
+        if (n === 0) {
+          ctx.fillStyle = "#E0CBA6";
+          ctx.fillRect(x, y, 1, 1);
+        } else if (n === 1) {
+          ctx.fillStyle = "#F0E0C4";
+          ctx.fillRect(x, y, 1, 1);
+        }
+      }
+    }
   });
 }
 
 export function floorTexture() {
   return canvasTexture(128, (ctx, size) => {
     for (let y = 0; y < size; y += 1) {
-      ctx.fillStyle = y % 18 < 16 ? "#B88854" : "#7A4E28";
+      ctx.fillStyle = y % 20 < 18 ? "#C49A62" : "#A87848";
       ctx.fillRect(0, y, size, 1);
     }
-    ctx.fillStyle = "#6A3E1E";
+    ctx.fillStyle = "#8A5A30";
     for (let x = 0; x < size; x += 32) {
       ctx.fillRect(x, 0, 1, size);
     }
-    ctx.fillStyle = "#C9A06A";
-    for (let y = 3; y < size; y += 18) {
+    ctx.fillStyle = "#D4B07A";
+    for (let y = 4; y < size; y += 20) {
       ctx.fillRect(0, y, size, 1);
     }
   });
@@ -481,11 +488,13 @@ export function pipsTuftTexture() {
 
 export function pipsSlipperTexture() {
   return canvasTexture(16, (ctx, size) => {
-    ctx.fillStyle = "#5A3A28";
+    ctx.fillStyle = "#8A5A38";
     ctx.fillRect(0, 0, size, size);
-    ctx.fillStyle = "#3A2418";
+    ctx.fillStyle = "#5A3A24";
     ctx.fillRect(0, 11, size, 5);
-    ctx.fillStyle = "#C4A070";
-    ctx.fillRect(3, 4, 10, 3);
+    ctx.fillStyle = "#E0C090";
+    ctx.fillRect(2, 3, 12, 4);
+    ctx.fillStyle = "#C47848";
+    ctx.fillRect(6, 4, 4, 2);
   });
 }

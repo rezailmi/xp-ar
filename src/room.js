@@ -45,7 +45,7 @@ export function createRoom() {
   const wallpaper = plasterTexture();
   wallpaper.wrapS = THREE.RepeatWrapping;
   wallpaper.wrapT = THREE.RepeatWrapping;
-  wallpaper.repeat.set(2.2, 1.5);
+  wallpaper.repeat.set(1.1, 1);
   const wallMat = createPS1Material({ map: wallpaper, color: "#ffffff", wobble: 0.004 });
 
   const floorMap = floorTexture();
@@ -108,14 +108,14 @@ export function createRoom() {
   room.add(createPosters(trimMat));
   room.add(createHangingBag(-ROOM.halfW + 0.1, 1.05, 0.72));
 
-  const sunFloor = glowPlane(1.15, 0.82, 0xffe08a, 0.42);
+  const sunFloor = glowPlane(1.35, 0.95, 0xffe08a, 0.55);
   sunFloor.rotation.x = -Math.PI / 2;
-  sunFloor.position.set(-0.42, 0.036, 0.08);
+  sunFloor.position.set(-0.55, 0.036, 0.02);
   room.add(sunFloor);
 
-  const sunWall = glowPlane(0.55, 1.15, 0xffc878, 0.38);
+  const sunWall = glowPlane(0.72, 1.35, 0xffc878, 0.5);
   sunWall.rotation.y = Math.PI / 2;
-  sunWall.position.set(-ROOM.halfW + 0.09, 1.15, -0.18);
+  sunWall.position.set(-ROOM.halfW + 0.09, 1.2, -0.18);
   room.add(sunWall);
 
   const coolCorner = glowPlane(0.7, 0.9, 0x6a7ab0, 0.12);
