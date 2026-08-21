@@ -11,10 +11,10 @@ uniform mat3 normalMatrix;
 uniform float uTime;
 uniform float uSnap;
 uniform float uWobble;
-uniform vec3 uLightDir;
+uniform vec3 uWarmDir;
 
 out vec2 vUv;
-out float vShade;
+out float vBand;
 
 void main() {
   vec3 pos = position;
@@ -30,7 +30,8 @@ void main() {
 
   vUv = uv;
   vec3 n = normalize(normalMatrix * normal);
-  vShade = clamp(dot(n, normalize(uLightDir)) * 0.5 + 0.58, 0.4, 1.18);
+  float ndotl = clamp(dot(n, normalize(uWarmDir)), 0.0, 1.0);
+  vBand = floor(ndotl * 3.0 + 0.35) / 3.0;
 }
 `;
 
@@ -40,9 +41,12 @@ precision mediump float;
 uniform sampler2D uMap;
 uniform vec3 uColor;
 uniform float uHasMap;
+uniform vec3 uWarmColor;
+uniform vec3 uCoolColor;
+uniform vec3 uEmissive;
 
 in vec2 vUv;
-in float vShade;
+in float vBand;
 
 out vec4 fragColor;
 
@@ -51,16 +55,23 @@ void main() {
   if (uHasMap > 0.5) {
     texel = texture(uMap, vUv).rgb;
   }
-  fragColor = vec4(texel * uColor * vShade, 1.0);
+  vec3 shade = mix(uCoolColor, uWarmColor, vBand);
+  fragColor = vec4(texel * uColor * shade + uEmissive, 1.0);
 }
 `;
 
 const ticking = [];
 
+const WARM_DIR = new THREE.Vector3(-0.92, 0.48, 0.18).normalize();
+const WARM_COLOR = new THREE.Color(1.18, 0.96, 0.68);
+const COOL_COLOR = new THREE.Color(0.52, 0.58, 0.78);
+
 export function createPS1Material({
   map = null,
   color = "#ffffff",
   wobble = 0.018,
+  emissive = "#000000",
+  side = THREE.FrontSide,
 } = {}) {
   const material = new THREE.RawShaderMaterial({
     glslVersion: THREE.GLSL3,
@@ -71,12 +82,17 @@ export function createPS1Material({
       uTime: { value: 0 },
       uSnap: { value: 168 },
       uWobble: { value: wobble },
-      uLightDir: { value: new THREE.Vector3(-0.85, 0.55, 0.2).normalize() },
+      uWarmDir: { value: WARM_DIR.clone() },
+      uWarmColor: { value: WARM_COLOR.clone() },
+      uCoolColor: { value: COOL_COLOR.clone() },
+      uEmissive: { value: new THREE.Color(emissive) },
     },
     vertexShader,
     fragmentShader,
+    side,
   });
   material.userData.baseWobble = wobble;
+  material.userData.baseEmissive = material.uniforms.uEmissive.value.clone();
   ticking.push(material);
   return material;
 }
@@ -87,6 +103,12 @@ export function tickPS1Materials(time, { wobble = true, snap = 168 } = {}) {
     material.uniforms.uWobble.value = wobble ? material.userData.baseWobble ?? 0.018 : 0;
     material.uniforms.uSnap.value = snap;
   }
+}
+
+export function pulseEmissive(material, amount) {
+  const base = material.userData.baseEmissive;
+  if (!base) return;
+  material.uniforms.uEmissive.value.copy(base).multiplyScalar(amount);
 }
 
 export function rememberWobble(material, amount) {

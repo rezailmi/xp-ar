@@ -4,7 +4,7 @@ Privilege: **room, then body, then balloon.** If the room reads as a level, the 
 
 ## Subject
 
-A living room a body lives in. **Pips** is already using the sofa and the rug. Original PS1 mascot. House guest, not a pet, not Crash.
+A living room a body lives in. **Pips** is already using the sofa. Original PS1 roommate. House guest, not a pet, not Crash.
 
 ## Audience / job
 
@@ -14,13 +14,12 @@ Reza, thirty seconds. Feel *someone appeared in my living room*. Then talk.
 
 | From | Take |
 | --- | --- |
+| binadra apartment stills | Morning window vs cool corners. Lived-in clutter. Nearest-neighbor texels. Chunky appliances. |
+| ember.lite lighting | Saturated sky against warm interior glow. Local bloom on CRT / lamp / LED. Not the mall. |
+| ember.lite cat energy | Calm inhabitant. Occupies the sofa. Watches. Not a mascot spin. |
 | [EyePet](https://en.wikipedia.org/wiki/EyePet) | Creature on *your* rug, scaled against real furniture. |
-| [Nintendogs](https://en.wikipedia.org/wiki/Nintendogs) | A body that can sit or lean on the sofa. Not a dog. No meters. |
 | [Tomodachi](https://en.wikipedia.org/wiki/Tomodachi_Life) | One tight apartment. Camera cannot leave. |
-| Bob / domestic toys | Sofa, lamp, rug, CRT at arm’s reach. |
-| Crash *construction* (not likeness) | Large head, no neck, short limbs, gauntlets + sneakers as side color blocks, low-poly snap, orange/tan that holds on a CRT. |
-| Ape Escape Spike *energy* | Busy hands when still. Not the hair, not the net. |
-| Spyro *energy* | Small on the floor. Not purple, horns, or wings. |
+| Crash *construction* (not likeness) | Large head, no neck, short limbs, low-poly snap. Bounce lives in the idle, not the silhouette. |
 | Clippit / [Microsoft Agent](https://en.wikipedia.org/wiki/Microsoft_Agent) | One yellow paper letter. 1px brown edge. Triangular tail on the skull. Tahoma 11. Reply replaces the copy. |
 
 ## Avoid
@@ -29,28 +28,28 @@ Rover. Comic Sans. House-as-OS. Pixar fur. Pet-care HUD. Catalog. Mii faces. Dua
 
 Crash face/mask, green eyes, back spots, chest patch, blue jeans + red shoes, mohawk, name, Wumpa, gum-on-shoe, gem-pose, “Whoa,” spin-as-brand.
 
-Spike red hair / Time Net. Spyro purple+horns+wings. Croc green+backpack.
+Teal candy wallpaper. Toy-primary sofa/rug. Toys R Us / Pizza Hut / branded toys. Coca-Cola script. Stay With Me / Miki Matsubara. FF7 screens. BINADRA. Pagoda “JAPAN” poster. A tuxedo cat as Pips.
 
-Paperclip mesh. Office 97 wizard chrome. Title-bar window. Luna/XP frames. Bonzi / Peedy / Merlin. TTS. Right-click menus. iMessage pills.
+Paperclip mesh. Office 97 wizard chrome. Title-bar window. Luna/XP frames. Bonzi / Peedy / Merlin. TTS. Right-click menus. iMessage pills. Inter. Purple UI gradients.
 
 ## Palette
 
-Fun 2000s living room (Jet Set Radio / Sunshine / Banjo / GC Animal Crossing). Not dusty tan. Not mauve SaaS.
+Lived-in apartment morning. Cream plaster. Wood and metal. Warm sun, cool fill. Not a candy box.
 
 | Token | Hex | Role |
 | --- | --- | --- |
-| wallpaper | `#2EC4B6` | Teal candy walls |
-| sofa | `#2A4DE0` | Cobalt — committed |
-| rug | `#FF7A1A` | Orange checker |
-| sky | `#7EC8E3` | Slice through the window |
+| plaster | `#E6D4B4` | Warm wall. Catches the window. |
+| sofa | `#D8C4A0` | Oatmeal fabric on a wood frame |
+| rug | `#7A4030` | Worn rust. Checker is gone. |
+| sky | `#FFB46A` | Morning postcard through the window |
 | balloon | `#FFF4A3` | Clippy paper. Not neon HUD |
 | ink | `#111111` | Type and 1px balloon edge |
 
-Supporting: lavender dot `#C9A8F0`, lime shade `#B6E04A`, trim `#8B4E24`, fur `#E07A28` (brighter tan, still not jeans+red-shoes), gauntlet `#E8D8B0`, sneaker `#2F6F62`.
+Supporting: skin `#E6C8A0`, vest `#5A6840`, tuft `#A84A28`, slipper `#5A3A28`, CRT bloom `#C8B8FF`, LED `#2AD84A`.
 
 ## Window
 
-A hole in the left wall. Frame, sill, half-open curtains. Behind it: a 64px postcard (sky + a tree + a building). Daylight hits the rug. Orbit still cannot leave the room or become an outdoor level.
+A hole in the left wall. Frame, sill, half-open linen. Behind it: a 64px postcard (gold sky, sun, block buildings). Morning sun hits the rug and the left wall. Orbit still cannot leave the room or become an outdoor level.
 
 ## Type
 
@@ -58,12 +57,12 @@ Tahoma / `"MS Sans Serif"` / system-ui. Balloon 11px. Sketch note 10px. Never In
 
 ## Layout
 
-Tomodachi-tight: ~3.4m. Sofa you could sit on. Camera starts inside and is clamped to the walls. A window is *in* the room.
+Tomodachi-tight: ~3.4m. Sofa you could sit on. Camera starts low and is clamped to the walls. A window is *in* the room.
 
 ```
 +------------------------------+
-| [window] [lamp] sofa [CRT]   |
-|          [table]             |
+| [window] sofa [CRT shelf]    |
+| cooker   Pips  [dresser]     |
 |     rug  (sun patch)         |
 |   (you, in the room)         |
 +------------------------------+
@@ -72,12 +71,13 @@ Tomodachi-tight: ~3.4m. Sofa you could sit on. Camera starts inside and is clamp
 
 ## Signature
 
-A **candy-colored apartment you cannot leave**, daylight from a real window, taped paper balloon on a short-limbed guest.
+A **small apartment you cannot leave**, morning sun from a real window, taped paper balloon on a roommate who already sat down.
 
 ## Motion
 
-- Pips: sit/lean. Glance, yawn, twitch, compact bounce, busy hands. No spin.
-- Room wobbles. Paper does not.
+- Pips: sit/lounge. Breath, glance, tuft, tail twitch, a small bounce. Hands stay on the lap. No spin.
+- Room wobbles a little. Paper does not.
+- CRT and the record LED pulse in place.
 - Send insets. `prefers-reduced-motion` stills the body.
 
 ## Copy
@@ -86,4 +86,4 @@ Officious house guest. Opens with “It looks like you walked in.” One letter 
 
 ## Critique
 
-The dusty tan room read like a closed set. This pass saturates like a 2001 kids’ game and adds a window that is furniture, not a skybox. The clamp stays. The balloon stays paper.
+The candy-teal pass read like a toy aisle with a Crash fidget on the sofa. This pass keeps the clamp, the balloon, and the name, and spends the budget on apartment light and an original roommate body.

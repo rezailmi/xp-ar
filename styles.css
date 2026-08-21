@@ -1,8 +1,8 @@
 :root {
-  --wallpaper: #2ec4b6;
-  --trim: #8b4e24;
-  --rug: #ff7a1a;
-  --sofa: #2a4de0;
+  --wallpaper: #e6d4b4;
+  --trim: #8a5a32;
+  --rug: #7a4030;
+  --sofa: #d8c4a0;
   --crt-beige: #f2e6c4;
   --balloon: #fff4a3;
   --balloon-edge: #4a3b12;
@@ -31,6 +31,10 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
+}
+
+#gl {
+  image-rendering: pixelated;
 }
 
 #css3d,
