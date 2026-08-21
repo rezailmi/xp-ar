@@ -55,7 +55,7 @@ void main() {
   if (uHasMap > 0.5) {
     texel = texture(uMap, vUv).rgb;
   }
-  vec3 shade = mix(uCoolColor, uWarmColor, vBand);
+  vec3 shade = mix(uCoolColor, uWarmColor, vBand) + vec3(0.1, 0.1, 0.16);
   fragColor = vec4(texel * uColor * shade + uEmissive, 1.0);
 }
 `;

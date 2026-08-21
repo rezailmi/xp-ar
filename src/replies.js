@@ -1,11 +1,11 @@
 const LINES = [
-  "The sofa accepted me. The rug is still jealous.",
   "The futon accepted me. The table is still jealous.",
+  "I am reading. You can still talk. I turn pages slowly.",
   "I filed the record under Background. I can still see you.",
   "I am a guest. I am also a paperclip. I sat down anyway.",
   "Searching the house… found: you, this cushion, leftover Tuesday.",
   "Do not mind the wobble. The room does that. I do a smaller version.",
-  "I wrote your words on the armrest. Then I sat on them.",
+  "I wrote your words on the blanket. Then I sat on them.",
   "It looks like you still live here. Good. I was using the furniture.",
 ];
 

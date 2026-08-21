@@ -116,6 +116,11 @@ export function createRoom() {
   lavaPool.position.set(-1.22, 0.04, 0.55);
   room.add(lavaPool);
 
+  const futonWash = glowPlane(1.05, 0.85, 0xf89d09, 0.22);
+  futonWash.rotation.x = -Math.PI / 2;
+  futonWash.position.set(-0.2, 0.09, -0.05);
+  room.add(futonWash);
+
   room.userData.update = (time) => {
     for (const update of updaters) update(time);
   };
