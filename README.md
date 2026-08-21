@@ -1,23 +1,35 @@
 # xp-ar
 
-Talk to your agent in AR. The agent lives in a Windows XP / PlayStation 1 3D world.
+An AR toy where the agent is in the house with you. Sketch, not a product.
 
-Open-source, fun, early sketch. This repo is the place to gather the idea before it is a product.
+Read [WHY.md](WHY.md) first. Then [DESIGN.md](DESIGN.md).
 
-## The idea
+## Open locally
 
-You are in AR. Your agent is in the room with you. It looks like a late-90s / early-00s 3D game: chunky low-poly, affine textures, XP chrome, PS1 wobble. You talk to it. It talks back.
+Static page. No build. No public host in this repo.
 
-Not a Handmade feature. A separate toy.
+```bash
+npx serve .
+```
 
-## Now
+Then open the URL `serve` prints. Or open `index.html` (use `npx serve` if `file://` blanks the canvas). Needs a network hop the first time for Three.js on unpkg.
 
-Designer is making a clickable prototype you can open in a browser. First pass is the feel: room, agent, talk. Not a real AR headset build.
+## The sketch
+
+You are in a tight living room you cannot leave. **Pips** is using the sofa. Type in the paper balloon. The reply replaces the copy. Lines are canned. No API.
+
+On screen: **Sketch. Decisions still open.** so the pixels do not fake alignment.
+
+- Drag to look (one finger on a phone)
+- Scroll to zoom
+- WASD to walk
+- `prefers-reduced-motion` keeps the room and kills the wobble
 
 ## Not now
 
-- Shipping a headset app
-- Wiring a live coding agent
+- Headset AR
+- A live model backend
+- GitHub Pages, Vercel, or any public deploy from this PR
 - Handmade / Directcopy work
 
 ## License

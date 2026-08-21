@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Pips — sketch</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%23FFF4A3'/%3E%3Crect x='2' y='2' width='12' height='12' fill='none' stroke='%234A3B12' stroke-width='2'/%3E%3Crect x='4' y='5' width='4' height='4' fill='%23C86A2A'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="stage">
+      <canvas id="gl"></canvas>
+      <div id="css3d"></div>
+    </div>
+
+    <p class="sketch-note">Sketch. Decisions still open.</p>
+    <p class="hint">Drag to look · Scroll · WASD</p>
+
+    <div id="talk-balloon" class="balloon">
+      <div class="balloon-paper">
+        <p id="reply-echo" class="balloon-echo"></p>
+        <p id="reply-line" class="balloon-line">It looks like you walked in.</p>
+        <form id="talk-form" autocomplete="off">
+          <label class="sr-only" for="talk-input">Message</label>
+          <input
+            id="talk-input"
+            name="message"
+            type="text"
+            maxlength="140"
+            spellcheck="false"
+            placeholder="Type here…"
+          />
+          <button type="submit" class="balloon-btn" id="talk-send">Send</button>
+        </form>
+      </div>
+      <span class="balloon-tail" aria-hidden="true"></span>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
