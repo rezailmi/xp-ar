@@ -35,16 +35,22 @@ Paperclip mesh. Office 97 wizard chrome. Title-bar window. Luna/XP frames. Bonzi
 
 ## Palette
 
-| Token | Hex |
-| --- | --- |
-| wallpaper | `#C4A882` |
-| trim | `#6B4A2A` |
-| rug | `#7A2E2E` |
-| sofa | `#3A4A6B` |
-| balloon | `#FFF4A3` |
-| ink | `#111111` |
+Fun 2000s living room (Jet Set Radio / Sunshine / Banjo / GC Animal Crossing). Not dusty tan. Not mauve SaaS.
 
-Body blocks (kept): fur `#C86A2A`, gauntlet `#E8D8B0`, sneaker `#2F6F62`. CRT beige `#D8D0B8`. Balloon edge `#4A3B12`.
+| Token | Hex | Role |
+| --- | --- | --- |
+| wallpaper | `#2EC4B6` | Teal candy walls |
+| sofa | `#2A4DE0` | Cobalt — committed |
+| rug | `#FF7A1A` | Orange checker |
+| sky | `#7EC8E3` | Slice through the window |
+| balloon | `#FFF4A3` | Clippy paper. Not neon HUD |
+| ink | `#111111` | Type and 1px balloon edge |
+
+Supporting: lavender dot `#C9A8F0`, lime shade `#B6E04A`, trim `#8B4E24`, fur `#E07A28` (brighter tan, still not jeans+red-shoes), gauntlet `#E8D8B0`, sneaker `#2F6F62`.
+
+## Window
+
+A hole in the left wall. Frame, sill, half-open curtains. Behind it: a 64px postcard (sky + a tree + a building). Daylight hits the rug. Orbit still cannot leave the room or become an outdoor level.
 
 ## Type
 
@@ -52,13 +58,13 @@ Tahoma / `"MS Sans Serif"` / system-ui. Balloon 11px. Sketch note 10px. Never In
 
 ## Layout
 
-Tomodachi-tight: ~3.4m. Sofa you could sit on. Camera starts inside and is clamped to the walls. No window-to-sky.
+Tomodachi-tight: ~3.4m. Sofa you could sit on. Camera starts inside and is clamped to the walls. A window is *in* the room.
 
 ```
 +------------------------------+
-| [lamp]   sofa+Pips    [CRT]  |
+| [window] [lamp] sofa [CRT]   |
 |          [table]             |
-|     rug                      |
+|     rug  (sun patch)         |
 |   (you, in the room)         |
 +------------------------------+
   Sketch. Decisions still open.
@@ -66,7 +72,7 @@ Tomodachi-tight: ~3.4m. Sofa you could sit on. Camera starts inside and is clamp
 
 ## Signature
 
-A **closed living room** you cannot leave, with a **taped paper balloon** on a short-limbed guest who fidgets.
+A **candy-colored apartment you cannot leave**, daylight from a real window, taped paper balloon on a short-limbed guest.
 
 ## Motion
 
@@ -80,4 +86,4 @@ Officious house guest. Opens with “It looks like you walked in.” One letter 
 
 ## Critique
 
-The last room was 4.6m with a free orbit — a level with furniture. This pass shrinks to apartment reach and clamps the camera to the wallpaper. Pips loses the neck, the chest patch, and the spin. The balloon loses the name plate that read as a title bar.
+The dusty tan room read like a closed set. This pass saturates like a 2001 kids’ game and adds a window that is furniture, not a skybox. The clamp stays. The balloon stays paper.

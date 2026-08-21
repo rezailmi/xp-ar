@@ -17,7 +17,7 @@ const renderer = new THREE.WebGLRenderer({
   powerPreference: "high-performance",
 });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-renderer.setClearColor(0xc4a882, 1);
+renderer.setClearColor(0x2ec4b6, 1);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 
 const cssRenderer = new CSS3DRenderer();
@@ -28,9 +28,9 @@ const scene = new THREE.Scene();
 const cssScene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(50, 1, 0.08, 12);
-camera.position.set(0.18, 1.28, 1.18);
+camera.position.set(0.58, 1.24, 1.05);
 
-const lookTarget = new THREE.Vector3(0.12, 0.72, -0.7);
+const lookTarget = new THREE.Vector3(-0.15, 0.72, -0.55);
 
 scene.add(createRoom());
 

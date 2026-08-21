@@ -30,7 +30,7 @@ void main() {
 
   vUv = uv;
   vec3 n = normalize(normalMatrix * normal);
-  vShade = clamp(dot(n, normalize(uLightDir)) * 0.55 + 0.48, 0.28, 1.05);
+  vShade = clamp(dot(n, normalize(uLightDir)) * 0.5 + 0.58, 0.4, 1.18);
 }
 `;
 
@@ -71,7 +71,7 @@ export function createPS1Material({
       uTime: { value: 0 },
       uSnap: { value: 168 },
       uWobble: { value: wobble },
-      uLightDir: { value: new THREE.Vector3(0.45, 1.0, 0.35).normalize() },
+      uLightDir: { value: new THREE.Vector3(-0.85, 0.55, 0.2).normalize() },
     },
     vertexShader,
     fragmentShader,

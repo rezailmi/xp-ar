@@ -2,7 +2,9 @@ import * as THREE from "three";
 import { createPS1Material } from "./ps1-material.js";
 import {
   crtBeigeTexture,
+  curtainTexture,
   floorTexture,
+  outsideTexture,
   rugTexture,
   shadeTexture,
   sofaTexture,
@@ -26,7 +28,7 @@ export function createRoom() {
   const wallpaper = wallpaperTexture();
   wallpaper.wrapS = THREE.RepeatWrapping;
   wallpaper.wrapT = THREE.RepeatWrapping;
-  wallpaper.repeat.set(1.6, 1.15);
+  wallpaper.repeat.set(2.4, 1.6);
   const wallMat = createPS1Material({ map: wallpaper, color: "#ffffff", wobble: 0.006 });
 
   const floorMap = floorTexture();
@@ -39,7 +41,7 @@ export function createRoom() {
   const beigeMat = createPS1Material({ map: crtBeigeTexture(), color: "#ffffff", wobble: 0.006 });
   const shadeMat = createPS1Material({ map: shadeTexture(), color: "#ffffff", wobble: 0.007 });
   const darkMat = createPS1Material({ color: "#2A2420", wobble: 0.004 });
-  const blindMat = createPS1Material({ color: "#B39168", wobble: 0.004 });
+  const curtainMat = createPS1Material({ map: curtainTexture(), color: "#ffffff", wobble: 0.006 });
 
   const w = ROOM.halfW * 2;
   const d = ROOM.halfD * 2;
@@ -51,7 +53,7 @@ export function createRoom() {
 
   const ceiling = new THREE.Mesh(
     new THREE.PlaneGeometry(w + 0.2, d + 0.2, 2, 2),
-    createPS1Material({ color: "#B89A74", wobble: 0.003 }),
+    createPS1Material({ color: "#E8F4C8", wobble: 0.003 }),
   );
   ceiling.rotation.x = Math.PI / 2;
   ceiling.position.y = h;
@@ -59,8 +61,8 @@ export function createRoom() {
 
   room.add(box(0, h / 2, -ROOM.halfD - 0.06, w + 0.24, h, 0.14, wallMat));
   room.add(box(0, h / 2, ROOM.halfD + 0.06, w + 0.24, h, 0.14, wallMat));
-  room.add(box(-ROOM.halfW - 0.06, h / 2, 0, 0.14, h, d + 0.24, wallMat));
   room.add(box(ROOM.halfW + 0.06, h / 2, 0, 0.14, h, d + 0.24, wallMat));
+  room.add(leftWallWithHole(wallMat, h, d));
 
   room.add(box(0, 0.05, -ROOM.halfD + 0.02, w - 0.1, 0.1, 0.05, trimMat));
   room.add(box(-ROOM.halfW + 0.02, 0.05, 0, 0.05, 0.1, d - 0.1, trimMat));
@@ -77,10 +79,40 @@ export function createRoom() {
   room.add(createTable(0.48, 0, -0.28, trimMat));
   room.add(createCrt(1.12, 0, -0.88, beigeMat, darkMat, trimMat));
   room.add(createLamp(-1.18, 0, -0.95, trimMat, shadeMat, beigeMat));
-  room.add(createBlinds(-ROOM.halfW + 0.08, 1.2, 0.05, trimMat, blindMat));
+  room.add(createWindow(-ROOM.halfW + 0.01, 1.3, -0.22, trimMat, curtainMat));
   room.add(createDoor(0.85, 0, ROOM.halfD - 0.02, trimMat, beigeMat));
 
+  const sun = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.05, 0.72),
+    new THREE.MeshBasicMaterial({
+      color: 0xfff4a3,
+      transparent: true,
+      opacity: 0.32,
+      depthWrite: false,
+    }),
+  );
+  sun.rotation.x = -Math.PI / 2;
+  sun.position.set(-0.35, 0.035, 0.15);
+  room.add(sun);
+
   return room;
+}
+
+function leftWallWithHole(wallMat, h, d) {
+  const group = new THREE.Group();
+  const x = -ROOM.halfW - 0.06;
+  const winZ0 = -0.78;
+  const winZ1 = 0.32;
+  const winY0 = 0.86;
+  const winY1 = 1.76;
+
+  group.add(box(x, winY0 / 2, 0, 0.14, winY0, d + 0.24, wallMat));
+  group.add(box(x, (h + winY1) / 2, 0, 0.14, h - winY1, d + 0.24, wallMat));
+  const southD = winZ0 + ROOM.halfD + 0.12;
+  group.add(box(x, (winY0 + winY1) / 2, -ROOM.halfD + southD / 2 - 0.06, 0.14, winY1 - winY0, southD, wallMat));
+  const northD = ROOM.halfD - winZ1 + 0.12;
+  group.add(box(x, (winY0 + winY1) / 2, ROOM.halfD - northD / 2 + 0.06, 0.14, winY1 - winY0, northD, wallMat));
+  return group;
 }
 
 function box(x, y, z, w, h, d, mat) {
@@ -192,16 +224,56 @@ function createLamp(x, y, z, trimMat, shadeMat, beigeMat) {
   return group;
 }
 
-function createBlinds(x, y, z, trimMat, blindMat) {
+function createWindow(x, y, z, trimMat, curtainMat) {
   const group = new THREE.Group();
   group.position.set(x, y, z);
-  const frame = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.88, 0.92), trimMat);
-  group.add(frame);
-  for (let i = 0; i < 8; i += 1) {
-    const slat = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.07, 0.8), blindMat);
-    slat.position.set(0.03, -0.32 + i * 0.09, 0);
-    group.add(slat);
-  }
+
+  const jambL = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.96, 0.08), trimMat);
+  jambL.position.set(0.04, 0, -0.52);
+  const jambR = jambL.clone();
+  jambR.position.z = 0.52;
+  const head = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 1.12), trimMat);
+  head.position.set(0.04, 0.48, 0);
+  const sill = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.07, 1.16), trimMat);
+  sill.position.set(0.08, -0.48, 0);
+  group.add(jambL, jambR, head, sill);
+
+  const outsideMap = outsideTexture();
+  const outside = new THREE.Mesh(
+    new THREE.PlaneGeometry(1.08, 0.88),
+    new THREE.MeshBasicMaterial({ map: outsideMap }),
+  );
+  outside.rotation.y = Math.PI / 2;
+  outside.position.set(-0.2, 0.02, 0);
+  group.add(outside);
+
+  const pane = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.98, 0.8),
+    new THREE.MeshBasicMaterial({
+      color: 0x7ec8e3,
+      transparent: true,
+      opacity: 0.12,
+      depthWrite: false,
+    }),
+  );
+  pane.rotation.y = Math.PI / 2;
+  pane.position.set(0.03, 0.02, 0);
+  group.add(pane);
+
+  const mullion = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.8, 0.04), trimMat);
+  mullion.position.set(0.03, 0.02, 0);
+  group.add(mullion);
+
+  const curtainL = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.88, 0.2), curtainMat);
+  curtainL.position.set(0.07, 0.02, -0.4);
+  const curtainR = curtainL.clone();
+  curtainR.position.z = 0.4;
+  group.add(curtainL, curtainR);
+
+  const valance = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.1, 1.12), curtainMat);
+  valance.position.set(0.08, 0.46, 0);
+  group.add(valance);
+
   return group;
 }
 
