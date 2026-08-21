@@ -1,35 +1,29 @@
 # xp-ar
 
-Talk to your agent in AR. The agent lives in a PlayStation 1 living room and talks like a paperclip.
+An AR toy where the agent is in the house with you. Sketch, not a product.
 
-Open-source, fun, early sketch. Not a Handmade feature.
+Read [WHY.md](WHY.md) first. Then [DESIGN.md](DESIGN.md).
 
 ## Open locally
 
-This is a static page. No build step. No public host in this repo.
-
-From the repo root:
+Static page. No build. No public host in this repo.
 
 ```bash
 npx serve .
 ```
 
-Then open the URL `serve` prints (usually `http://localhost:3000`).
+Then open the URL `serve` prints. Or open `index.html` (use `npx serve` if `file://` blanks the canvas). Needs a network hop the first time for Three.js on unpkg.
 
-Or open `index.html` directly in a browser. Chrome/Edge can load the Three.js import map from the network. If the canvas stays blank on `file://`, use `npx serve .` instead.
+## The sketch
 
-You need a network connection the first time so the browser can fetch Three.js from unpkg.
+You are in a small living room. **Pips** is on the rug. Type in the paper balloon. The reply replaces the copy. Lines are canned. No API.
 
-## The prototype
-
-You are in a low-poly living room. **Pips** (original PS1-era mascot — not Crash, not Rover) is standing on the rug. Type in the yellow Office-assistant balloon and press Enter. The balloon text is the reply. Lines are canned, slightly manic, plus an echo of what you typed. No API.
+On screen: **Sketch. Decisions still open.** so the pixels do not fake alignment.
 
 - Drag to look (one finger on a phone)
 - Scroll to zoom
 - WASD to walk
-- `prefers-reduced-motion` keeps the room and turns off the PS1 wobble
-
-Design notes: [DESIGN.md](DESIGN.md).
+- `prefers-reduced-motion` keeps the room and kills the wobble
 
 ## Not now
 

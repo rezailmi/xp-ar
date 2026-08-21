@@ -1,82 +1,81 @@
-# Design plan — living room, Pips, Clippy balloon
+# Design plan — from WHY.md
 
-Written before this pass of code. Follows the frontend-design skill. Revises the Bliss-yard / Rover / Luna plan.
+Written after the why, before this rebuild. Follows the frontend-design skill. The why wins if this file and the pixels disagree.
 
 ## Subject
 
-A toy AR living room. The agent appeared on the rug. He is **Pips**: an original PlayStation-era mascot (biped, sneakers, gauntlets, wild eyes). Crash energy, not Crash. Not Rover.
+A living room you could stand in. **Pips** appeared on the rug — an original PS1 mascot (orange/tan, sneakers, gauntlets, wild eyes). House guest, not a desktop icon.
 
 ## Audience
 
-Reza. A five-minute click-through. No headset, no account, no backend.
+Reza. Thirty seconds. Click through. Leave.
 
 ## Job
 
-Feel like you walked into the house and a late-90s help mascot is already standing on the carpet, talking like a paperclip who learned to spin.
+Feel *this character appeared in my living room*, then talk.
 
 ## Aesthetic risk
 
-The **Office Assistant balloon is the only talk surface**, hung in the room with a paper tail aimed at Pips’s head. Yellow comic paper against chunky PS1 furniture. No Luna chrome. The OS is a speech bubble, not a window.
+The room is **small and furnished like a house**, not a game level. The only chrome is a paper balloon and a tiny honest caption: **Sketch. Decisions still open.** If it looks shipped, it failed the why.
 
 ## Palette
 
-Locked domestic tokens. No mauve, no Inter-era purple, no AI-beige.
+Domestic tokens. No mauve, no Inter purple, no AI-beige.
 
 | Token | Hex | Role |
 | --- | --- | --- |
 | wallpaper | `#C4A882` | Walls |
-| trim | `#6B4A2A` | Baseboard, frames, table |
-| rug | `#7A2E2E` | The place Pips stands |
-| sofa | `#3A4A6B` | Backdrop couch |
-| crt-beige | `#D8D0B8` | TV plastic, lamp, sneakers’ gum |
-| balloon | `#FFF4A3` | Paper talk surface |
-| ink | `#111111` | Type and balloon edge |
+| trim | `#6B4A2A` | Wood, frames |
+| rug | `#7A2E2E` | Where Pips stands |
+| sofa | `#3A4A6B` | The couch you would sit on |
+| balloon | `#FFF4A3` | Paper talk |
+| ink | `#111111` | Type and edges |
 
-Supporting (not new hues): balloon stroke `#4A3B12`, Pips fur `#C86A2A`, gauntlet cream `#E8D8B0`, sneaker `#2F6F62`.
+Supporting, not new hues: CRT beige `#D8D0B8`, balloon edge `#4A3B12`, fur `#C86A2A`, gauntlet `#E8D8B0`, sneaker `#2F6F62`.
 
 ## Type
 
-- **Chrome / UI:** Tahoma, `"MS Sans Serif"`, system-ui. 11px balloon body, 11px bold name.
-- **Never:** Inter, Geist, a display serif, a purple CTA, Luna title bars.
+- **Talk / hint:** Tahoma, `"MS Sans Serif"`, system-ui. 11px body. 11px bold name.
+- **Sketch note:** same face, 10px. Not a banner.
+- **Never:** Inter, Geist, a display serif, a purple CTA, a title bar.
+
+Tahoma is the only face. It is used like office paper, not like a brand.
 
 ## Layout
 
-Full-viewport WebGL. One billboarded balloon in the room, tail on the character.
+Tighter than a level: ~4.6m across, ceiling you could touch. Camera starts *in* the room, looking at Pips on the rug. Sofa close behind. Lamp and CRT in reach. One balloon, tail on the skull.
 
 ```
-+--------------------------------------------------+
-| wallpaper                  [lamp]   [CRT]        |
-|              [sofa]                              |
-|           [coffee table]                         |
-|                                                  |
-|        +-------------------------+               |
-|        | Pips                    |  <- paper     |
-|        | you typed: …            |     balloon   |
-|        | [______________] [Send] |               |
-|        +---------\               |               |
-|                   \  [PIPS]                      |
-|                    rug                           |
-+--------------------------------------------------+
-  Tahoma hint, bottom-left: Drag to look · Scroll · WASD
++--------------------------------------+
+| wallpaper     [lamp] sofa [CRT]      |
+|               [table]                |
+|      +------------------+            |
+|      | (copy)           |            |
+|      | [______] [Send]  |            |
+|      +----\             |            |
+|            \ [PIPS]                  |
+|              rug                     |
++--------------------------------------+
+  Sketch. Decisions still open.     (tiny)
 ```
 
-No sidebar. No XP window. No iMessage pills.
+No sidebar. No second balloon. No Luna. No WASD billboard that looks like an app chrome — controls stay one Tahoma line, or go unsaid next to the sketch note.
 
 ## Signature
 
-A **Clippy comic balloon** (paper yellow, 2px brown edge, pointed tail on the skull) living in a **low-poly living room**, with PS1 vertex snap + wobble + nearest-neighbor texels on the furniture and on Pips.
+A **paper Office balloon taped to a house-scale living room**, with PS1 snap + wobble + nearest-neighbor texels. The sketch caption is not decoration; it is the Emil fix.
 
 ## Motion
 
-- Pips: spin-ready idle — bounce, arms out, a twitch toward a spin.
-- PS1 wobble on room meshes and Pips (not the paper balloon).
-- Send insets on press. No bounce-in. No page-load ballet.
-- `prefers-reduced-motion: reduce` keeps the room and balloon; kills wobble and the idle.
+- Pips: spin-ready idle. Bounce, arms out, a twitch toward a spin.
+- Wobble on room and body. Not on the paper.
+- Send insets. No bounce-in.
+- `prefers-reduced-motion` keeps the room; kills wobble and idle.
 
 ## Copy
 
-Slightly officious, eager, a little broken. A PS1 mascot who thinks he is a helpful paperclip. Echoes what you typed. Never “unlock,” “companion,” Crash, or Rover.
+House guest who thinks he is a helpful paperclip. Eager, slightly officious, a little broken. Echo what was typed. No “unlock.” No homework bit unless the house earns it.
 
 ## Critique (before build)
 
-The last plan’s risk was a Luna window in a Bliss yard. That read as XP desktop tourism. This pass moves the joke indoors: domestic set, original mascot, Office-assistant paper. A generic 3D chat demo would put pills in a drawer. The balloon on the rug is the one thing to keep; cut anything that looks like a title bar.
+A generic 3D chat demo would be a large empty stage, a mascot, and a polished HUD. The last pass drifted that way: 7-meter walls, furniture in the corners, a yellow control bar that read like product chrome. This plan shrinks the room to domestic reach and puts the unfinished-ness on screen. The balloon stays the one bold thing.

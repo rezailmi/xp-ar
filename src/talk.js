@@ -1,7 +1,7 @@
 import { CSS3DObject } from "three/addons/renderers/CSS3DRenderer.js";
 import { replyTo } from "./replies.js";
 
-const CSS_SCALE = 0.0054;
+const CSS_SCALE = 0.0046;
 
 export function createTalkSurface() {
   const balloonEl = document.getElementById("talk-balloon");
@@ -12,7 +12,7 @@ export function createTalkSurface() {
 
   const balloon = new CSS3DObject(balloonEl);
   balloon.scale.setScalar(CSS_SCALE);
-  balloon.position.set(0.72, 1.78, 0.28);
+  balloon.position.set(0.52, 1.58, 0.22);
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();

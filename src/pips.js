@@ -85,8 +85,8 @@ export function createPips() {
   const gloveR = gloveL.clone();
   armL.add(upper.clone(), gloveL);
   armR.add(upper, gloveR);
-  armL.rotation.z = 0.55;
-  armR.rotation.z = -0.55;
+  armL.rotation.z = 0.62;
+  armR.rotation.z = -0.62;
   group.add(armL, armR);
 
   const thighGeo = new THREE.BoxGeometry(0.14, 0.28, 0.16);
@@ -143,19 +143,19 @@ export function createPips() {
     if (reduceMotion) {
       group.position.y = group.userData.baseY;
       group.rotation.y = 0;
-      armL.rotation.z = 0.55;
-      armR.rotation.z = -0.55;
+      armL.rotation.z = 0.62;
+      armR.rotation.z = -0.62;
       head.rotation.y = 0;
       return;
     }
-    const bounce = Math.abs(Math.sin(time * 6.2)) * 0.03;
+    const bounce = Math.abs(Math.sin(time * 7.1)) * 0.034;
     group.position.y = group.userData.baseY + bounce;
-    const windup = Math.pow(Math.max(0, Math.sin(time * 1.15)), 10) * 1.1;
-    group.rotation.y = Math.sin(time * 1.7) * 0.12 + windup;
-    armL.rotation.z = 0.55 + Math.sin(time * 6.2) * 0.18;
-    armR.rotation.z = -0.55 - Math.sin(time * 6.2) * 0.18;
-    head.rotation.y = Math.sin(time * 2.4) * 0.12;
-    head.rotation.z = Math.sin(time * 3.1) * 0.06;
+    const windup = Math.pow(Math.max(0, Math.sin(time * 1.05)), 12) * 1.35;
+    group.rotation.y = Math.sin(time * 1.9) * 0.1 + windup;
+    armL.rotation.z = 0.62 + Math.sin(time * 7.1) * 0.22;
+    armR.rotation.z = -0.62 - Math.sin(time * 7.1) * 0.22;
+    head.rotation.y = Math.sin(time * 2.6) * 0.14;
+    head.rotation.z = Math.sin(time * 3.4) * 0.07;
   };
 
   return group;

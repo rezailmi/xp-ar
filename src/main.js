@@ -27,26 +27,27 @@ cssHost.appendChild(cssRenderer.domElement);
 const scene = new THREE.Scene();
 const cssScene = new THREE.Scene();
 
-const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 40);
-camera.position.set(0.42, 1.38, 3.05);
+const camera = new THREE.PerspectiveCamera(52, 1, 0.08, 24);
+camera.position.set(0.22, 1.42, 1.92);
 
-const lookTarget = new THREE.Vector3(0.02, 0.88, 0.08);
+const lookTarget = new THREE.Vector3(0, 0.82, 0.04);
 
 scene.add(createRoom());
 
 const pips = createPips();
-pips.position.set(0, 0, 0.12);
+pips.scale.setScalar(0.92);
+pips.position.set(0, 0, 0.06);
 scene.add(pips);
 
 const { balloon, input } = createTalkSurface();
 cssScene.add(balloon);
 
 const controls = createControls(camera, canvas, lookTarget, {
-  minRadius: 1.7,
-  maxRadius: 4.6,
-  minPhi: 0.42,
-  maxPhi: 1.28,
-  bounds: { x: 2.2, zMin: -1.6, zMax: 2.4 },
+  minRadius: 1.25,
+  maxRadius: 2.55,
+  minPhi: 0.55,
+  maxPhi: 1.22,
+  bounds: { x: 1.15, zMin: -0.55, zMax: 1.35 },
 });
 
 function resize() {
