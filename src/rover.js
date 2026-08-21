@@ -7,7 +7,7 @@ export function createRover() {
   group.name = "Rover";
 
   const fur = furTexture();
-  const furMat = createPS1Material({ map: fur, color: "#D4B24A", wobble: 0.02 });
+  const furMat = createPS1Material({ map: fur, color: "#E6C25A", wobble: 0.02 });
   const darkFur = createPS1Material({ color: "#5A3E14", wobble: 0.016 });
   const noseMat = createPS1Material({ color: "#111111", wobble: 0.01 });
   const eyeMat = createPS1Material({ color: "#1A1208", wobble: 0.01 });

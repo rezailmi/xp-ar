@@ -30,9 +30,9 @@ scene.fog = new THREE.Fog(0xc5e4f3, 18, 72);
 const cssScene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(48, 1, 0.1, 120);
-camera.position.set(0.55, 1.55, 4.15);
+camera.position.set(1.05, 1.48, 5.05);
 
-const lookTarget = new THREE.Vector3(0.15, 0.85, 0.2);
+const lookTarget = new THREE.Vector3(0.05, 0.82, 0.05);
 
 scene.add(createSky());
 scene.add(createRoom());

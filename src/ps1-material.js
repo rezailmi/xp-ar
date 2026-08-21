@@ -13,7 +13,7 @@ uniform float uSnap;
 uniform float uWobble;
 uniform vec3 uLightDir;
 
-noperspective out vec2 vUv;
+out vec2 vUv;
 out float vShade;
 
 void main() {
@@ -41,7 +41,7 @@ uniform sampler2D uMap;
 uniform vec3 uColor;
 uniform float uHasMap;
 
-noperspective in vec2 vUv;
+in vec2 vUv;
 in float vShade;
 
 out vec4 fragColor;

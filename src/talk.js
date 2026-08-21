@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { CSS3DObject } from "three/addons/renderers/CSS3DRenderer.js";
 import { replyTo } from "./replies.js";
 
-const CSS_SCALE = 0.01;
+const CSS_SCALE = 0.0058;
 
 export function createTalkSurface() {
   const talkEl = document.getElementById("talk-window");
@@ -14,11 +14,11 @@ export function createTalkSurface() {
 
   const talk = new CSS3DObject(talkEl);
   talk.scale.setScalar(CSS_SCALE);
-  talk.position.set(-1.42, 1.08, 1.35);
+  talk.position.set(-1.72, 0.98, 0.2);
 
   const reply = new CSS3DObject(replyEl);
   reply.scale.setScalar(CSS_SCALE);
-  reply.position.set(1.05, 1.62, 0.55);
+  reply.position.set(1.28, 1.78, 0.12);
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();

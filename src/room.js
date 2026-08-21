@@ -20,9 +20,9 @@ export function createRoom() {
   for (let i = 0; i < pos.count; i += 1) {
     const x = pos.getX(i);
     const z = pos.getZ(i);
-    const hillA = Math.exp(-(x + 16) ** 2 / 90 - (z + 24) ** 2 / 110) * 7.4;
-    const hillB = Math.exp(-(x - 22) ** 2 / 140 - (z + 28) ** 2 / 160) * 4.8;
-    const hillC = Math.exp(-(x + 4) ** 2 / 220 - (z + 36) ** 2 / 180) * 3.2;
+    const hillA = Math.exp(-((x + 16) ** 2) / 90 - ((z + 24) ** 2) / 110) * 7.4;
+    const hillB = Math.exp(-((x - 22) ** 2) / 140 - ((z + 28) ** 2) / 160) * 4.8;
+    const hillC = Math.exp(-((x + 4) ** 2) / 220 - ((z + 36) ** 2) / 180) * 3.2;
     pos.setY(i, hillA + hillB + hillC);
   }
   groundGeo.computeVertexNormals();
@@ -45,8 +45,8 @@ export function createRoom() {
   moundB.position.set(18, 0.9, -30);
   room.add(moundB);
 
-  room.add(createCrate(-2.15, 0, -0.35));
-  room.add(createCrt(-2.15, 0.52, -0.35));
+  room.add(createCrate(-1.85, 0, -1.15));
+  room.add(createCrt(-1.85, 0.52, -1.15));
 
   return room;
 }
