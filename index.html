@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>Agent — Bliss yard</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="stage">
+      <canvas id="gl"></canvas>
+      <div id="css3d"></div>
+    </div>
+
+    <p class="hint">Drag to look · Scroll to zoom · WASD to walk</p>
+
+    <div id="talk-window" class="xp-window talk-window">
+      <div class="xp-titlebar">
+        <span class="xp-title-icon" aria-hidden="true"></span>
+        <span class="xp-title">Agent</span>
+        <div class="xp-caption-buttons">
+          <button type="button" class="xp-caption" tabindex="-1" aria-hidden="true">–</button>
+          <button type="button" class="xp-caption" tabindex="-1" aria-hidden="true">□</button>
+          <button type="button" class="xp-caption xp-caption-close" tabindex="-1" aria-hidden="true">×</button>
+        </div>
+      </div>
+      <div class="xp-body">
+        <p class="xp-help">Ask Rover something. He lives here.</p>
+        <form id="talk-form" autocomplete="off">
+          <label class="sr-only" for="talk-input">Message</label>
+          <input
+            id="talk-input"
+            name="message"
+            type="text"
+            maxlength="140"
+            spellcheck="false"
+            placeholder="Type a question…"
+          />
+          <button type="submit" class="xp-btn" id="talk-send">Send</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="reply-window" class="xp-window reply-window">
+      <div class="xp-titlebar">
+        <span class="xp-title-icon" aria-hidden="true"></span>
+        <span class="xp-title">Rover</span>
+        <div class="xp-caption-buttons">
+          <button type="button" class="xp-caption" tabindex="-1" aria-hidden="true">–</button>
+          <button type="button" class="xp-caption xp-caption-close" tabindex="-1" aria-hidden="true">×</button>
+        </div>
+      </div>
+      <div class="xp-body">
+        <p id="reply-echo" class="xp-echo"></p>
+        <p id="reply-line" class="xp-line">Hi. I’m Rover. Type something and press Enter.</p>
+      </div>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
