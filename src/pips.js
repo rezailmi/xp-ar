@@ -5,11 +5,34 @@ import { catBlackTexture, catCreamTexture, catFaceTexture, catWhiteTexture } fro
 export function createPips() {
   const group = new THREE.Group();
   group.name = "Pips";
+  group.scale.setScalar(1.42);
 
-  const blackMat = createPS1Material({ map: catBlackTexture(), color: "#ffffff", wobble: 0.01 });
-  const whiteMat = createPS1Material({ map: catWhiteTexture(), color: "#ffffff", wobble: 0.008 });
-  const creamMat = createPS1Material({ map: catCreamTexture(), color: "#ffffff", wobble: 0.006 });
-  const faceMat = createPS1Material({ map: catFaceTexture(), color: "#ffffff", wobble: 0.004 });
+  const blackMat = createPS1Material({
+    map: catBlackTexture(),
+    color: "#ffffff",
+    wobble: 0.01,
+    emissive: "#141018",
+  });
+  const whiteMat = createPS1Material({
+    map: catWhiteTexture(),
+    color: "#ffffff",
+    wobble: 0.008,
+    holdTint: 0.42,
+    emissive: "#1a1610",
+  });
+  const creamMat = createPS1Material({
+    map: catCreamTexture(),
+    color: "#ffffff",
+    wobble: 0.006,
+    holdTint: 0.28,
+  });
+  const faceMat = createPS1Material({
+    map: catFaceTexture(),
+    color: "#ffffff",
+    wobble: 0.004,
+    holdTint: 0.4,
+    emissive: "#181410",
+  });
 
   const belly = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.08, 0.22), whiteMat);
   belly.position.set(0, 0.085, 0.04);
@@ -127,7 +150,7 @@ export function createPips() {
   group.userData.update = (time, reduceMotion) => {
     if (reduceMotion) {
       head.rotation.set(0, 0, 0);
-      tail.rotation.set(0.08, 0, 0);
+      tail.rotation.set(0.12, 0, 0);
       frontL.rotation.set(0, 0, 0);
       frontR.rotation.set(0, 0, 0);
       belly.rotation.x = 0;
@@ -149,7 +172,7 @@ export function createPips() {
     head.rotation.y = glance;
     head.rotation.x = Math.sin(time * 1.2) * 0.03;
 
-    tail.rotation.x = 0.06 + Math.sin(time * 1.6) * 0.05;
+    tail.rotation.x = 0.12 + Math.sin(time * 1.6) * 0.04;
     tail.rotation.y = cycle >= 4.6 && cycle < 5.05 ? Math.sin(time * 14) * 0.35 : Math.sin(time * 1.1) * 0.06;
     tailMid.rotation.y = Math.sin(time * 1.8) * 0.08;
 

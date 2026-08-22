@@ -4,7 +4,7 @@ Privilege: **room, then body, then balloon.** If the room reads as a level, the 
 
 ## Subject
 
-A living room a body lives in. **Pips** is a house-scale tuxedo cat already on the futon. Original PS1 roommate. Not Crash. Not a mascot giant.
+A living room a body lives in. **Pips** is a house-scale white cat with black patches, already on the futon. Original PS1 roommate. Not Crash. Not a mascot giant.
 
 ## Audience / job
 
@@ -17,7 +17,7 @@ Reza, thirty seconds. Feel *someone appeared in my living room*. Then talk.
 | binadra night tatami | Indigo room `#130e1f` / `#2b2b5d` / `#5350a2`. CRT blue. Lava-lamp amber. Futon on the floor. Low camera. |
 | binadra sunset balcony | Amber wash `#f89d09` / `#d36b11` through sliding glass / shoji. Invented city skyline only. |
 | binadra bath still | Saturated practical glow and colored bounce. Not a bathroom. |
-| ember.lite tuxedo cat | White base. Black saddle, head-cap, tail. White muzzle, belly, legs. One black hind sock. White tail tip. House-cat scale. |
+| ember.lite eastbound cat | White base, not a black tuxedo. Black saddle, head-cap over the ears, most of the tail. White muzzle, belly, legs. One black hind sock. White tail tip. Optional cream smudge. House-cat scale. |
 | Crash *construction* (not likeness) | Readable silhouette, low-poly snap. Bounce lives in the idle, not a spin. |
 | Clippit / [Microsoft Agent](https://en.wikipedia.org/wiki/Microsoft_Agent) | One yellow paper letter. 1px brown edge. Triangular tail on the ear. Tahoma 11. Reply replaces the copy. |
 
@@ -74,7 +74,7 @@ Tomodachi-tight: ~3.4m. Futon you could lie on. Camera starts near the floor and
 
 ## Signature
 
-A **small night apartment you cannot leave**, sunset through sliding glass, taped paper balloon on a tuxedo cat already using the futon.
+A **small night apartment you cannot leave**, sunset through sliding glass, taped paper balloon on a white-base patched cat already using the futon.
 
 ## Motion
 
@@ -89,4 +89,4 @@ Officious house guest. Opens with “It looks like you walked in.” One letter 
 
 ## Critique
 
-The candy-teal pass read like a toy aisle. The biped roommate was rejected. This fold keeps the night apartment and the balloon, and makes Pips a house-scale tuxedo cat on the futon.
+The candy-teal pass read like a toy aisle. The biped roommate was rejected. The black-body tuxedo pass was the wrong cat. This fold keeps the night apartment and the balloon, and makes Pips a house-scale white cat with black patches on the futon.

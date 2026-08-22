@@ -29,17 +29,29 @@ const scene = new THREE.Scene();
 const cssScene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(64, 1, 0.08, 12);
-camera.position.set(0.28, 0.46, 1.12);
-
 const lookTarget = new THREE.Vector3(-0.16, 0.2, -0.02);
+const shot = new URLSearchParams(window.location.search).get("shot");
+
+if (shot === "close") {
+  camera.position.set(0.18, 0.24, 0.22);
+  lookTarget.set(-0.16, 0.17, -0.06);
+} else {
+  camera.position.set(0.28, 0.46, 1.12);
+}
 
 const room = createRoom();
 scene.add(room);
 
 const pips = createPips();
-pips.position.set(-0.16, 0.075, -0.08);
-pips.userData.seatY = 0.075;
+pips.position.set(-0.16, 0.07, -0.08);
+pips.rotation.y = -1.12;
+pips.userData.seatY = 0.07;
 scene.add(pips);
+
+if (shot === "close") {
+  const balloonEl = document.getElementById("talk-balloon");
+  if (balloonEl) balloonEl.hidden = true;
+}
 
 const talkCursor = createTalkCursor();
 scene.add(talkCursor);
@@ -48,10 +60,10 @@ const { balloon, input } = createTalkSurface();
 cssScene.add(balloon);
 
 const controls = createControls(camera, canvas, lookTarget, {
-  minRadius: 0.85,
+  minRadius: 0.34,
   maxRadius: 1.7,
-  minPhi: 0.92,
-  maxPhi: 1.35,
+  minPhi: 0.88,
+  maxPhi: 1.48,
   lookSpeed: 0.0022,
   walkSpeed: 0.55,
   walk: ROOM.walk,

@@ -443,7 +443,7 @@ export function steamTexture() {
 
 export function catBlackTexture() {
   return canvasTexture(32, (ctx, size) => {
-    ctx.fillStyle = "#141418";
+    ctx.fillStyle = "#121216";
     ctx.fillRect(0, 0, size, size);
     for (let y = 0; y < size; y += 1) {
       for (let x = 0; x < size; x += 1) {
@@ -455,26 +455,29 @@ export function catBlackTexture() {
           ctx.fillStyle = "#2C2C34";
           ctx.fillRect(x, y, 1, 1);
         } else if (n === 2) {
-          ctx.fillStyle = "#3A3A42";
+          ctx.fillStyle = "#4A4A56";
           ctx.fillRect(x, y, 1, 1);
         }
       }
     }
+    ctx.fillStyle = "#6A6A78";
+    ctx.fillRect(18, 5, 9, 2);
+    ctx.fillRect(7, 19, 6, 1);
   });
 }
 
 export function catWhiteTexture() {
   return canvasTexture(32, (ctx, size) => {
-    ctx.fillStyle = "#E8E4DC";
+    ctx.fillStyle = "#F4F0E8";
     ctx.fillRect(0, 0, size, size);
     for (let y = 0; y < size; y += 1) {
       for (let x = 0; x < size; x += 1) {
         const n = (x * 5 + y * 13) % 8;
         if (n === 0) {
-          ctx.fillStyle = "#C8C4BC";
+          ctx.fillStyle = "#D8D4CC";
           ctx.fillRect(x, y, 1, 1);
         } else if (n === 1) {
-          ctx.fillStyle = "#F4F0E8";
+          ctx.fillStyle = "#FFFFFF";
           ctx.fillRect(x, y, 1, 1);
         }
       }

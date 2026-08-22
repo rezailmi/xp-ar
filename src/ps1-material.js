@@ -44,6 +44,7 @@ uniform float uHasMap;
 uniform vec3 uWarmColor;
 uniform vec3 uCoolColor;
 uniform vec3 uEmissive;
+uniform float uHoldTint;
 
 in vec2 vUv;
 in float vBand;
@@ -56,6 +57,7 @@ void main() {
     texel = texture(uMap, vUv).rgb;
   }
   vec3 shade = mix(uCoolColor, uWarmColor, vBand) + vec3(0.1, 0.1, 0.16);
+  shade = mix(shade, vec3(0.94, 0.91, 0.86), uHoldTint);
   fragColor = vec4(texel * uColor * shade + uEmissive, 1.0);
 }
 `;
@@ -71,6 +73,7 @@ export function createPS1Material({
   color = "#ffffff",
   wobble = 0.018,
   emissive = "#000000",
+  holdTint = 0,
   side = THREE.FrontSide,
 } = {}) {
   const material = new THREE.RawShaderMaterial({
@@ -86,6 +89,7 @@ export function createPS1Material({
       uWarmColor: { value: WARM_COLOR.clone() },
       uCoolColor: { value: COOL_COLOR.clone() },
       uEmissive: { value: new THREE.Color(emissive) },
+      uHoldTint: { value: holdTint },
     },
     vertexShader,
     fragmentShader,
