@@ -443,16 +443,19 @@ export function steamTexture() {
 
 export function catBlackTexture() {
   return canvasTexture(32, (ctx, size) => {
-    ctx.fillStyle = "#1A1A1C";
+    ctx.fillStyle = "#141418";
     ctx.fillRect(0, 0, size, size);
     for (let y = 0; y < size; y += 1) {
       for (let x = 0; x < size; x += 1) {
         const n = (x * 7 + y * 11 + (x ^ y)) % 9;
         if (n === 0) {
-          ctx.fillStyle = "#0C0C10";
+          ctx.fillStyle = "#08080C";
           ctx.fillRect(x, y, 1, 1);
         } else if (n === 1) {
-          ctx.fillStyle = "#2A2A30";
+          ctx.fillStyle = "#2C2C34";
+          ctx.fillRect(x, y, 1, 1);
+        } else if (n === 2) {
+          ctx.fillStyle = "#3A3A42";
           ctx.fillRect(x, y, 1, 1);
         }
       }
@@ -476,6 +479,29 @@ export function catWhiteTexture() {
         }
       }
     }
+  });
+}
+
+export function catCreamTexture() {
+  return canvasTexture(16, (ctx, size) => {
+    ctx.fillStyle = "#D8C4A0";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#C4A878";
+    ctx.fillRect(3, 4, 4, 3);
+    ctx.fillStyle = "#E8D8B8";
+    ctx.fillRect(8, 8, 3, 3);
+  });
+}
+
+export function catFaceTexture() {
+  return canvasTexture(16, (ctx, size) => {
+    ctx.fillStyle = "#E8E4DC";
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = "#2A2420";
+    ctx.fillRect(4, 6, 2, 2);
+    ctx.fillRect(10, 6, 2, 2);
+    ctx.fillStyle = "#3A2824";
+    ctx.fillRect(7, 10, 2, 2);
   });
 }
 

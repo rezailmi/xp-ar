@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { createPS1Material } from "./ps1-material.js";
-import { catBlackTexture, catWhiteTexture } from "./textures.js";
+import { catBlackTexture, catCreamTexture, catFaceTexture, catWhiteTexture } from "./textures.js";
 
 export function createPips() {
   const group = new THREE.Group();
@@ -8,107 +8,104 @@ export function createPips() {
 
   const blackMat = createPS1Material({ map: catBlackTexture(), color: "#ffffff", wobble: 0.01 });
   const whiteMat = createPS1Material({ map: catWhiteTexture(), color: "#ffffff", wobble: 0.008 });
-  const eyeMat = createPS1Material({ color: "#C8D24A", wobble: 0.004 });
-  const pupilMat = createPS1Material({ color: "#111111", wobble: 0.003 });
-  const noseMat = createPS1Material({ color: "#2A1A1A", wobble: 0.004 });
-  const innerEarMat = createPS1Material({ color: "#C49088", wobble: 0.004 });
+  const creamMat = createPS1Material({ map: catCreamTexture(), color: "#ffffff", wobble: 0.006 });
+  const faceMat = createPS1Material({ map: catFaceTexture(), color: "#ffffff", wobble: 0.004 });
 
-  const haunches = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.11, 0.15), blackMat);
-  haunches.position.set(0, 0.09, -0.05);
+  const belly = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.08, 0.22), whiteMat);
+  belly.position.set(0, 0.085, 0.04);
+  group.add(belly);
+
+  const saddle = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.07, 0.18), blackMat);
+  saddle.position.set(0, 0.135, 0.02);
+  group.add(saddle);
+
+  const shoulder = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.06, 0.08), blackMat);
+  shoulder.position.set(0, 0.13, 0.12);
+  group.add(shoulder);
+
+  const creamBack = new THREE.Mesh(new THREE.BoxGeometry(0.05, 0.02, 0.06), creamMat);
+  creamBack.position.set(0.015, 0.172, 0.0);
+  group.add(creamBack);
+
+  const haunches = new THREE.Mesh(new THREE.BoxGeometry(0.15, 0.1, 0.12), whiteMat);
+  haunches.position.set(0, 0.085, -0.08);
   group.add(haunches);
 
-  const body = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.11, 0.2), blackMat);
-  body.position.set(0, 0.115, 0.07);
-  group.add(body);
-
-  const bib = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.08, 0.05), whiteMat);
-  bib.position.set(0, 0.1, 0.16);
-  group.add(bib);
+  const haunchPatch = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.05, 0.08), blackMat);
+  haunchPatch.position.set(0, 0.13, -0.08);
+  group.add(haunchPatch);
 
   const head = new THREE.Group();
-  head.position.set(0, 0.2, 0.17);
+  head.position.set(0, 0.18, 0.16);
   group.add(head);
 
-  const skull = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.11, 0.12), blackMat);
-  head.add(skull);
+  const face = new THREE.Mesh(new THREE.BoxGeometry(0.12, 0.08, 0.1), faceMat);
+  face.position.set(0, -0.01, 0.02);
+  head.add(face);
 
-  const muzzle = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.055, 0.055), whiteMat);
-  muzzle.position.set(0, -0.015, 0.07);
+  const cap = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.055, 0.11), blackMat);
+  cap.position.set(0, 0.045, -0.005);
+  head.add(cap);
+
+  const creamHead = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.015, 0.04), creamMat);
+  creamHead.position.set(0.01, 0.075, 0.01);
+  head.add(creamHead);
+
+  const muzzle = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.045, 0.05), whiteMat);
+  muzzle.position.set(0, -0.02, 0.065);
   head.add(muzzle);
 
-  const earL = new THREE.Group();
-  earL.position.set(-0.05, 0.075, -0.01);
-  const earLOuter = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.07, 0.03), blackMat);
-  earLOuter.rotation.z = 0.18;
-  const earLInner = new THREE.Mesh(new THREE.BoxGeometry(0.022, 0.04, 0.02), innerEarMat);
-  earLInner.position.set(0, 0.005, 0.012);
-  earL.add(earLOuter, earLInner);
-  head.add(earL);
-
-  const earR = new THREE.Group();
-  earR.position.set(0.05, 0.075, -0.01);
-  const earROuter = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.07, 0.03), blackMat);
-  earROuter.rotation.z = -0.18;
-  const earRInner = earLInner.clone();
-  earR.add(earROuter, earRInner);
-  head.add(earR);
+  const earL = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.065, 0.028), blackMat);
+  earL.position.set(-0.045, 0.085, -0.015);
+  earL.rotation.z = 0.16;
+  const earR = earL.clone();
+  earR.position.x = 0.045;
+  earR.rotation.z = -0.16;
+  head.add(earL, earR);
 
   const balloonAnchor = new THREE.Object3D();
-  balloonAnchor.position.set(0.03, 0.05, 0.02);
+  balloonAnchor.position.set(0.02, 0.04, 0.01);
   earR.add(balloonAnchor);
 
-  const eyeL = new THREE.Mesh(new THREE.BoxGeometry(0.028, 0.022, 0.02), eyeMat);
-  eyeL.position.set(-0.032, 0.018, 0.062);
-  const eyeR = eyeL.clone();
-  eyeR.position.x = 0.032;
-  head.add(eyeL, eyeR);
-
-  const pupilL = new THREE.Mesh(new THREE.BoxGeometry(0.012, 0.02, 0.012), pupilMat);
-  pupilL.position.set(-0.032, 0.016, 0.072);
-  const pupilR = pupilL.clone();
-  pupilR.position.x = 0.032;
-  head.add(pupilL, pupilR);
-
-  const nose = new THREE.Mesh(new THREE.BoxGeometry(0.02, 0.014, 0.016), noseMat);
-  nose.position.set(0, -0.012, 0.1);
-  head.add(nose);
-
   const frontL = new THREE.Group();
-  frontL.position.set(-0.045, 0.1, 0.15);
+  frontL.position.set(-0.045, 0.1, 0.14);
   const frontR = new THREE.Group();
-  frontR.position.set(0.045, 0.1, 0.15);
-  const shin = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.09, 0.035), blackMat);
-  shin.position.set(0, -0.04, 0);
-  const paw = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.028, 0.05), whiteMat);
-  paw.position.set(0, -0.09, 0.008);
-  frontL.add(shin.clone(), paw.clone());
-  frontR.add(shin, paw);
+  frontR.position.set(0.045, 0.1, 0.14);
+  const frontShin = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.09, 0.035), whiteMat);
+  frontShin.position.set(0, -0.04, 0);
+  const frontPaw = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.026, 0.048), whiteMat);
+  frontPaw.position.set(0, -0.09, 0.006);
+  frontL.add(frontShin.clone(), frontPaw.clone());
+  frontR.add(frontShin, frontPaw);
   group.add(frontL, frontR);
 
   const backL = new THREE.Group();
-  backL.position.set(-0.05, 0.07, -0.1);
+  backL.position.set(-0.05, 0.07, -0.12);
   const backR = new THREE.Group();
-  backR.position.set(0.05, 0.07, -0.1);
-  const thigh = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.07, 0.07), blackMat);
+  backR.position.set(0.05, 0.07, -0.12);
+  const thigh = new THREE.Mesh(new THREE.BoxGeometry(0.045, 0.07, 0.07), whiteMat);
   thigh.position.set(0, 0.01, 0);
-  const hindPaw = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.026, 0.05), whiteMat);
+  const hindPaw = new THREE.Mesh(new THREE.BoxGeometry(0.04, 0.024, 0.05), whiteMat);
   hindPaw.position.set(0, -0.05, 0.01);
   backL.add(thigh.clone(), hindPaw.clone());
-  backR.add(thigh, hindPaw);
+  const sock = new THREE.Mesh(new THREE.BoxGeometry(0.042, 0.035, 0.042), blackMat);
+  sock.position.set(0, -0.02, 0);
+  backR.add(thigh, sock, hindPaw);
   group.add(backL, backR);
 
   const tail = new THREE.Group();
-  tail.position.set(0, 0.13, -0.13);
-  const tailBase = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.03, 0.08), blackMat);
-  tailBase.position.set(0, 0.02, -0.03);
-  const tailTip = new THREE.Mesh(new THREE.BoxGeometry(0.025, 0.025, 0.07), blackMat);
-  tailTip.position.set(0, 0.05, -0.08);
-  tailTip.rotation.x = 0.6;
-  tail.add(tailBase, tailTip);
+  tail.position.set(0, 0.1, -0.15);
+  const tailBase = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.03, 0.1), blackMat);
+  tailBase.position.set(0, 0, -0.05);
+  const tailMid = new THREE.Mesh(new THREE.BoxGeometry(0.028, 0.028, 0.08), blackMat);
+  tailMid.position.set(0, -0.005, -0.13);
+  const tailTip = new THREE.Mesh(new THREE.BoxGeometry(0.026, 0.026, 0.05), whiteMat);
+  tailTip.position.set(0, -0.008, -0.19);
+  tail.add(tailBase, tailMid, tailTip);
   group.add(tail);
 
   const shadow = new THREE.Mesh(
-    new THREE.CircleGeometry(0.14, 8),
+    new THREE.CircleGeometry(0.15, 8),
     new THREE.MeshBasicMaterial({
       color: 0x0a0814,
       transparent: true,
@@ -117,10 +114,11 @@ export function createPips() {
     }),
   );
   shadow.rotation.x = -Math.PI / 2;
-  shadow.position.set(0, 0.012, 0.02);
+  shadow.position.set(0, 0.012, 0.0);
   group.add(shadow);
 
-  const bodyY = body.position.y;
+  const bellyY = belly.position.y;
+  const saddleY = saddle.position.y;
   const headY = head.position.y;
 
   group.userData.head = head;
@@ -129,60 +127,57 @@ export function createPips() {
   group.userData.update = (time, reduceMotion) => {
     if (reduceMotion) {
       head.rotation.set(0, 0, 0);
-      tail.rotation.set(0.35, 0, 0);
+      tail.rotation.set(0.08, 0, 0);
       frontL.rotation.set(0, 0, 0);
       frontR.rotation.set(0, 0, 0);
-      body.rotation.x = 0;
-      body.position.y = bodyY;
+      belly.rotation.x = 0;
+      saddle.rotation.x = 0;
+      belly.position.y = bellyY;
+      saddle.position.y = saddleY;
       head.position.y = headY;
-      eyeL.scale.y = 1;
-      eyeR.scale.y = 1;
       return;
     }
 
-    const breath = Math.sin(time * 1.7) * 0.006;
-    body.position.y = bodyY + breath;
-    bib.position.y = 0.1 + breath;
-    head.position.y = headY + breath * 0.5;
+    const breath = Math.sin(time * 1.7) * 0.005;
+    belly.position.y = bellyY + breath;
+    saddle.position.y = saddleY + breath;
+    shoulder.position.y = 0.13 + breath;
+    head.position.y = headY + breath * 0.45;
 
     const cycle = time % 10;
-    const glance = cycle < 1.8 ? Math.sin(time * 2.1) * 0.28 : cycle >= 6.2 && cycle < 7.4 ? -0.22 : 0;
+    const glance = cycle < 1.8 ? Math.sin(time * 2.1) * 0.22 : cycle >= 6.2 && cycle < 7.4 ? -0.18 : 0;
     head.rotation.y = glance;
-    head.rotation.x = Math.sin(time * 1.2) * 0.04;
+    head.rotation.x = Math.sin(time * 1.2) * 0.03;
 
-    const blink = cycle >= 3.1 && cycle < 3.22 || cycle >= 8.4 && cycle < 8.5;
-    eyeL.scale.y = blink ? 0.15 : 1;
-    eyeR.scale.y = blink ? 0.15 : 1;
-    pupilL.scale.y = blink ? 0.15 : 1;
-    pupilR.scale.y = blink ? 0.15 : 1;
+    tail.rotation.x = 0.06 + Math.sin(time * 1.6) * 0.05;
+    tail.rotation.y = cycle >= 4.6 && cycle < 5.05 ? Math.sin(time * 14) * 0.35 : Math.sin(time * 1.1) * 0.06;
+    tailMid.rotation.y = Math.sin(time * 1.8) * 0.08;
 
-    tail.rotation.x = 0.4 + Math.sin(time * 2.4) * 0.08;
-    tail.rotation.z = cycle >= 4.6 && cycle < 5.05 ? Math.sin(time * 16) * 0.45 : Math.sin(time * 1.3) * 0.08;
-    tailTip.rotation.x = 0.6 + Math.sin(time * 3.1) * 0.12;
-
-    const shift = Math.sin(time * 0.9) * 0.03;
+    const shift = Math.sin(time * 0.9) * 0.025;
     group.rotation.z = shift;
-    haunches.rotation.z = -shift * 0.4;
+    haunches.rotation.z = -shift * 0.35;
 
-    const step = cycle >= 7.6 && cycle < 8.3;
+    const step = cycle >= 7.6 && cycle < 8.5;
     if (step) {
-      const lift = Math.abs(Math.sin(time * 9)) * 0.35;
+      const lift = Math.abs(Math.sin(time * 8)) * 0.4;
       frontL.rotation.x = lift;
-      frontR.rotation.x = -lift * 0.35;
+      frontR.rotation.x = -lift * 0.4;
+      backR.rotation.x = lift * 0.3;
+      backL.rotation.x = -lift * 0.2;
     } else {
-      frontL.rotation.x = Math.sin(time * 1.4) * 0.04;
-      frontR.rotation.x = Math.sin(time * 1.4 + 0.8) * 0.04;
+      frontL.rotation.x = Math.sin(time * 1.3) * 0.035;
+      frontR.rotation.x = Math.sin(time * 1.3 + 0.8) * 0.035;
+      backL.rotation.x = 0;
+      backR.rotation.x = 0;
     }
 
     const lounge = cycle >= 2 && cycle < 3.4;
-    body.rotation.x = lounge ? 0.28 : 0;
-    haunches.rotation.x = lounge ? 0.18 : 0;
+    belly.rotation.x = lounge ? 0.22 : 0;
+    saddle.rotation.x = lounge ? 0.22 : 0;
+    haunches.rotation.x = lounge ? 0.12 : 0;
 
-    const bounce = cycle >= 9.2 && cycle < 9.55 ? Math.abs(Math.sin(time * 8)) * 0.008 : 0;
+    const bounce = cycle >= 9.2 && cycle < 9.55 ? Math.abs(Math.sin(time * 8)) * 0.007 : 0;
     group.position.y = group.userData.seatY + bounce;
-
-    pupilL.position.x = -0.032 + glance * 0.01;
-    pupilR.position.x = 0.032 + glance * 0.01;
   };
 
   return group;

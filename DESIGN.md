@@ -17,7 +17,7 @@ Reza, thirty seconds. Feel *someone appeared in my living room*. Then talk.
 | binadra night tatami | Indigo room `#130e1f` / `#2b2b5d` / `#5350a2`. CRT blue. Lava-lamp amber. Futon on the floor. Low camera. |
 | binadra sunset balcony | Amber wash `#f89d09` / `#d36b11` through sliding glass / shoji. Invented city skyline only. |
 | binadra bath still | Saturated practical glow and colored bounce. Not a bathroom. |
-| ember.lite tuxedo cat | Black body, white bib / muzzle / paws. Chunky low-poly. Texel fur. Sit, lounge, stiff walk. House-cat scale. |
+| ember.lite tuxedo cat | White base. Black saddle, head-cap, tail. White muzzle, belly, legs. One black hind sock. White tail tip. House-cat scale. |
 | Crash *construction* (not likeness) | Readable silhouette, low-poly snap. Bounce lives in the idle, not a spin. |
 | Clippit / [Microsoft Agent](https://en.wikipedia.org/wiki/Microsoft_Agent) | One yellow paper letter. 1px brown edge. Triangular tail on the ear. Tahoma 11. Reply replaces the copy. |
 
@@ -89,4 +89,4 @@ Officious house guest. Opens with “It looks like you walked in.” One letter 
 
 ## Critique
 
-The candy-teal pass read like a toy aisle. The morning cream pass was closer but still a sit-up living room. This fold keeps the clamp, the balloon, and the name, and spends the budget on binadra night light and a roommate who already lay down.
+The candy-teal pass read like a toy aisle. The biped roommate was rejected. This fold keeps the night apartment and the balloon, and makes Pips a house-scale tuxedo cat on the futon.
