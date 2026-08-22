@@ -3,6 +3,8 @@ export function createControls(camera, canvas, target, options = {}) {
   const maxRadius = options.maxRadius ?? 1.7;
   const minPhi = options.minPhi ?? 0.62;
   const maxPhi = options.maxPhi ?? 1.18;
+  const lookSpeed = options.lookSpeed ?? 0.0035;
+  const walkSpeed = options.walkSpeed ?? 0.75;
   const walk = options.walk ?? { x: 1, zMin: -0.2, zMax: 1.1 };
   const camBox = options.cam ?? { x: 1.4, z: 1.3, yMin: 0.42, yMax: 1.88 };
 
@@ -34,8 +36,8 @@ export function createControls(camera, canvas, target, options = {}) {
     const dy = event.clientY - state.lastY;
     state.lastX = event.clientX;
     state.lastY = event.clientY;
-    state.theta -= dx * 0.005;
-    state.phi = clamp(state.phi - dy * 0.005, minPhi, maxPhi);
+    state.theta -= dx * lookSpeed;
+    state.phi = clamp(state.phi - dy * lookSpeed, minPhi, maxPhi);
   };
 
   const onPointerUp = (event) => {
@@ -67,7 +69,7 @@ export function createControls(camera, canvas, target, options = {}) {
 
   return {
     update(dt) {
-      const speed = 1.15 * dt;
+      const speed = walkSpeed * dt;
       const forward = newDir(state.theta);
       const right = { x: forward.z, z: -forward.x };
       if (state.keys.has("KeyW")) {
@@ -88,7 +90,7 @@ export function createControls(camera, canvas, target, options = {}) {
       }
       target.x = clamp(target.x, -walk.x, walk.x);
       target.z = clamp(target.z, walk.zMin, walk.zMax);
-      target.y = clamp(target.y, 0.55, 1.05);
+      target.y = clamp(target.y, 0.18, 0.62);
 
       let radius = state.radius;
       for (let i = 0; i < 8; i += 1) {
