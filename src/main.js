@@ -31,14 +31,14 @@ const cssScene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(64, 1, 0.08, 12);
 camera.position.set(0.28, 0.46, 1.12);
 
-const lookTarget = new THREE.Vector3(-0.08, 0.28, -0.12);
+const lookTarget = new THREE.Vector3(-0.16, 0.2, -0.02);
 
 const room = createRoom();
 scene.add(room);
 
 const pips = createPips();
-pips.position.set(-0.2, 0.08, -0.18);
-pips.userData.seatY = 0.08;
+pips.position.set(-0.16, 0.075, -0.08);
+pips.userData.seatY = 0.075;
 scene.add(pips);
 
 const talkCursor = createTalkCursor();
@@ -86,7 +86,7 @@ function frame(now) {
     wobble: !reduceMotion,
     snap: reduceMotion ? 2000 : 148,
   });
-  tapeBalloon(camera, balloon, pips.userData.head);
+  tapeBalloon(camera, balloon, pips.userData.balloonAnchor ?? pips.userData.head);
 
   renderer.render(scene, camera);
   cssRenderer.render(cssScene, camera);

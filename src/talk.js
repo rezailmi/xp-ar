@@ -29,6 +29,6 @@ export function createTalkSurface() {
 
 export function tapeBalloon(camera, balloon, head) {
   head.getWorldPosition(headWorld);
-  balloon.position.set(headWorld.x + 0.26, headWorld.y + 0.2, headWorld.z + 0.06);
+  balloon.position.set(headWorld.x + 0.2, headWorld.y + 0.14, headWorld.z + 0.05);
   balloon.quaternion.copy(camera.quaternion);
 }

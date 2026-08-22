@@ -4,7 +4,7 @@ Privilege: **room, then body, then balloon.** If the room reads as a level, the 
 
 ## Subject
 
-A living room a body lives in. **Pips** is already on the futon. Original PS1 roommate. House guest, not a pet, not Crash, not a Shiba.
+A living room a body lives in. **Pips** is a house-scale tuxedo cat already on the futon. Original PS1 roommate. Not Crash. Not a mascot giant.
 
 ## Audience / job
 
@@ -17,9 +17,9 @@ Reza, thirty seconds. Feel *someone appeared in my living room*. Then talk.
 | binadra night tatami | Indigo room `#130e1f` / `#2b2b5d` / `#5350a2`. CRT blue. Lava-lamp amber. Futon on the floor. Low camera. |
 | binadra sunset balcony | Amber wash `#f89d09` / `#d36b11` through sliding glass / shoji. Invented city skyline only. |
 | binadra bath still | Saturated practical glow and colored bounce. Not a bathroom. |
-| binadra sleeping inhabitant | Lounge poses. One mundane accessory. Cozy, not a mascot spin. |
-| Crash *construction* (not likeness) | Large head, no neck, short limbs, low-poly snap. Bounce lives in the idle. |
-| Clippit / [Microsoft Agent](https://en.wikipedia.org/wiki/Microsoft_Agent) | One yellow paper letter. 1px brown edge. Triangular tail on the skull. Tahoma 11. Reply replaces the copy. |
+| ember.lite tuxedo cat | Black body, white bib / muzzle / paws. Chunky low-poly. Texel fur. Sit, lounge, stiff walk. House-cat scale. |
+| Crash *construction* (not likeness) | Readable silhouette, low-poly snap. Bounce lives in the idle, not a spin. |
+| Clippit / [Microsoft Agent](https://en.wikipedia.org/wiki/Microsoft_Agent) | One yellow paper letter. 1px brown edge. Triangular tail on the ear. Tahoma 11. Reply replaces the copy. |
 
 ## Avoid
 
@@ -27,7 +27,9 @@ Rover. Comic Sans. House-as-OS. Pixar fur. Pet-care HUD. Catalog. Mii faces. Dua
 
 Crash face/mask, green eyes, back spots, chest patch, blue jeans + red shoes, mohawk, name, Wumpa, spin-as-brand.
 
-Shiba Inu. Ramen-cup hat. Cucumber slices. Akatsuki cloud blanket. Teal candy wallpaper. Toys R Us / Pizza Hut. Coca-Cola script. Stay With Me / Miki Matsubara. Evangelion. Street Fighter. FF7. Naruto. Chainsaw Man. Godzilla. BINADRA. Pagoda “JAPAN” poster. Skytree. Fuji copy. A bathroom tour.
+7-Eleven. Mountain Dew. Monster Energy. CIBC. Bell. Pepsi. Danforth. Emberlite graffiti. Toys R Us. Pokémon. Tamagotchi. Neopets. A convenience-store rebuild.
+
+Shiba Inu. Ramen-cup hat. Cucumber slices. Akatsuki cloud blanket. Teal candy wallpaper. Coca-Cola script. Stay With Me / Miki Matsubara. Evangelion. Street Fighter. FF7. Naruto. Chainsaw Man. Godzilla. BINADRA. Pagoda “JAPAN” poster. Skytree. Fuji copy. A bathroom tour. A Crash-fidget biped.
 
 Paperclip mesh. Inter. Purple UI gradients. Nested cards.
 
@@ -72,11 +74,11 @@ Tomodachi-tight: ~3.4m. Futon you could lie on. Camera starts near the floor and
 
 ## Signature
 
-A **small night apartment you cannot leave**, sunset through sliding glass, taped paper balloon on a roommate already using the futon.
+A **small night apartment you cannot leave**, sunset through sliding glass, taped paper balloon on a tuxedo cat already using the futon.
 
 ## Motion
 
-- Pips: belly-read / lounge. Breath, glance, doze, tuft, tail twitch, a small bounce. Book on the belly. No spin.
+- Pips: sit on the futon. Tail twitch, blink, weight shift, a stiff paw step. Occasional lounge. No spin. No book.
 - Room wobbles a little. Paper does not.
 - CRT and lava lamp pulse in place.
 - Send insets. `prefers-reduced-motion` stills the body.

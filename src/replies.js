@@ -1,6 +1,6 @@
 const LINES = [
   "The futon accepted me. The table is still jealous.",
-  "I am reading. You can still talk. I turn pages slowly.",
+  "I already sat down. You can still talk.",
   "I filed the record under Background. I can still see you.",
   "I am a guest. I am also a paperclip. I sat down anyway.",
   "Searching the house… found: you, this cushion, leftover Tuesday.",

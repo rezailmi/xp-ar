@@ -441,17 +441,37 @@ export function steamTexture() {
   });
 }
 
-export function pipsSkinTexture() {
-  return canvasTexture(64, (ctx, size) => {
-    ctx.fillStyle = "#E6C8A0";
+export function catBlackTexture() {
+  return canvasTexture(32, (ctx, size) => {
+    ctx.fillStyle = "#1A1A1C";
     ctx.fillRect(0, 0, size, size);
     for (let y = 0; y < size; y += 1) {
       for (let x = 0; x < size; x += 1) {
-        if ((x * 3 + y * 5) % 8 === 0) {
-          ctx.fillStyle = "#D4B088";
+        const n = (x * 7 + y * 11 + (x ^ y)) % 9;
+        if (n === 0) {
+          ctx.fillStyle = "#0C0C10";
           ctx.fillRect(x, y, 1, 1);
-        } else if ((x + y * 3) % 11 === 0) {
-          ctx.fillStyle = "#F0D8B4";
+        } else if (n === 1) {
+          ctx.fillStyle = "#2A2A30";
+          ctx.fillRect(x, y, 1, 1);
+        }
+      }
+    }
+  });
+}
+
+export function catWhiteTexture() {
+  return canvasTexture(32, (ctx, size) => {
+    ctx.fillStyle = "#E8E4DC";
+    ctx.fillRect(0, 0, size, size);
+    for (let y = 0; y < size; y += 1) {
+      for (let x = 0; x < size; x += 1) {
+        const n = (x * 5 + y * 13) % 8;
+        if (n === 0) {
+          ctx.fillStyle = "#C8C4BC";
+          ctx.fillRect(x, y, 1, 1);
+        } else if (n === 1) {
+          ctx.fillStyle = "#F4F0E8";
           ctx.fillRect(x, y, 1, 1);
         }
       }
